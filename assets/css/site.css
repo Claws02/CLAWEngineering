@@ -286,10 +286,17 @@ button { font: inherit; color: inherit; }
   margin-bottom: 1.4rem;
 }
 
+/* The discipline line sits under the name and must stay subordinate to it —
+   it is long enough that at full display size it out-weighs the name itself. */
 .hero-name em {
   display: block;
   font-style: normal;
   color: var(--graphite-2);
+  font-size: 0.42em;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  margin-top: 0.55rem;
+  max-width: 20ch;
 }
 
 .hero-role {
@@ -341,6 +348,33 @@ button { font: inherit; color: inherit; }
 .track-hire .track-tag { color: var(--blue); background: var(--blue-wash); }
 .track-claw .track-tag { color: var(--redline); background: var(--redline-wash); }
 
+/* Single lead panel — CLAW carries the fork on its own now, so it gets the
+   weight the two-up grid used to split. */
+.tracks-single { grid-template-columns: 1fr; }
+
+.track-lead { padding: clamp(1.9rem, 4vw, 2.9rem) clamp(1.6rem, 3.5vw, 2.6rem); }
+.track-lead .track-tag { font-size: var(--fs-xs); padding: 0.3rem 0.7rem; margin-bottom: 1.15rem; }
+.track-lead .track-title { font-size: clamp(1.6rem, 3.4vw, 2.35rem); margin-bottom: 0.8rem; }
+.track-lead .track-body { font-size: var(--fs-base); max-width: 62ch; margin-bottom: 1.35rem; }
+
+.track-marks {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.track-marks li {
+  font-family: var(--mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  border: 1px solid var(--hairline-2);
+  padding: 0.3rem 0.6rem;
+}
+
 .track-title {
   font-family: var(--serif);
   font-size: 1.3rem;
@@ -375,10 +409,18 @@ button { font: inherit; color: inherit; }
 .titleblock {
   border: 1px solid var(--hairline-2);
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   background: var(--hairline-2);
   gap: 1px;
-  max-width: 780px;
+  max-width: 900px;
+}
+
+@media (max-width: 720px) {
+  .titleblock { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 420px) {
+  .titleblock { grid-template-columns: 1fr; }
 }
 
 .tb-cell {
@@ -577,6 +619,16 @@ button { font: inherit; color: inherit; }
 }
 
 .card:hover { background: var(--paper-2); }
+
+/* Featured grid — two up, so each card reads as a square plate rather than a
+   tall column. Collapses to one up before the cards get too narrow to hold it. */
+.grid-featured { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid-featured .card-body { padding: 1.4rem 1.5rem 1.6rem; }
+.grid-featured .card-title { font-size: 1.35rem; }
+
+@media (max-width: 720px) {
+  .grid-featured { grid-template-columns: 1fr; }
+}
 
 .card-figure {
   position: relative;
@@ -785,6 +837,15 @@ button { font: inherit; color: inherit; }
 }
 
 .cap { background: var(--paper); padding: 1.4rem 1.3rem; }
+
+.caps-note {
+  margin-top: 1.25rem;
+  max-width: 78ch;
+  font-size: var(--fs-sm);
+  color: var(--graphite);
+}
+
+.caps-note strong { color: var(--ink); font-weight: 500; }
 
 .cap-head {
   font-family: var(--mono);
