@@ -1,722 +1,399 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Caleb Lawson - ElectroMechanical Engineer(In Training)</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- ScrollReveal for animations -->
-    <script src="https://unpkg.com/scrollreveal"></script>
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        .section {
-            scroll-margin-top: 64px;
-        }
-        .reveal {
-            visibility: hidden;
-        }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caleb Lawson — Electrical &amp; Embedded Systems Engineer</title>
+<meta name="description" content="Caleb Lawson is an electrical and embedded systems engineer in Boston. Power distribution and fire alarm design at IMEG, embedded and robotics work through CLAW Engineering.">
+<link rel="canonical" href="https://clawengineering.com/">
 
-        /* ── Aurora Background ──────────────────────────────────────── */
-        #aurora-canvas {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-        #home {
-            position: relative;
-            overflow: hidden;
-        }
-        #home-content {
-            position: relative;
-            z-index: 1;
-        }
-        /* Fade aurora into the next dark section */
-        #home::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 120px;
-            background: linear-gradient(to bottom, transparent, #111827);
-            pointer-events: none;
-            z-index: 2;
-        }
+<meta property="og:type" content="website">
+<meta property="og:title" content="Caleb Lawson — Electrical &amp; Embedded Systems Engineer">
+<meta property="og:description" content="Power systems by day, embedded and robotics by build. Boston, MA.">
+<meta property="og:url" content="https://clawengineering.com/">
+<meta property="og:image" content="https://clawengineering.com/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
 
-        /* ── Gradient animated hero heading ────────────────────────── */
-        .gradient-text {
-            background: linear-gradient(90deg, #22d3ee 0%, #818cf8 40%, #a78bfa 60%, #22d3ee 100%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradient-shift 6s linear infinite;
-        }
-        @keyframes gradient-shift {
-            0%   { background-position: 0%   center; }
-            100% { background-position: 200% center; }
-        }
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
 
-        /* ── SpotlightCard ──────────────────────────────────────────── */
-        .card-spotlight {
-            position: relative;
-            --mouse-x: 50%;
-            --mouse-y: 50%;
-            --spotlight-color: rgba(6, 182, 212, 0.18);
-        }
-        .card-spotlight::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            background: radial-gradient(
-                circle at var(--mouse-x) var(--mouse-y),
-                var(--spotlight-color),
-                transparent 70%
-            );
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            pointer-events: none;
-            z-index: 1;
-        }
-        .card-spotlight:hover::before {
-            opacity: 1;
-        }
-
-        /* ── 3-D Tilt card ──────────────────────────────────────────── */
-        .tilt-card {
-            transform-style: preserve-3d;
-            will-change: transform;
-            transition: transform 0.08s linear, box-shadow 0.3s ease;
-        }
-        .tilt-card:hover {
-            box-shadow: 0 20px 60px rgba(6, 182, 212, 0.25);
-        }
-
-        /* ── SplitText characters ───────────────────────────────────── */
-        .split-char {
-            display: inline-block;
-            opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-        .split-char.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ── Timeline glow dot ──────────────────────────────────────── */
-        .timeline-dot-glow {
-            box-shadow: 0 0 0 0 rgba(6,182,212,0.5);
-            animation: timeline-pulse 2.5s ease-in-out infinite;
-        }
-        @keyframes timeline-pulse {
-            0%   { box-shadow: 0 0 0 0   rgba(6,182,212,0.5); }
-            60%  { box-shadow: 0 0 0 10px rgba(6,182,212,0);   }
-            100% { box-shadow: 0 0 0 0   rgba(6,182,212,0);    }
-        }
-
-        /* ── Shimmer border on highlighted timeline card ────────────── */
-        @keyframes border-shimmer {
-            0%   { background-position: 0%   50%; }
-            50%  { background-position: 100% 50%; }
-            100% { background-position: 0%   50%; }
-        }
-        .shimmer-border {
-            position: relative;
-        }
-        .shimmer-border::after {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            border-radius: inherit;
-            background: linear-gradient(270deg, #22d3ee, #818cf8, #22d3ee);
-            background-size: 400% 400%;
-            animation: border-shimmer 4s ease infinite;
-            z-index: -1;
-        }
-
-        /* ── Skill tag hover ────────────────────────────────────────── */
-        .skill-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.4rem 0;
-            transition: color 0.2s ease, transform 0.2s ease;
-        }
-        .skill-item::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: #22d3ee;
-            flex-shrink: 0;
-            transition: box-shadow 0.3s ease;
-        }
-        .skill-item:hover {
-            color: #22d3ee;
-            transform: translateX(4px);
-        }
-        .skill-item:hover::before {
-            box-shadow: 0 0 8px #22d3ee;
-        }
-    </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Caleb Lawson",
+  "jobTitle": "Electrical Engineer Designer",
+  "worksFor": { "@type": "Organization", "name": "IMEG Corp" },
+  "address": { "@type": "PostalAddress", "addressLocality": "Boston", "addressRegion": "MA", "addressCountry": "US" },
+  "alumniOf": { "@type": "CollegeOrUniversity", "name": "Wentworth Institute of Technology" },
+  "sameAs": ["https://www.linkedin.com/in/caleblawson102/"]
+}
+</script>
 </head>
-<body class="bg-gray-900 text-gray-200">
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
 
-    <!-- Header & Navigation -->
-    <header id="header" class="bg-gray-900/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-white hover:text-cyan-400 transition-colors">Caleb Lawson</a>
-            <nav class="hidden md:flex space-x-8">
-                <a href="#about" class="text-gray-300 hover:text-cyan-400 transition-colors">About</a>
-                <a href="#timeline" class="text-gray-300 hover:text-cyan-400 transition-colors">Timeline</a>
-                <a href="projects.html" class="text-gray-300 hover:text-cyan-400 transition-colors">Projects</a>
-                <a href="#skills" class="text-gray-300 hover:text-cyan-400 transition-colors">Skills</a>
-                <a href="#resume" class="text-gray-300 hover:text-cyan-400 transition-colors">Resume</a>
-                <a href="#contact" class="text-gray-300 hover:text-cyan-400 transition-colors">Contact</a>
-            </nav>
-            <button id="mobile-menu-button" class="md:hidden text-white">
-                <i data-lucide="menu"></i>
-            </button>
+<header class="masthead">
+  <div class="shell masthead-inner">
+    <a class="mark" href="index.html">
+      <span class="mark-name">Caleb Lawson</span>
+      <span class="mark-sub">EE / Embedded</span>
+    </a>
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav class="nav" id="site-nav" data-nav aria-label="Primary">
+      <ul class="nav-list">
+        <li><a class="nav-link is-current" href="index.html">Home</a></li>
+        <li><a class="nav-link" href="projects.html">Projects</a></li>
+        <li><a class="nav-link" href="services.html">Consulting</a></li>
+        <li><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ===== E-000 Title sheet ===== -->
+  <section class="hero">
+    <div class="hero-frame plot-h" aria-hidden="true"></div>
+    <div class="shell hero-inner">
+      <p class="hero-eyebrow">E-000 &nbsp;·&nbsp; Boston, Massachusetts</p>
+
+      <h1 class="hero-name">
+        Caleb Lawson
+        <em>Electrical &amp; embedded</em>
+      </h1>
+
+      <p class="hero-role">
+        Power systems by day<span class="sep">/</span>embedded &amp; robotics by build
+      </p>
+
+      <p class="hero-lede">
+        I design the electrical systems buildings run on — power distribution, lighting,
+        fire alarm — and I build the embedded hardware and software that moves, senses and
+        decides. M.S. in Electrical &amp; Computer Engineering, 2026.
+      </p>
+
+      <div class="tracks">
+        <a class="track track-hire" href="#experience">
+          <span class="track-tag">Hiring</span>
+          <h2 class="track-title">You have a role to fill</h2>
+          <p class="track-body">
+            Open to robotics and embedded systems roles. Here is the record, the work,
+            and what I can do on day one.
+          </p>
+          <span class="track-go">See the record <span class="arrow">&rarr;</span></span>
+        </a>
+
+        <a class="track track-claw" href="services.html">
+          <span class="track-tag">CLAW Engineering</span>
+          <h2 class="track-title">You have something to build</h2>
+          <p class="track-body">
+            Independent engineering: firmware, circuit and PCB design, electrical
+            documentation, drone survey. Scoped, fixed-price, delivered.
+          </p>
+          <span class="track-go">See the services <span class="arrow">&rarr;</span></span>
+        </a>
+      </div>
+
+      <dl class="titleblock">
+        <div class="tb-cell"><dt class="tb-key">Current</dt><dd class="tb-val">IMEG Corp</dd></div>
+        <div class="tb-cell"><dt class="tb-key">Discipline</dt><dd class="tb-val">Electrical / Embedded</dd></div>
+        <div class="tb-cell"><dt class="tb-key">Credentials</dt><dd class="tb-val">M.S. ECE · FAA Part 107</dd></div>
+        <div class="tb-cell"><dt class="tb-key">Status</dt><dd class="tb-val">Open to roles</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ===== E-100 Qualifications ===== -->
+  <section class="sheet" id="about">
+    <div class="shell">
+      <div class="sheet-head reveal">
+        <p class="sheet-no">E-100 &nbsp;·&nbsp; Background</p>
+        <h2 class="sheet-title">What I actually do</h2>
+      </div>
+
+      <div class="split">
+        <div class="prose reveal">
+          <p>
+            My day job is construction documents: power distribution, lighting and fire alarm
+            design against the NEC and NFPA 72, for buildings that get built. It is unglamorous
+            and it is the best possible training in the thing engineering actually rewards —
+            being correct, on a deadline, where being wrong is expensive.
+          </p>
+          <p>
+            The rest of my time goes to hardware that moves. Firmware on ESP32 and Arduino,
+            Verilog on MAX 10, control systems, drone autonomy, and the software around all
+            of it. My graduate capstone was a drone swarm that maps wildfire fronts for the
+            crews fighting them — an interdisciplinary team, a real problem, and the clearest
+            answer I have found to what I want to build.
+          </p>
+          <p>
+            The thread back to the start is a talking trash can. <strong>PUSH</strong>, at Walt
+            Disney World, convinced a kid that a machine could have a personality and that
+            somebody had to build it. That is still the target: robotics that people react to,
+            not just machines that function.
+          </p>
+          <p>
+            I take work where at least two of three hold — good people, meaningful work, fair
+            compensation. It has been a reliable filter so far.
+          </p>
+
+          <dl class="facts">
+            <div class="fact"><dt>Based</dt><dd>Boston, Massachusetts</dd></div>
+            <div class="fact"><dt>Education</dt><dd>M.S. Electrical &amp; Computer Engineering — Wentworth Institute of Technology, 2026</dd></div>
+            <div class="fact"><dt>Licences</dt><dd>FAA Part 107 Remote Pilot · SolidWorks CSWA</dd></div>
+            <div class="fact"><dt>Track</dt><dd>Working toward PE licensure</dd></div>
+            <div class="fact"><dt>Looking for</dt><dd>Robotics and embedded systems roles</dd></div>
+          </dl>
         </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
-            <a href="#about" class="block py-2 text-gray-300 hover:text-cyan-400">About</a>
-            <a href="#timeline" class="block py-2 text-gray-300 hover:text-cyan-400">Timeline</a>
-            <a href="projects.html" class="block py-2 text-gray-300 hover:text-cyan-400">Projects</a>
-            <a href="#skills" class="block py-2 text-gray-300 hover:text-cyan-400">Skills</a>
-            <a href="#resume" class="block py-2 text-gray-300 hover:text-cyan-400">Resume</a>
-            <a href="#contact" class="block py-2 text-gray-300 hover:text-cyan-400">Contact</a>
+
+        <figure class="portrait-wrap reveal">
+          <img class="portrait" src="https://i.imgur.com/gRIybcL.jpeg" alt="Caleb Lawson" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-guard>
+          <figcaption class="portrait-cap"><span>Caleb Lawson</span><span>Boston, MA</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== E-200 Experience ===== -->
+  <section class="sheet sheet-tinted" id="experience">
+    <div class="shell">
+      <div class="sheet-head reveal">
+        <p class="sheet-no">E-200 &nbsp;·&nbsp; Experience</p>
+        <h2 class="sheet-title">Where I have worked</h2>
+      </div>
+
+      <div class="register">
+        <article class="entry reveal">
+          <p class="entry-dates">2026 — Present</p>
+          <div>
+            <h3 class="entry-role">Founder</h3>
+            <p class="entry-org">CLAW Engineering</p>
+            <p class="entry-note">
+              Independent engineering practice: embedded firmware, circuit and PCB design,
+              electrical documentation support, and drone survey work for startups, small
+              businesses and other engineers.
+            </p>
+          </div>
+          <div class="entry-tags">
+            <span class="tag">Firmware</span><span class="tag">PCB</span><span class="tag">Consulting</span>
+          </div>
+        </article>
+
+        <article class="entry reveal">
+          <p class="entry-dates">Aug 2025 — Present</p>
+          <div>
+            <h3 class="entry-role">Electrical Engineer Designer</h3>
+            <p class="entry-org">IMEG Corp · Boston, MA</p>
+            <p class="entry-note">
+              Design power distribution, lighting and fire alarm systems to NEC and NFPA code,
+              from schematic through construction documents, coordinated across disciplines.
+            </p>
+          </div>
+          <div class="entry-tags">
+            <span class="tag">NEC</span><span class="tag">NFPA 72</span><span class="tag">Revit</span><span class="tag">AutoCAD</span>
+          </div>
+        </article>
+
+        <article class="entry reveal">
+          <p class="entry-dates">Aug 2024 — Jan 2025</p>
+          <div>
+            <h3 class="entry-role">Project Controls Intern</h3>
+            <p class="entry-org">Walt Disney Imagineering</p>
+            <p class="entry-note">
+              Reviewed design documentation and produced trend analyses comparing budget
+              estimates against actual project cost, while tracking risk across the project.
+            </p>
+          </div>
+          <div class="entry-tags">
+            <span class="tag">Cost trending</span><span class="tag">Risk</span><span class="tag">Doc review</span>
+          </div>
+        </article>
+
+        <article class="entry reveal">
+          <p class="entry-dates">Jan 2024 — Apr 2024</p>
+          <div>
+            <h3 class="entry-role">Engineering Intern</h3>
+            <p class="entry-org">Vanderweil Engineering</p>
+            <p class="entry-note">
+              Power system analysis and 3D modelling in AutoCAD, Revit and AutoPIPE.
+            </p>
+          </div>
+          <div class="entry-tags">
+            <span class="tag">Power systems</span><span class="tag">Revit</span><span class="tag">AutoPIPE</span>
+          </div>
+        </article>
+
+        <article class="entry reveal">
+          <p class="entry-dates">May 2023 — Aug 2023</p>
+          <div>
+            <h3 class="entry-role">Assistant Project Manager</h3>
+            <p class="entry-org">JM Electrical</p>
+            <p class="entry-note">
+              Earned the FAA Part 107 certificate and put it to work, running drone site
+              surveys that cut both the cost and the turnaround of field documentation.
+            </p>
+          </div>
+          <div class="entry-tags">
+            <span class="tag">Part 107</span><span class="tag">Site survey</span><span class="tag">Field</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== E-300 Selected work ===== -->
+  <section class="sheet" id="work">
+    <div class="shell">
+      <div class="sheet-head reveal">
+        <p class="sheet-no">E-300 &nbsp;·&nbsp; Selected work</p>
+        <h2 class="sheet-title">Four worth opening</h2>
+        <p class="sheet-lede">
+          Every project below opens to the full sheet — the problem, what I owned, what
+          came out, and what I would do differently on the next pass.
+        </p>
+      </div>
+
+      <div class="grid" data-grid="featured"></div>
+
+      <p style="margin-top:2rem">
+        <a class="btn btn-ghost" href="projects.html">All projects <span aria-hidden="true">&rarr;</span></a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== E-400 Capabilities ===== -->
+  <section class="sheet sheet-tinted" id="capabilities">
+    <div class="shell">
+      <div class="sheet-head reveal">
+        <p class="sheet-no">E-400 &nbsp;·&nbsp; Capabilities</p>
+        <h2 class="sheet-title">What I bring</h2>
+      </div>
+
+      <div class="caps">
+        <div class="cap reveal">
+          <h3 class="cap-head">Electrical design</h3>
+          <ul class="cap-list">
+            <li><strong>Power distribution</strong> — one-lines, panel schedules, load calc</li>
+            <li><strong>Lighting</strong> — layout, control, photometrics</li>
+            <li><strong>Fire alarm</strong> — NFPA 72 device layout and riser</li>
+            <li><strong>Codes</strong> — NEC / NFPA 70, NFPA 72</li>
+            <li><strong>Tools</strong> — Revit, AutoCAD, Bluebeam</li>
+          </ul>
         </div>
-    </header>
 
-    <main class="pt-24">
-        <!-- Hero Section -->
-        <section id="home" class="py-24 md:py-32 text-center min-h-[80vh] flex items-center">
-            <canvas id="aurora-canvas"></canvas>
-            <div id="home-content" class="container mx-auto px-6 w-full">
-                <div class="max-w-4xl mx-auto">
-                    <img src="https://i.imgur.com/aBKtCyk.png" alt="ElecMechLab Banner" class="mx-auto mb-8 w-full max-w-xl reveal" onerror="this.onerror=null;this.src='https://placehold.co/300x100/111827/FFFFFF?text=ElecMechLab';">
-                    <h1 class="text-4xl md:text-6xl font-bold mb-4 reveal split-animate gradient-text">ElectroMechanical Engineer (In Training)</h1>
-                    <p class="text-lg md:text-xl text-gray-300 mb-8 reveal">
-                        Crafting elegant solutions to complex problems, creating entertainment, and putting smiles on people's faces.
-                    </p>
-                    <div class="flex justify-center gap-4 flex-wrap reveal">
-                        <a href="#projects" class="bg-cyan-500 hover:bg-cyan-600 text-white font-semibold py-3 px-8 rounded-lg transition-transform transform hover:scale-105 shadow-lg shadow-cyan-500/20">
-                            View My Work
-                        </a>
-                        <a href="#contact" class="bg-gray-700/80 hover:bg-gray-600 text-white font-semibold py-3 px-8 rounded-lg transition-transform transform hover:scale-105 shadow-lg backdrop-blur-sm border border-gray-600/50">
-                            Get In Touch
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Me Section -->
-        <section id="about" class="section bg-gray-800 py-20">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center text-white mb-12 reveal split-animate">About Me</h2>
-                <div class="flex flex-col md:flex-row items-center gap-12">
-                    <div class="md:w-1/3 reveal">
-                        <img src="https://i.imgur.com/gRIybcL.jpeg" alt="Portrait of Caleb Lawson" class="rounded-full w-64 h-64 object-cover mx-auto shadow-2xl border-4 border-gray-700" onerror="this.onerror=null;this.src='https://placehold.co/400x400/111827/7DD3FC?text=Caleb+Lawson';">
-                    </div>
-                    <div class="md:w-2/3 text-lg text-gray-300 reveal">
-                        <p class="mb-4">
-                           Hello! I'm Caleb, an engineer guided by a core philosophy for my work: every role must satisfy at least two of my three core values: Good People, Meaningful Work, and Good Compensation. This principle steers me towards opportunities where I can collaborate with passionate teams on projects that make a real difference.
-                        </p>
-                        <p class="mb-4">
-                           My journey started with a childhood fascination for Disney and a spark of inspiration from the talking trash can "PUSH" in the parks, which instilled in me the desire to create things that bring joy and curiosity. This curiosity has evolved into a career focused on innovation and continuous learning. In every role, my goal is not only to apply my existing skills but to constantly expand my knowledge, embracing new challenges that push me to grow as an engineer.
-                        </p>
-                        <p>
-                           This drive is what led me to my capstone project, where I had the privilege of working with an incredible interdisciplinary team to engineer a drone swarm technology to assist firefighters, a perfect blend of meaningful work and great people.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Timeline Section -->
-        <section id="timeline" class="section py-20">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center text-white mb-16 reveal split-animate">My Journey</h2>
-                <div class="relative max-w-2xl mx-auto">
-                    <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gray-700"></div>
-                    <!-- Timeline Item 1 -->
-                    <div class="mb-8 flex justify-between items-center w-full right-timeline">
-                        <div class="order-1 w-5/12"></div>
-                        <div class="z-20 flex items-center order-1 bg-cyan-500 shadow-xl w-8 h-8 rounded-full timeline-dot-glow">
-                            <h1 class="mx-auto font-semibold text-lg text-white"></h1>
-                        </div>
-                        <div class="order-1 bg-gray-800 rounded-lg shadow-xl w-5/12 px-6 py-4 reveal">
-                            <h3 class="font-bold text-white text-xl">Electrical Engineer Designer 1</h3>
-                            <p class="text-sm font-medium text-cyan-400">Aug 2025 - Present | IMEG</p>
-                            <p class="text-sm text-gray-400 mt-2">Designing power distribution, lighting, and fire alarm systems in compliance with NEC and NFPA codes.</p>
-                        </div>
-                    </div>
-
-                    <!-- Timeline Item 2 -->
-                    <div class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline">
-                        <div class="order-1 w-5/12"></div>
-                        <div class="z-20 flex items-center order-1 bg-cyan-500 shadow-xl w-8 h-8 rounded-full timeline-dot-glow">
-                            <h1 class="mx-auto text-white font-semibold text-lg"></h1>
-                        </div>
-                        <div class="order-1 bg-cyan-900/50 rounded-lg shadow-xl w-5/12 px-6 py-4 reveal shimmer-border">
-                            <h3 class="font-bold text-white text-xl">Project Controls Intern</h3>
-                            <p class="text-sm font-medium text-cyan-400">Aug 2024 - Jan 2025 | Walt Disney Imagineering</p>
-                            <p class="text-sm text-gray-400 mt-2">Evaluated design documentation and provided trend analyses to compare budget estimates against project costs. While tracking risks to the project.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Timeline Item 3 -->
-                    <div class="mb-8 flex justify-between items-center w-full right-timeline">
-                        <div class="order-1 w-5/12"></div>
-                        <div class="z-20 flex items-center order-1 bg-cyan-500 shadow-xl w-8 h-8 rounded-full timeline-dot-glow">
-                            <h1 class="mx-auto font-semibold text-lg text-white"></h1>
-                        </div>
-                        <div class="order-1 bg-gray-800 rounded-lg shadow-xl w-5/12 px-6 py-4 reveal">
-                            <h3 class="font-bold text-white text-xl">Engineering Intern</h3>
-                            <p class="text-sm font-medium text-cyan-400">Jan 2024 - Apr 2024 | Vanderweil Engineering</p>
-                            <p class="text-sm text-gray-400 mt-2">Applied skills in 3D modeling using AutoCAD, Revit, and AutoPipe, and also analyzed power systems.</p>
-                        </div>
-                    </div>
-
-                    <!-- Timeline Item 4 -->
-                     <div class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline">
-                        <div class="order-1 w-5/12"></div>
-                        <div class="z-20 flex items-center order-1 bg-cyan-500 shadow-xl w-8 h-8 rounded-full timeline-dot-glow">
-                            <h1 class="mx-auto text-white font-semibold text-lg"></h1>
-                        </div>
-                        <div class="order-1 bg-cyan-900/50 rounded-lg shadow-xl w-5/12 px-6 py-4 reveal">
-                            <h3 class="font-bold text-white text-xl">Assistant Project Manager</h3>
-                            <p class="text-sm font-medium text-cyan-400">May 2023 - Aug 2023 | JM Electrical</p>
-                            <p class="text-sm text-gray-400 mt-2">Obtained drone license, enabling cost-effective and expedited site surveys using drones.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects" class="section py-20 bg-gray-800">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center text-white mb-12 reveal split-animate">Featured Projects</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    
-                    <!-- Project Card 1 -->
-                    <div class="bg-gray-900 rounded-lg overflow-hidden shadow-lg transition-shadow duration-300 reveal card-spotlight tilt-card">
-                        <div class="w-full h-56 bg-black flex items-center justify-center">
-                           <img src="https://i.imgur.com/n7N7JPL.png" alt="Mapping and Predicting Wildfires Project" class="w-full h-full object-contain">
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-white mb-2">Mapping and Predicting Wildfires</h3>
-                            <p class="text-gray-400 mb-4">A capstone project featuring a drone swarm to provide firefighters with real-time data on topology, wind, and fire locations to update containment lines.</p>
-                             <div class="flex flex-wrap gap-2">
-                                <span class="bg-cyan-900 text-cyan-300 text-xs font-semibold px-2.5 py-0.5 rounded">Drones</span>
-                                <span class="bg-cyan-900 text-cyan-300 text-xs font-semibold px-2.5 py-0.5 rounded">System Design</span>
-                                <span class="bg-cyan-900 text-cyan-300 text-xs font-semibold px-2.5 py-0.5 rounded">C++ / Python</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project Card 2 -->
-                    <div class="bg-gray-900 rounded-lg overflow-hidden shadow-lg transition-shadow duration-300 reveal card-spotlight tilt-card">
-                        <div class="w-full h-56 bg-black flex items-center justify-center">
-                            <img src="https://i.imgur.com/C0iv781.png" alt="Linear Actuating Pillow Project" class="w-full h-full object-contain">
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-white mb-2">Linear Actuating Pillow</h3>
-                            <p class="text-gray-400 mb-4">A therapeutic back pillow with six adjustable pads, designed to give wheelchair users more control over their lumbar support and comfort.</p>
-                             <div class="flex flex-wrap gap-2">
-                                <span class="bg-cyan-900 text-cyan-300 text-xs font-semibold px-2.5 py-0.5 rounded">SolidWorks</span>
-                                <span class="bg-cyan-900 text-cyan-300 text-xs font-semibold px-2.5 py-0.5 rounded">Arduino</span>
-                                <span class="bg-cyan-900 text-cyan-300 text-xs font-semibold px-2.5 py-0.5 rounded">3D Printing</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project Card 3 -->
-                    <div class="bg-gray-900 rounded-lg overflow-hidden shadow-lg transition-shadow duration-300 reveal card-spotlight tilt-card">
-                        <div class="w-full h-56 bg-black flex items-center justify-center">
-                            <img src="https://i.imgur.com/FCN3p6O.png" alt="Velocity Speed Controller Project" class="w-full h-full object-contain">
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-white mb-2">Velocity Speed Controller</h3>
-                            <p class="text-gray-400 mb-4">Designed and simulated a DC motor controller to achieve specific performance requirements using MATLAB and Simulink.</p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="bg-cyan-900 text-cyan-300 text-xs font-semibold px-2.5 py-0.5 rounded">MATLAB</span>
-                                <span class="bg-cyan-900 text-cyan-300 text-xs font-semibold px-2.5 py-0.5 rounded">Simulink</span>
-                                <span class="bg-cyan-900 text-cyan-300 text-xs font-semibold px-2.5 py-0.5 rounded">Control Systems</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-center mt-12 reveal">
-                    <a href="projects.html" class="bg-gray-700 hover:bg-gray-600 text-white font-semibold py-3 px-8 rounded-lg transition-transform transform hover:scale-105 shadow-lg">
-                        View All Projects
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section id="skills" class="section py-20">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center text-white mb-12 reveal split-animate">Skills</h2>
-                <div class="max-w-4xl mx-auto">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div class="reveal">
-                            <h3 class="text-xl font-semibold text-cyan-400 mb-4">Design & Modeling</h3>
-                            <ul class="space-y-1 text-gray-300">
-                                <li class="skill-item">SolidWorks (CSWA)</li>
-                                <li class="skill-item">AutoCAD</li>
-                                <li class="skill-item">Revit</li>
-                                <li class="skill-item">Bluebeam</li>
-                            </ul>
-                        </div>
-                        <div class="reveal">
-                            <h3 class="text-xl font-semibold text-cyan-400 mb-4">Prototyping & Fabrication</h3>
-                            <ul class="space-y-1 text-gray-300">
-                                <li class="skill-item">3D Printing</li>
-                                <li class="skill-item">Soldering</li>
-                                <li class="skill-item">Woodworking</li>
-                                <li class="skill-item">Drones (Licensed)</li>
-                            </ul>
-                        </div>
-                        <div class="reveal">
-                            <h3 class="text-xl font-semibold text-cyan-400 mb-4">Analysis & Software</h3>
-                            <ul class="space-y-1 text-gray-300">
-                                <li class="skill-item">MATLAB & Simulink</li>
-                                <li class="skill-item">Arduino & C</li>
-                                <li class="skill-item">Pipe Flo</li>
-                                <li class="skill-item">Microsoft Office Suite</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Resume Section -->
-        <section id="resume" class="section bg-gray-800 py-20">
-            <div class="container mx-auto px-6 text-center reveal">
-                 <h2 class="text-3xl font-bold text-white mb-4 split-animate">My Resume</h2>
-                 <p class="text-gray-400 mb-8 max-w-2xl mx-auto">
-                    For a more detailed look at my experience, qualifications, and the projects I've worked on, please download my resume.
-                 </p>
-                 <a href="https://www.dropbox.com/scl/fi/x78584a1ytjksykwq86mq/RESUME.pdf?rlkey=rd74vcy5rdux9wrvvsdgx3eyo&st=3hjijpyd&dl=1" target="_blank" class="bg-cyan-500 hover:bg-cyan-600 text-white font-semibold py-3 px-8 rounded-lg transition-transform transform hover:scale-105 shadow-lg inline-flex items-center gap-2">
-                    <i data-lucide="download"></i>
-                    Download Resume (PDF)
-                </a>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="section py-20">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center text-white mb-12 reveal split-animate">Get In Touch</h2>
-                <div class="max-w-2xl mx-auto reveal">
-                    <p class="text-center text-gray-400 mb-8">
-                        I love to hear about new opportunities and love to keep learning. If you have any inquiries, please feel free to send me a message or connect with me on other platforms.
-                    </p>
-                    <form id="contact-form" action="https://formspree.io/f/xdkdqrwn" method="POST" class="space-y-6">
-                        <div>
-                            <label for="name" class="block text-sm font-medium text-gray-300">Name</label>
-                            <input type="text" id="name" name="name" required class="mt-1 block w-full bg-gray-700 border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-cyan-500 focus:border-cyan-500">
-                        </div>
-                        <div>
-                            <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
-                            <input type="email" id="email" name="email" required class="mt-1 block w-full bg-gray-700 border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-cyan-500 focus:border-cyan-500">
-                        </div>
-                        <div>
-                            <label for="message" class="block text-sm font-medium text-gray-300">Message</label>
-                            <textarea id="message" name="message" rows="4" required class="mt-1 block w-full bg-gray-700 border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"></textarea>
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" class="bg-cyan-500 hover:bg-cyan-600 text-white font-semibold py-3 px-8 rounded-lg transition-transform transform hover:scale-105 shadow-lg">
-                                Send Message
-                            </button>
-                        </div>
-                    </form>
-                    <p id="form-status" class="text-center mt-4"></p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 py-8">
-        <div class="container mx-auto px-6 text-center text-gray-500">
-            <p class="mb-4">Connect with me on LinkedIn:</p>
-            <div class="flex justify-center space-x-6 mb-4">
-                <a href="https://www.linkedin.com/in/caleblawson102/" target="_blank" class="hover:text-cyan-400 transition-transform transform hover:scale-110"><i data-lucide="linkedin" class="w-8 h-8"></i></a>
-            </div>
-            <p>&copy; 2024 Caleb Lawson. All Rights Reserved.</p>
+        <div class="cap reveal">
+          <h3 class="cap-head">Embedded &amp; hardware</h3>
+          <ul class="cap-list">
+            <li><strong>MCUs</strong> — ESP32, Arduino / AVR, C and C++</li>
+            <li><strong>FPGA</strong> — Verilog on Intel MAX 10 (DE10-Lite)</li>
+            <li><strong>Buses</strong> — SPI, I²C, UART</li>
+            <li><strong>Board work</strong> — schematic, power management, soldering, bring-up</li>
+            <li><strong>Sensors</strong> — integration, calibration, characterisation</li>
+          </ul>
         </div>
-    </footer>
 
-    <script>
-        // ── Lucide icons ────────────────────────────────────────────────
-        lucide.createIcons();
+        <div class="cap reveal">
+          <h3 class="cap-head">Software &amp; analysis</h3>
+          <ul class="cap-list">
+            <li><strong>Languages</strong> — Python, C / C++, TypeScript</li>
+            <li><strong>Modelling</strong> — MATLAB, Simulink, control system design</li>
+            <li><strong>Simulation</strong> — SPICE / ngspice, including WASM builds</li>
+            <li><strong>Data</strong> — PostgreSQL, Docker, gradient boosting</li>
+            <li><strong>Front end</strong> — React, Vite</li>
+          </ul>
+        </div>
 
-        // ── Mobile menu ─────────────────────────────────────────────────
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-        });
+        <div class="cap reveal">
+          <h3 class="cap-head">Field &amp; fabrication</h3>
+          <ul class="cap-list">
+            <li><strong>Drone</strong> — FAA Part 107, site survey, aerial documentation</li>
+            <li><strong>CAD</strong> — SolidWorks (CSWA)</li>
+            <li><strong>Fabrication</strong> — 3D printing, parametric enclosures, woodworking</li>
+            <li><strong>Bench</strong> — logic analyzer, scope, DMM, bring-up debugging</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        // ── Header shadow on scroll ──────────────────────────────────────
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            header.classList.toggle('shadow-lg', window.scrollY > 50);
-        });
+  <!-- ===== E-500 Contact ===== -->
+  <section class="sheet" id="contact">
+    <div class="shell">
+      <div class="sheet-head reveal">
+        <p class="sheet-no">E-500 &nbsp;·&nbsp; Contact</p>
+        <h2 class="sheet-title">Start a conversation</h2>
+        <p class="sheet-lede">
+          Roles, project work, or a question about something on this site — all land in the
+          same place. I reply within two business days.
+        </p>
+      </div>
 
-        // ── Formspree contact form ───────────────────────────────────────
-        const form   = document.getElementById('contact-form');
-        const status = document.getElementById('form-status');
-        form.addEventListener('submit', async (event) => {
-            event.preventDefault();
-            const data = new FormData(event.target);
-            try {
-                const response = await fetch(event.target.action, {
-                    method: form.method, body: data, headers: { 'Accept': 'application/json' }
-                });
-                if (response.ok) {
-                    status.innerHTML   = 'Thanks for your submission!';
-                    status.className   = 'text-green-400';
-                    form.reset();
-                } else {
-                    const json = await response.json();
-                    status.innerHTML = Object.hasOwn(json, 'errors')
-                        ? json.errors.map(e => e.message).join(', ')
-                        : 'Oops! There was a problem submitting your form';
-                    status.className = 'text-red-400';
-                }
-            } catch (_) {
-                status.innerHTML = 'Oops! There was a problem submitting your form';
-                status.className = 'text-red-400';
-            }
-        });
+      <div class="split">
+        <form class="form reveal" data-form action="https://formspree.io/f/xdkdqrwn" method="POST">
+          <div class="field">
+            <label for="name">Your name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="field">
+            <label for="message">What do you need?</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+          <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+          <div><button class="btn" type="submit">Send message</button></div>
+        </form>
 
-        // ── ScrollReveal ─────────────────────────────────────────────────
-        const sr = ScrollReveal({ distance: '60px', duration: 1000, delay: 200, reset: true });
-        sr.reveal('.reveal', { origin: 'top', interval: 100 });
+        <div class="reveal">
+          <div class="channels">
+            <a class="channel" href="https://www.linkedin.com/in/caleblawson102/" target="_blank" rel="noopener">
+              <span class="channel-key">LinkedIn</span>
+              <span class="channel-val">caleblawson102 &rarr;</span>
+            </a>
+            <a class="channel" href="mailto:calebtlawson@gmail.com">
+              <span class="channel-key">Email</span>
+              <span class="channel-val">calebtlawson@gmail.com &rarr;</span>
+            </a>
+            <a class="channel" href="https://www.dropbox.com/scl/fi/x78584a1ytjksykwq86mq/RESUME.pdf?rlkey=rd74vcy5rdux9wrvvsdgx3eyo&amp;st=3hjijpyd&amp;dl=1">
+              <span class="channel-key">Résumé</span>
+              <span class="channel-val">Download PDF &rarr;</span>
+            </a>
+            <a class="channel" href="services.html">
+              <span class="channel-key">Consulting</span>
+              <span class="channel-val">CLAW Engineering &rarr;</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        // ════════════════════════════════════════════════════════════════
-        //  REACTBITS EFFECTS
-        // ════════════════════════════════════════════════════════════════
+</main>
 
-        // ── 1. Aurora WebGL background ───────────────────────────────────
-        (function initAurora() {
-            const canvas = document.getElementById('aurora-canvas');
-            const section = document.getElementById('home');
-            if (!canvas || !section) return;
+<div class="modal" data-modal aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-panel" data-modal-content></div>
+</div>
 
-            const gl = canvas.getContext('webgl2');
-            if (!gl) { canvas.style.display = 'none'; return; }
+<footer class="colophon">
+  <div class="shell colophon-inner">
+    <span>&copy; <span data-year>2026</span> Caleb Lawson</span>
+    <div class="colophon-links">
+      <a href="projects.html">Projects</a>
+      <a href="services.html">Consulting</a>
+      <a href="https://www.linkedin.com/in/caleblawson102/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <span>Set in IBM Plex</span>
+  </div>
+</footer>
 
-            const VERT = `#version 300 es
-            in vec2 position;
-            void main() { gl_Position = vec4(position, 0.0, 1.0); }`;
-
-            const FRAG = `#version 300 es
-            precision highp float;
-            uniform float uTime;
-            uniform float uAmplitude;
-            uniform vec3  uColorStops[3];
-            uniform vec2  uResolution;
-            uniform float uBlend;
-            out vec4 fragColor;
-
-            vec3 permute(vec3 x) { return mod(((x * 34.0) + 1.0) * x, 289.0); }
-
-            float snoise(vec2 v) {
-                const vec4 C = vec4(0.211324865405187, 0.366025403784439,
-                                   -0.577350269189626, 0.024390243902439);
-                vec2 i  = floor(v + dot(v, C.yy));
-                vec2 x0 = v - i + dot(i, C.xx);
-                vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
-                vec4 x12 = x0.xyxy + C.xxzz;
-                x12.xy -= i1;
-                i = mod(i, 289.0);
-                vec3 p = permute(permute(i.y + vec3(0.0, i1.y, 1.0)) + i.x + vec3(0.0, i1.x, 1.0));
-                vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), 0.0);
-                m = m * m * m * m;
-                vec3 x  = 2.0 * fract(p * C.www) - 1.0;
-                vec3 h  = abs(x) - 0.5;
-                vec3 ox = floor(x + 0.5);
-                vec3 a0 = x - ox;
-                m *= 1.79284291400159 - 0.85373472095314 * (a0*a0 + h*h);
-                vec3 g;
-                g.x  = a0.x  * x0.x   + h.x  * x0.y;
-                g.yz = a0.yz * x12.xz  + h.yz * x12.yw;
-                return 130.0 * dot(m, g);
-            }
-
-            void main() {
-                vec2 uv = gl_FragCoord.xy / uResolution;
-                vec3 color;
-                if (uv.x < 0.5) {
-                    color = mix(uColorStops[0], uColorStops[1], uv.x * 2.0);
-                } else {
-                    color = mix(uColorStops[1], uColorStops[2], (uv.x - 0.5) * 2.0);
-                }
-                float h = snoise(vec2(uv.x * 2.0 + uTime * 0.1, uTime * 0.25)) * 0.5 * uAmplitude;
-                h = exp(h);
-                h = (uv.y * 2.0 - h + 0.2);
-                float intensity  = 0.6 * h;
-                float midPoint   = 0.20;
-                float alpha      = smoothstep(midPoint - uBlend * 0.5, midPoint + uBlend * 0.5, intensity);
-                vec3  auroraCol  = intensity * color;
-                fragColor = vec4(auroraCol * alpha, alpha);
-            }`;
-
-            function compileShader(type, src) {
-                const s = gl.createShader(type);
-                gl.shaderSource(s, src);
-                gl.compileShader(s);
-                if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
-                    console.error('Shader error:', gl.getShaderInfoLog(s));
-                    gl.deleteShader(s); return null;
-                }
-                return s;
-            }
-
-            const vs = compileShader(gl.VERTEX_SHADER,   VERT);
-            const fs = compileShader(gl.FRAGMENT_SHADER, FRAG);
-            if (!vs || !fs) return;
-
-            const prog = gl.createProgram();
-            gl.attachShader(prog, vs); gl.attachShader(prog, fs);
-            gl.linkProgram(prog);
-            if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
-                console.error('Program link error:', gl.getProgramInfoLog(prog)); return;
-            }
-
-            // Fullscreen triangle
-            const vao = gl.createVertexArray();
-            gl.bindVertexArray(vao);
-            const buf = gl.createBuffer();
-            gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
-            const posLoc = gl.getAttribLocation(prog, 'position');
-            gl.enableVertexAttribArray(posLoc);
-            gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
-
-            const uTime      = gl.getUniformLocation(prog, 'uTime');
-            const uAmplitude = gl.getUniformLocation(prog, 'uAmplitude');
-            const uColorStop = gl.getUniformLocation(prog, 'uColorStops');
-            const uResolution= gl.getUniformLocation(prog, 'uResolution');
-            const uBlend     = gl.getUniformLocation(prog, 'uBlend');
-
-            // Color palette matching site's cyan accent with purple depth
-            const stops = ['#1a0533', '#0e7490', '#312e81'];
-            function hexRgb(hex) {
-                return [
-                    parseInt(hex.slice(1,3),16)/255,
-                    parseInt(hex.slice(3,5),16)/255,
-                    parseInt(hex.slice(5,7),16)/255
-                ];
-            }
-            const colorData = new Float32Array(stops.flatMap(hexRgb));
-
-            function resize() {
-                const w = section.offsetWidth, h = section.offsetHeight;
-                canvas.width = w; canvas.height = h;
-                gl.viewport(0, 0, w, h);
-            }
-            window.addEventListener('resize', resize);
-            resize();
-
-            gl.enable(gl.BLEND);
-            gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
-            gl.clearColor(0,0,0,0);
-
-            let start = null;
-            function render(ts) {
-                if (!start) start = ts;
-                const t = (ts - start) * 0.001;
-                gl.clear(gl.COLOR_BUFFER_BIT);
-                gl.useProgram(prog);
-                gl.bindVertexArray(vao);
-                gl.uniform1f(uTime,       t);
-                gl.uniform1f(uAmplitude,  1.2);
-                gl.uniform1f(uBlend,      0.6);
-                gl.uniform2f(uResolution, canvas.width, canvas.height);
-                gl.uniform3fv(uColorStop, colorData);
-                gl.drawArrays(gl.TRIANGLES, 0, 3);
-                requestAnimationFrame(render);
-            }
-            requestAnimationFrame(render);
-        })();
-
-        // ── 2. SpotlightCard – cursor-following radial glow ──────────────
-        document.querySelectorAll('.card-spotlight').forEach(card => {
-            card.addEventListener('mousemove', e => {
-                const rect = card.getBoundingClientRect();
-                card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-                card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-            });
-        });
-
-        // ── 3. 3-D Tilt on project cards ────────────────────────────────
-        document.querySelectorAll('.tilt-card').forEach(card => {
-            const TILT = 8; // max degrees
-            card.addEventListener('mousemove', e => {
-                const rect = card.getBoundingClientRect();
-                const cx   = rect.left + rect.width  / 2;
-                const cy   = rect.top  + rect.height / 2;
-                const dx   = (e.clientX - cx) / (rect.width  / 2);
-                const dy   = (e.clientY - cy) / (rect.height / 2);
-                card.style.transform = `perspective(600px) rotateY(${dx * TILT}deg) rotateX(${-dy * TILT}deg) scale3d(1.03,1.03,1.03)`;
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(600px) rotateY(0deg) rotateX(0deg) scale3d(1,1,1)';
-            });
-        });
-
-        // ── 4. SplitText – scroll-triggered char-by-char reveal ──────────
-        (function initSplitText() {
-            const elements = document.querySelectorAll('.split-animate');
-
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (!entry.isIntersecting || entry.target._split_done) return;
-                    entry.target._split_done = true;
-                    entry.target.querySelectorAll('.split-char').forEach((span, i) => {
-                        setTimeout(() => span.classList.add('visible'), i * 35);
-                    });
-                });
-            }, { threshold: 0.15 });
-
-            elements.forEach(el => {
-                // Skip if already processed (e.g., from a previous call)
-                if (el._split_init) return;
-                el._split_init = true;
-
-                const text = el.textContent;
-                el.textContent = '';
-                [...text].forEach(ch => {
-                    const span = document.createElement('span');
-                    span.className   = 'split-char';
-                    span.textContent = ch === ' ' ? '\u00A0' : ch;
-                    el.appendChild(span);
-                });
-                observer.observe(el);
-            });
-        })();
-    </script>
+<script src="assets/js/projects.js"></script>
+<script src="assets/js/site.js"></script>
 </body>
 </html>
