@@ -1,0 +1,12 @@
+{
+  "name": "caleblawson-site",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Personal site for Caleb Lawson. Static — no build step. jsdom is a test-only dependency.",
+  "scripts": {
+    "test": "node smoke.test.js"
+  },
+  "devDependencies": {
+    "jsdom": "^26.1.0"
+  }
+}

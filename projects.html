@@ -1,446 +1,91 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Caleb Lawson - All Projects</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        .project-card {
-            cursor: pointer;
-        }
-        /* Hide scrollbar for the modal gallery */
-        .gallery-container::-webkit-scrollbar { display: none; }
-        .gallery-container {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projects — Caleb Lawson</title>
+<meta name="description" content="Electrical, embedded, software and mechanical projects by Caleb Lawson — drone swarm autonomy, FPGA design, browser SPICE simulation, control systems and more.">
+<link rel="canonical" href="https://clawengineering.com/projects.html">
 
-        /* ── SpotlightCard ──────────────────────────────────────────── */
-        .card-spotlight {
-            position: relative;
-            --mouse-x: 50%;
-            --mouse-y: 50%;
-            --spotlight-color: rgba(6, 182, 212, 0.18);
-        }
-        .card-spotlight::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            background: radial-gradient(
-                circle at var(--mouse-x) var(--mouse-y),
-                var(--spotlight-color),
-                transparent 70%
-            );
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            pointer-events: none;
-            z-index: 1;
-        }
-        .card-spotlight:hover::before { opacity: 1; }
+<meta property="og:type" content="website">
+<meta property="og:title" content="Projects — Caleb Lawson">
+<meta property="og:description" content="Drone swarm autonomy, FPGA design, browser SPICE simulation, control systems.">
+<meta property="og:url" content="https://clawengineering.com/projects.html">
+<meta property="og:image" content="https://clawengineering.com/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
 
-        /* ── 3-D Tilt ───────────────────────────────────────────────── */
-        .tilt-card {
-            transform-style: preserve-3d;
-            will-change: transform;
-            transition: transform 0.08s linear, box-shadow 0.3s ease;
-        }
-        .tilt-card:hover {
-            box-shadow: 0 20px 60px rgba(6, 182, 212, 0.25);
-        }
-
-        /* ── Page title gradient ────────────────────────────────────── */
-        .gradient-text {
-            background: linear-gradient(90deg, #22d3ee 0%, #818cf8 50%, #22d3ee 100%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradient-shift 6s linear infinite;
-        }
-        @keyframes gradient-shift {
-            0%   { background-position: 0%   center; }
-            100% { background-position: 200% center; }
-        }
-    </style>
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
 </head>
-<body class="bg-gray-900 text-gray-200">
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
 
-    <!-- Header & Navigation -->
-    <header id="header" class="bg-gray-900/80 backdrop-blur-sm sticky top-0 left-0 right-0 z-50 transition-all duration-300 shadow-lg">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-bold text-white hover:text-cyan-400 transition-colors">Caleb Lawson</a>
-            <nav class="hidden md:flex space-x-8">
-                <a href="index.html#about" class="text-gray-300 hover:text-cyan-400 transition-colors">About</a>
-                <a href="projects.html" class="text-cyan-400 font-semibold transition-colors">Projects</a>
-                <a href="index.html#skills" class="text-gray-300 hover:text-cyan-400 transition-colors">Skills</a>
-                <a href="index.html#resume" class="text-gray-300 hover:text-cyan-400 transition-colors">Resume</a>
-                <a href="index.html#contact" class="text-gray-300 hover:text-cyan-400 transition-colors">Contact</a>
-            </nav>
-            <button id="mobile-menu-button" class="md:hidden text-white">
-                <i data-lucide="menu"></i>
-            </button>
-        </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
-            <a href="index.html#about" class="block py-2 text-gray-300 hover:text-cyan-400">About</a>
-            <a href="projects.html" class="block py-2 text-cyan-400 font-semibold">Projects</a>
-            <a href="index.html#skills" class="block py-2 text-gray-300 hover:text-cyan-400">Skills</a>
-            <a href="index.html#resume" class="block py-2 text-gray-300 hover:text-cyan-400">Resume</a>
-            <a href="index.html#contact" class="block py-2 text-gray-300 hover:text-cyan-400">Contact</a>
-        </div>
-    </header>
+<header class="masthead">
+  <div class="shell masthead-inner">
+    <a class="mark" href="index.html">
+      <span class="mark-name">Caleb Lawson</span>
+      <span class="mark-sub">EE / Embedded</span>
+    </a>
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav class="nav" id="site-nav" data-nav aria-label="Primary">
+      <ul class="nav-list">
+        <li><a class="nav-link" href="index.html">Home</a></li>
+        <li><a class="nav-link is-current" href="projects.html">Projects</a></li>
+        <li><a class="nav-link" href="services.html">Consulting</a></li>
+        <li><a class="nav-link" href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
-    <main class="pt-12">
-        <!-- All Projects Section -->
-        <section id="all-projects" class="py-20">
-            <div class="container mx-auto px-6">
-                <h2 class="text-4xl font-bold text-center mb-4 gradient-text">All Projects</h2>
-                <!-- Filter Buttons -->
-                <div id="filter-buttons" class="flex justify-center gap-2 md:gap-4 mb-12 flex-wrap">
-                    <button class="filter-btn bg-cyan-500 text-white font-semibold py-2 px-4 rounded-lg" data-filter="all">All</button>
-                    <button class="filter-btn bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg" data-filter="electrical">Electrical</button>
-                    <button class="filter-btn bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg" data-filter="mechanical">Mechanical</button>
-                    <button class="filter-btn bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg" data-filter="software">Software</button>
-                </div>
+<main id="main">
+  <section class="sheet" style="border-top:0">
+    <div class="shell">
+      <div class="sheet-head">
+        <p class="sheet-no">P-000 &nbsp;·&nbsp; Project index</p>
+        <h1 class="sheet-title">Everything I have built</h1>
+        <p class="sheet-lede">
+          Coursework, capstone, client work and things built because they were bothering me.
+          Filter by discipline; open any sheet for the problem, the scope, what I owned, and
+          what came out.
+        </p>
+      </div>
 
-                <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    
-                    <!-- Project Card 1 -->
-                    <div class="project-card bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-shadow duration-300 card-spotlight tilt-card" data-category="electrical software" data-modal="modal1">
-                        <div class="w-full h-56 bg-black flex items-center justify-center">
-                            <img src="https://i.imgur.com/n7N7JPL.png" alt="Mapping and Predicting Wildfires Project" class="w-full h-full object-contain">
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-white mb-2">Mapping and Predicting Wildfires</h3>
-                            <p class="text-gray-400 mb-4">A capstone project featuring a drone swarm to provide firefighters with real-time data on topology, wind, and fire locations...</p>
-                        </div>
-                    </div>
+      <div class="filters" role="group" aria-label="Filter projects by discipline">
+        <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
+        <button class="filter" type="button" data-filter="electrical" aria-pressed="false">Electrical</button>
+        <button class="filter" type="button" data-filter="embedded" aria-pressed="false">Embedded</button>
+        <button class="filter" type="button" data-filter="software" aria-pressed="false">Software</button>
+        <button class="filter" type="button" data-filter="mechanical" aria-pressed="false">Mechanical</button>
+      </div>
 
-                    <!-- Project Card 2 -->
-                    <div class="project-card bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-shadow duration-300 card-spotlight tilt-card" data-category="mechanical electrical software" data-modal="modal2">
-                         <div class="w-full h-56 bg-black flex items-center justify-center">
-                            <img src="https://i.imgur.com/C0iv781.png" alt="Linear Actuating Pillow Project" class="w-full h-full object-contain">
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-white mb-2">Linear Actuating Pillow</h3>
-                            <p class="text-gray-400 mb-4">A therapeutic back pillow with six adjustable pads, designed to give wheelchair users more control over their lumbar support and comfort.</p>
-                        </div>
-                    </div>
+      <p class="sheet-no" style="margin-bottom:1.5rem"><span data-filter-count>&nbsp;</span></p>
 
-                    <!-- Project Card 3 -->
-                    <div class="project-card bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-shadow duration-300 card-spotlight tilt-card" data-category="mechanical electrical" data-modal="modal3">
-                        <div class="w-full h-56 bg-black flex items-center justify-center">
-                            <img src="https://i.imgur.com/WCBfY1n.jpeg" alt="Ionic Thruster Project" class="w-full h-full object-contain">
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-white mb-2">Ionic Thruster</h3>
-                            <p class="text-gray-400 mb-4">Designed and built a functional thruster that uses ionized air to generate thrust without any moving parts or combustion.</p>
-                        </div>
-                    </div>
-
-                    <!-- Project Card 4 -->
-                    <div class="project-card bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-shadow duration-300 card-spotlight tilt-card" data-category="electrical software" data-modal="modal4">
-                        <div class="w-full h-56 bg-black flex items-center justify-center">
-                            <img src="https://i.imgur.com/RO9ixxL.jpeg" alt="Electronic Thermometer Project" class="w-full h-full object-contain">
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-white mb-2">Electronic Thermometer</h3>
-                            <p class="text-gray-400 mb-4">A project to understand how thermometers work by creating one with a thermistor and Arduino, achieving results accurate to +/- 0.1°C.</p>
-                        </div>
-                    </div>
-
-                    <!-- Project Card 5 -->
-                    <div class="project-card bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-shadow duration-300 card-spotlight tilt-card" data-category="electrical software" data-modal="modal5">
-                        <div class="w-full h-56 bg-black flex items-center justify-center">
-                            <img src="https://i.imgur.com/EQ87jwe.jpeg" alt="Elevator Control System Project" class="w-full h-full object-contain">
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-white mb-2">Elevator Control System</h3>
-                            <p class="text-gray-400 mb-4">A simulation of an elevator control system for floors 0-3, designed using logic gates and implemented on a microcontroller.</p>
-                        </div>
-                    </div>
-
-                    <!-- Project Card 6 -->
-                    <div class="project-card bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-shadow duration-300 card-spotlight tilt-card" data-category="electrical software" data-modal="modal6">
-                        <div class="w-full h-56 bg-black flex items-center justify-center">
-                            <img src="https://i.imgur.com/FCN3p6O.png" alt="Velocity Speed Controller Project" class="w-full h-full object-contain">
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-white mb-2">Velocity Speed Controller</h3>
-                            <p class="text-gray-400 mb-4">Designed and simulated a DC motor controller to achieve specific performance requirements using MATLAB and Simulink.</p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Project Modals -->
-    <div id="modal-container">
-        <!-- Modals will be injected here by JavaScript -->
+      <div class="grid" data-grid="all"></div>
     </div>
+  </section>
+</main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 py-8">
-        <div class="container mx-auto px-6 text-center text-gray-500">
-            <div class="flex justify-center space-x-6 mb-4">
-                <a href="https://www.linkedin.com/in/caleblawson102/" target="_blank" class="hover:text-cyan-400"><i data-lucide="linkedin"></i></a>
-            </div>
-            <p>&copy; 2024 Caleb Lawson. All Rights Reserved.</p>
-        </div>
-    </footer>
+<div class="modal" data-modal aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-panel" data-modal-content></div>
+</div>
 
-    <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
+<footer class="colophon">
+  <div class="shell colophon-inner">
+    <span>&copy; <span data-year>2026</span> Caleb Lawson</span>
+    <div class="colophon-links">
+      <a href="index.html">Home</a>
+      <a href="services.html">Consulting</a>
+      <a href="https://www.linkedin.com/in/caleblawson102/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <span>Set in IBM Plex</span>
+  </div>
+</footer>
 
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Project Data with detailed info for modals
-        const projects = {
-            modal1: {
-                title: 'Mapping and Predicting Wildfires',
-                images: [
-                    { src: 'https://i.imgur.com/n7N7JPL.png', caption: 'Drone swarm simulation in action.' },
-                    { src: 'https://i.imgur.com/s3x8c4t.png', caption: 'Containment line drawn using TensorFlow.' },
-                    { src: 'https://i.imgur.com/SUSKdiZ.png', caption: 'Crazyflie drone and control equipment.' },
-                    { src: 'https://i.imgur.com/485HbJQ.png', caption: "Flow chart detailing the swarm's operational logic." },
-                    { src: 'https://i.imgur.com/YHGixPB.png', caption: 'Floor pattern and path of the leader drone.' }
-                ],
-                problem: 'Firefighters need better real-time information to combat wildfires effectively and ensure their safety.',
-                scope: 'To research, design, and engineer a drone swarm technology that provides autonomous, real-time data on topology, wind, main fire locations, and spot fires to continuously update containment lines.',
-                whatIDid: 'Coordinated schedules and checked for clashes and risks while working with an interdisciplinary team to research, design, and engineer the drone swarm technology. Specifically working with the creation of search patterns and autonomous flight for the drones.',
-                results: 'A functional system concept that improves situational awareness for first responders, allowing for more strategic and safer wildfire management.',
-                recommendations: 'Further development into larger drones with longer run times and integration with existing wildfire management software.'
-            },
-            modal2: {
-                title: 'Linear Actuating Pillow',
-                images: [
-                    { src: 'https://i.imgur.com/C0iv781.png', caption: 'SolidWorks model of the main pillow body.' },
-                    { src: 'https://i.imgur.com/NDYZFc1.png', caption: 'SolidWorks model of a corner pad.' },
-                    { src: 'https://i.imgur.com/l7TTYSK.png', caption: 'SolidWorks model of a middle pad.' }
-                ],
-                problem: 'Lumbar support and comfort for wheelchair-bound persons is a lacking field when it comes to user-adjustable options, often needing external assistance.',
-                scope: 'Create a back pillow with 6 different sections of adjustable pads for immediate and simple adjustments, giving wheelchair-bound persons more freedom.',
-                whatIDid: 'Designed the wiring diagram and embedded software with Arduino. Created the mechanical design in SolidWorks.',
-                results: 'Functioning controls on Linear Actuators, giving slow and precise increments in adjusting panels for back support.',
-                recommendations: 'Curve pads for more comfort, possibility of personalization for curvature of individuals\' backs, create save-able settings of pad positioning.'
-            },
-            modal3: {
-                title: 'Ionic Thruster',
-                images: [
-                    { src: 'https://i.imgur.com/WCBfY1n.jpeg', caption: 'Completed model of the Ionic Thruster.' }
-                ],
-                problem: 'Does changing the distance of a corona discharge have an effect on thrust?',
-                scope: 'Design and create a functional thruster without the use of moving parts or combustion to test the hypothesis.',
-                whatIDid: 'Researched ionized air thrust, designed and assembled the high voltage input, and created the mechanical design in SolidWorks.',
-                results: 'No, changing the distance of the corona discharge does not affect the thrust notably.',
-                recommendations: 'Try more geometries for the thruster. Try more needles for more points of creating the corona discharge, try higher voltage.'
-            },
-            modal4: {
-                title: 'Electronic Thermometer',
-                images: [
-                    { src: 'https://i.imgur.com/RO9ixxL.jpeg', caption: 'Completed circuit of the Electrical Thermometer.' }
-                ],
-                problem: 'A desire to understand the fundamental principles of how electronic thermometers work.',
-                scope: 'Create an Electronic Thermometer using a thermistor, Arduino, and a voltage divider.',
-                whatIDid: 'Created the wiring diagram, developed the embedded software with Arduino, assembled the wiring on a breadboard, and debugged for accuracy.',
-                results: 'A functioning thermometer giving precise readings accurate to +/- 0.1°C.',
-                recommendations: 'Try assembly using a potentiometer and re-iterate for correct temperature readings. Try creating a PCB to create a smaller, portable thermometer.'
-            },
-            modal5: {
-                title: 'Elevator Control System',
-                images: [
-                    { src: 'https://i.imgur.com/EQ87jwe.jpeg', caption: 'Microcontroller demonstrating elevator floor changes.' },
-                    { src: 'https://i.imgur.com/STtB0dI.png', caption: 'Logic gate path for the control system.' }
-                ],
-                problem: 'A desire to understand the logic and decision-making processes within an elevator.',
-                scope: 'Create an elevator control system using logic gates and simulate its functionality for a 4-floor building (0-3) on a microcontroller.',
-                whatIDid: 'Designed a logic diagram which follows basic elevator functionality, reliability, and efficiency.',
-                results: 'A functioning elevator control system simulation that correctly handles floor requests and includes an E-stop feature.',
-                recommendations: 'Try to incorporate more floors and acceleration/speed control between floors.'
-            },
-            modal6: {
-                title: 'Velocity Speed Controller',
-                images: [
-                    { src: 'https://i.imgur.com/FCN3p6O.png', caption: 'MATLAB Simulink model of the speed controller.' },
-                    { src: 'https://i.imgur.com/hYyNEfm.png', caption: 'Comparison of actual vs. simulated step input.' }
-                ],
-                problem: 'A DC motor must achieve an angular velocity of 15 rad/s with zero steady-state error, a %Overshoot of ≤1%, and a settling time of less than 0.05 seconds.',
-                scope: 'Derive a mathematical model of the motor\'s transfer function, analyze its open-loop response, design a velocity speed controller to meet the requirements, and validate through simulation and testing.',
-                whatIDid: 'Mathematically modeled the motor\'s transfer function and derived the velocity speed controller feedback response. Simulated on MATLAB and Simulink to validate performance and tested the controller.',
-                results: 'A functioning Velocity Speed Controller was created. The settling time was slightly off from the simulation due to real-world factors, but the controller met the primary performance goals.',
-                recommendations: 'Try to integrate into different equipment such as conveyor belts, robotic arms, or pumps and compressors.'
-            }
-        };
-
-        // Modal Logic
-        const modalContainer = document.getElementById('modal-container');
-        const projectCards = document.querySelectorAll('.project-card');
-        let currentImageIndex = 0;
-
-        function showImage(index) {
-            const gallery = document.querySelector('.gallery-container');
-            if (gallery) {
-                gallery.scrollTo({ left: gallery.clientWidth * index, behavior: 'smooth' });
-            }
-        }
-
-        projectCards.forEach(card => {
-            card.addEventListener('click', () => {
-                const modalId = card.dataset.modal;
-                const project = projects[modalId];
-                currentImageIndex = 0;
-                
-                const modalHTML = `
-                    <div id="${modalId}" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50" onclick="closeModal(event)">
-                        <div class="bg-gray-800 rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative" onclick="event.stopPropagation()">
-                            <button class="close-modal absolute top-4 right-4 text-gray-400 hover:text-white z-20">
-                                <i data-lucide="x"></i>
-                            </button>
-                            
-                            <div class="relative">
-                                <div class="gallery-container w-full h-96 overflow-x-scroll snap-x snap-mandatory flex scroll-smooth bg-black">
-                                    ${project.images.map((imgData, index) => `
-                                        <div class="w-full flex-shrink-0 snap-center flex flex-col items-center justify-center p-4">
-                                            <img src="${imgData.src}" alt="${project.title} image ${index + 1}" class="max-w-full max-h-80 object-contain">
-                                            <p class="text-sm text-gray-400 mt-2 text-center">${imgData.caption}</p>
-                                        </div>
-                                    `).join('')}
-                                </div>
-                                ${project.images.length > 1 ? `
-                                <button class="prev-btn absolute top-1/2 left-4 -translate-y-1/2 bg-black/50 p-2 rounded-full text-white hover:bg-black/75">
-                                    <i data-lucide="chevron-left"></i>
-                                </button>
-                                <button class="next-btn absolute top-1/2 right-4 -translate-y-1/2 bg-black/50 p-2 rounded-full text-white hover:bg-black/75">
-                                    <i data-lucide="chevron-right"></i>
-                                </button>
-                                ` : ''}
-                            </div>
-
-                            <div class="p-8">
-                                <h3 class="text-3xl font-bold text-white mb-6">${project.title}</h3>
-                                <div class="grid md:grid-cols-2 gap-8 text-gray-300">
-                                    <div class="space-y-6">
-                                        <div>
-                                            <h4 class="text-xl font-semibold text-cyan-400 mb-2">Problem</h4>
-                                            <p>${project.problem}</p>
-                                        </div>
-                                        <div>
-                                            <h4 class="text-xl font-semibold text-cyan-400 mb-2">Scope</h4>
-                                            <p>${project.scope}</p>
-                                        </div>
-                                         <div>
-                                            <h4 class="text-xl font-semibold text-cyan-400 mb-2">What I Did</h4>
-                                            <p>${project.whatIDid}</p>
-                                        </div>
-                                    </div>
-                                    <div class="space-y-6">
-                                        <div>
-                                            <h4 class="text-xl font-semibold text-cyan-400 mb-2">Results</h4>
-                                            <p>${project.results}</p>
-                                        </div>
-                                        <div>
-                                            <h4 class="text-xl font-semibold text-cyan-400 mb-2">Recommendations</h4>
-                                            <p>${project.recommendations}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-
-                modalContainer.innerHTML = modalHTML;
-                lucide.createIcons();
-
-                document.querySelector(`#${modalId} .close-modal`).addEventListener('click', () => {
-                    modalContainer.innerHTML = '';
-                });
-
-                if (project.images.length > 1) {
-                    document.querySelector(`#${modalId} .prev-btn`).addEventListener('click', () => {
-                        currentImageIndex = (currentImageIndex - 1 + project.images.length) % project.images.length;
-                        showImage(currentImageIndex);
-                    });
-                    document.querySelector(`#${modalId} .next-btn`).addEventListener('click', () => {
-                        currentImageIndex = (currentImageIndex + 1) % project.images.length;
-                        showImage(currentImageIndex);
-                    });
-                }
-            });
-        });
-        
-        function closeModal(event) {
-            if (event.target.id === event.currentTarget.id) {
-                 modalContainer.innerHTML = '';
-            }
-        }
-
-        // Filter Logic
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const projectsGrid = document.getElementById('projects-grid');
-
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                filterButtons.forEach(btn => {
-                    btn.classList.remove('bg-cyan-500');
-                    btn.classList.add('bg-gray-700', 'hover:bg-gray-600');
-                });
-                button.classList.add('bg-cyan-500');
-                button.classList.remove('bg-gray-700', 'hover:bg-gray-600');
-
-                const filter = button.dataset.filter;
-
-                projectCards.forEach(card => {
-                    const categories = card.dataset.category.split(' ');
-                    if (filter === 'all' || categories.includes(filter)) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            });
-        });
-
-        // ── SpotlightCard – cursor-following radial glow ─────────────────
-        document.querySelectorAll('.card-spotlight').forEach(card => {
-            card.addEventListener('mousemove', e => {
-                const rect = card.getBoundingClientRect();
-                card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-                card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-            });
-        });
-
-        // ── 3-D Tilt on project cards ────────────────────────────────────
-        document.querySelectorAll('.tilt-card').forEach(card => {
-            const TILT = 8;
-            card.addEventListener('mousemove', e => {
-                const rect = card.getBoundingClientRect();
-                const dx   = (e.clientX - rect.left - rect.width  / 2) / (rect.width  / 2);
-                const dy   = (e.clientY - rect.top  - rect.height / 2) / (rect.height / 2);
-                card.style.transform = `perspective(600px) rotateY(${dx * TILT}deg) rotateX(${-dy * TILT}deg) scale3d(1.03,1.03,1.03)`;
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(600px) rotateY(0deg) rotateX(0deg) scale3d(1,1,1)';
-            });
-        });
-
-    </script>
+<script src="assets/js/projects.js"></script>
+<script src="assets/js/site.js"></script>
 </body>
 </html>
