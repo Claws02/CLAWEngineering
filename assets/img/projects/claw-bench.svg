@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="An RC circuit and its step response, drawn inside a browser frame.">
+  <rect width="800" height="500" fill="#fbfbf9"/>
+  <rect x="16.5" y="16.5" width="767" height="467" fill="none" stroke="#dde0e3" stroke-width="1"/>
+  <g stroke="#c3c8ce" stroke-width="1">
+    <path d="M16 44h20M44 16v20M784 44h-20M756 16v20M16 456h20M44 484v-20M784 456h-20M756 484v-20"/>
+  </g>
+  <rect x="52" y="60" width="696" height="330" rx="4" fill="none" stroke="#14181c" stroke-width="1.5"/>
+  <path d="M52 100h696" stroke="#14181c" stroke-width="1.5"/>
+  <g fill="#c3c8ce"><circle cx="76" cy="80" r="6"/><circle cx="98" cy="80" r="6"/><circle cx="120" cy="80" r="6"/></g>
+  <g fill="none" stroke="#14181c" stroke-width="1.8" stroke-linejoin="round">
+  <path d="M112 176h56"/>
+  <path d="M168 176l10-14 16 28 16-28 16 28 16-28 10 14"/>
+  <path d="M252 176h72"/>
+  <path d="M324 152v48M348 152v48"/>
+  <path d="M348 176h48v96"/>
+  <path d="M112 176v96h284"/>
+  </g>
+  <circle cx="112" cy="176" r="0" fill="none"/>
+  <g fill="none" stroke="#14181c" stroke-width="1.8"><path d="M96 152v48M104 160v32M120 168v16M128 164v24"/></g>
+  <text x="200" y="138" text-anchor="middle" font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="15" fill="#565f6b" letter-spacing="1.6">R</text>
+  <text x="336" y="138" text-anchor="middle" font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="15" fill="#565f6b" letter-spacing="1.6">C</text>
+  <g stroke="#14181c" stroke-width="1.8"><path d="M376 272h40M383 281h26M390 290h12"/></g>
+  <g stroke="#dde0e3" stroke-width="1"><path d="M470 150h214M470 200h214M470 250h214"/></g>
+  <path d="M470 128v172h214" fill="none" stroke="#565f6b" stroke-width="1.5"/>
+  <path d="M470 300C520 300 540 176 684 158" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="577" y="332" text-anchor="middle" font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#2563eb" letter-spacing="1.6">STEP RESPONSE</text>
+  <text x="400" y="366" text-anchor="middle" font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="15" fill="#565f6b" letter-spacing="1.6">ngspice → WebAssembly</text>
+  <g font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="14" fill="#7b838d" letter-spacing="2">
+    <text x="40" y="466">P-04</text>
+    <text x="760" y="466" text-anchor="end">SPICE IN THE BROWSER</text>
+  </g>
+</svg>

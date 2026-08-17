@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="A code flashcard with recall buttons and a streak meter.">
+  <rect width="800" height="500" fill="#fbfbf9"/>
+  <rect x="16.5" y="16.5" width="767" height="467" fill="none" stroke="#dde0e3" stroke-width="1"/>
+  <g stroke="#c3c8ce" stroke-width="1">
+    <path d="M16 44h20M44 16v20M784 44h-20M756 16v20M16 456h20M44 484v-20M784 456h-20M756 484v-20"/>
+  </g>
+  <rect x="180" y="136" width="424" height="220" rx="4" fill="#fbfbf9" stroke="#c3c8ce" stroke-width="1.5"/>
+  <rect x="156" y="116" width="424" height="220" rx="4" fill="#fbfbf9" stroke="#c3c8ce" stroke-width="1.5"/>
+  <rect x="132" y="96" width="424" height="220" rx="4" fill="#fbfbf9" stroke="#14181c" stroke-width="1.8"/>
+  <text x="160" y="136" text-anchor="start" font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="15" fill="#cc2936" letter-spacing="1.6">NEC 210.19(A)</text>
+  <path d="M160 154h368" stroke="#dde0e3" stroke-width="1"/>
+  <g font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="17" fill="#14181c" letter-spacing="0.6"><text x="160" y="196">Minimum branch-circuit</text><text x="160" y="224">conductor ampacity?</text></g>
+  <g fill="none" stroke="#c3c8ce" stroke-width="1.5"><rect x="160" y="248" width="164" height="40" rx="2"/><rect x="340" y="248" width="164" height="40" rx="2"/></g>
+  <text x="242" y="274" text-anchor="middle" font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#7b838d" letter-spacing="1.6">AGAIN</text>
+  <text x="422" y="274" text-anchor="middle" font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#2563eb" letter-spacing="1.6">GOT IT</text>
+  <text x="132" y="396" text-anchor="start" font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#565f6b" letter-spacing="1.6">STREAK</text>
+  <rect x="236" y="382" width="26" height="18" fill="#2563eb"/>
+  <rect x="272" y="382" width="26" height="18" fill="#2563eb"/>
+  <rect x="308" y="382" width="26" height="18" fill="#2563eb"/>
+  <rect x="344" y="382" width="26" height="18" fill="#2563eb"/>
+  <rect x="380" y="382" width="26" height="18" fill="#2563eb"/>
+  <rect x="416" y="382" width="26" height="18" fill="#2563eb"/>
+  <rect x="452" y="382" width="26" height="18" fill="#2563eb"/>
+  <rect x="488" y="382" width="26" height="18" fill="#2563eb"/>
+  <rect x="524" y="382" width="26" height="18" fill="#dde0e3"/>
+  <rect x="560" y="382" width="26" height="18" fill="#dde0e3"/>
+  <rect x="596" y="382" width="26" height="18" fill="#dde0e3"/>
+  <rect x="632" y="382" width="26" height="18" fill="#dde0e3"/>
+  <g font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="14" fill="#7b838d" letter-spacing="2">
+    <text x="40" y="466">P-13</text>
+    <text x="760" y="466" text-anchor="end">NEC DRILL</text>
+  </g>
+</svg>

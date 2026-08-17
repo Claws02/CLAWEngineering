@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Seven-segment decoder with a clock divider and GPIO broken out for logic-analyzer capture.">
+  <rect width="800" height="500" fill="#fbfbf9"/>
+  <rect x="16.5" y="16.5" width="767" height="467" fill="none" stroke="#dde0e3" stroke-width="1"/>
+  <g stroke="#c3c8ce" stroke-width="1">
+    <path d="M16 44h20M44 16v20M784 44h-20M756 16v20M16 456h20M44 484v-20M784 456h-20M756 484v-20"/>
+  </g>
+  <polygon points="84,104 91.5,96.5 160.5,96.5 168,104 160.5,111.5 91.5,111.5" fill="#14181c"/>
+  <polygon points="168,104 175.5,111.5 175.5,180.5 168,188 160.5,180.5 160.5,111.5" fill="#14181c"/>
+  <polygon points="168,188 175.5,195.5 175.5,264.5 168,272 160.5,264.5 160.5,195.5" fill="#14181c"/>
+  <polygon points="84,272 91.5,264.5 160.5,264.5 168,272 160.5,279.5 91.5,279.5" fill="#14181c"/>
+  <polygon points="84,188 91.5,195.5 91.5,264.5 84,272 76.5,264.5 76.5,195.5" fill="#dde0e3"/>
+  <polygon points="84,104 91.5,111.5 91.5,180.5 84,188 76.5,180.5 76.5,111.5" fill="#dde0e3"/>
+  <polygon points="84,188 91.5,180.5 160.5,180.5 168,188 160.5,195.5 91.5,195.5" fill="#14181c"/>
+  <text x="126.0" y="316" text-anchor="middle" font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#7b838d" letter-spacing="1.6">7-SEG DECODER</text>
+  <text x="300" y="112" text-anchor="start" font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#565f6b" letter-spacing="1.6">CLK</text>
+  <path d="M300 156v-32h20.0v32h20.0v-32h20.0v32h20.0v-32h20.0v32h20.0v-32h20.0v32h20.0v-32h20.0v32h20.0v-32h20.0v32h20.0v-32h20.0v32h20.0v-32h20.0v32h20.0v-32h20.0v32h20.0v-32h20.0v32h20.0v-32h20.0v32h20.0" fill="none" stroke="#14181c" stroke-width="2"/>
+  <rect x="390" y="196" width="172" height="60" rx="2" fill="none" stroke="#14181c" stroke-width="1.5"/><text x="476.0" y="226.0" text-anchor="middle" font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="19" fill="#14181c" letter-spacing="1">÷ N</text>
+  <line x1="476" y1="160" x2="476" y2="194" stroke="#565f6b" stroke-width="1.5"/><path d="M476 194l-5 -9h10z" fill="#565f6b"/>
+  <line x1="476" y1="258" x2="476" y2="292" stroke="#565f6b" stroke-width="1.5"/><path d="M476 292l-5 -9h10z" fill="#565f6b"/>
+  <text x="300" y="300" text-anchor="start" font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#565f6b" letter-spacing="1.6">CLK / N</text>
+  <path d="M300 344v-32h110.0v32h110.0v-32h110.0v32h110.0" fill="none" stroke="#2563eb" stroke-width="2"/>
+  <path d="M300 400h440" stroke="#14181c" stroke-width="1.5"/>
+  <g fill="#14181c"><circle cx="300" cy="400" r="4.5"/><circle cx="363" cy="400" r="4.5"/><circle cx="426" cy="400" r="4.5"/><circle cx="489" cy="400" r="4.5"/><circle cx="552" cy="400" r="4.5"/><circle cx="615" cy="400" r="4.5"/><circle cx="678" cy="400" r="4.5"/><circle cx="741" cy="400" r="4.5"/></g>
+  <g stroke="#cc2936" stroke-width="1.5" stroke-dasharray="4 4"><path d="M300 400v28M426 400v28M552 400v28M678 400v28"/></g>
+  <text x="520" y="444" text-anchor="middle" font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#cc2936" letter-spacing="1.6">GPIO → LOGIC ANALYZER</text>
+  <g font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="14" fill="#7b838d" letter-spacing="2">
+    <text x="40" y="466">P-03</text>
+    <text x="760" y="466" text-anchor="end">MAX 10 · DE10-LITE</text>
+  </g>
+</svg>

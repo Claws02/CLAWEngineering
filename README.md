@@ -19,8 +19,9 @@ assets/css/site.css     The entire design system
 assets/js/projects.js   Project catalog — the only file you edit to add work
 assets/js/site.js       All behaviour (nav, reveals, filters, modal, form)
 assets/img/             favicon, social card
-assets/docs/            résumé PDF goes here
-scripts/                One-time maintenance scripts
+assets/img/projects/    Project plates — generated schematics + downloaded photos
+assets/docs/            résumé PDF
+scripts/                Maintenance and asset-generation scripts
 smoke.test.js           64-assertion test suite
 .github/workflows/      CI — runs the suite on every push and PR
 robots.txt, sitemap.xml
@@ -48,6 +49,24 @@ Edit `assets/js/projects.js` only. Append an object to the array:
 
 Both pages render from that array. Nothing else needs touching. `tracks` values must
 match the filter buttons in `projects.html` or the project becomes unreachable by filter.
+
+### Project plates
+
+Projects without a photograph use a generated schematic plate — a line drawing of the
+actual mechanism (signal chain, waveform, optical path) in the site palette, sized 16:10
+to match the card figure. They live in `assets/img/projects/*.svg` and are produced by:
+
+```
+python3 scripts/make-placeholders.py
+```
+
+Edit the drawing functions in that script and re-run to change one. **These are stand-ins
+for real photographs** — when you have a photo of the built thing, drop it in
+`assets/img/projects/` and change the `image` path in the catalog. A photo of hardware
+that exists always beats a diagram of it.
+
+`P-15` is the exception: its plate is a redacted block stamped *patent pending* and is
+meant to stay that way until the non-provisional is filed.
 
 ---
 
@@ -93,10 +112,12 @@ service and serves nothing in its place.
       `services.html`, `robots.txt` and `sitemap.xml` reference a domain that does not
       resolve. If you decide on a different URL, search and replace
       `https://clawengineering.com` across those five files.
-- [ ] **Run `bash scripts/localize-images.sh`.** Every project image is currently
-      hotlinked from Imgur. Imgur can and does break hotlinks; the script downloads them
-      into `assets/img/projects/` and rewrites the references. Commit the result. This has
-      to run somewhere with outbound access to `i.imgur.com`.
+- [ ] **Run `bash scripts/localize-images.sh`.** Six projects still hotlink photographs
+      from Imgur (P-01, P-07, P-08, P-09, P-10, P-11). Imgur can and does break hotlinks;
+      the script downloads them into `assets/img/projects/` and rewrites the references.
+      Commit the result. This has to run somewhere with outbound access to `i.imgur.com`.
+- [ ] **Replace the generated plates with real photographs** as you get them. See
+      "Project plates" above. `P-15` stays redacted.
 - [ ] **Move the résumé into the repo.** It is served from a Dropbox share link today.
       Drop the PDF at `assets/docs/caleb-lawson-resume.pdf` and update the link in
       `index.html` (search for `dropbox.com`).
