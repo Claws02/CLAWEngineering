@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="A face with a region of interest, and the pulse waveform recovered from it.">
+  <rect width="800" height="500" fill="#fbfbf9"/>
+  <rect x="16.5" y="16.5" width="767" height="467" fill="none" stroke="#dde0e3" stroke-width="1"/>
+  <g stroke="#c3c8ce" stroke-width="1">
+    <path d="M16 44h20M44 16v20M784 44h-20M756 16v20M16 456h20M44 484v-20M784 456h-20M756 484v-20"/>
+  </g>
+  <g fill="none" stroke="#14181c" stroke-width="1.5"><ellipse cx="176" cy="196" rx="86" ry="106"/></g>
+  <g stroke="#7b838d" stroke-width="1.3"><path d="M140 182h12M146 176v12"/><path d="M200 182h12M206 176v12"/><path d="M170 214h12M176 208v12"/><path d="M144 248h12M150 242v12"/><path d="M196 248h12M202 242v12"/></g>
+  <rect x="132" y="112" width="88" height="42" fill="none" stroke="#cc2936" stroke-width="1.8" stroke-dasharray="6 4"/>
+  <text x="176" y="330" text-anchor="middle" font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#7b838d" letter-spacing="1.6">ROI · LANDMARKS</text>
+  <line x1="280" y1="196" x2="347" y2="196" stroke="#14181c" stroke-width="1.5"/><path d="M356 196l-9 -5v10z" fill="#14181c"/>
+  <text x="318" y="182" text-anchor="middle" font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#7b838d" letter-spacing="1.6">RGB</text>
+  <g stroke="#dde0e3" stroke-width="1"><path d="M376 150h348M376 200h348M376 250h348"/></g>
+  <path d="M376 226C384 226 388 158 398 158 C406 158 408 210 416 206 C424 202 428 186 436 190 C446 194 452 226 464 226 C472 226 476 158 486 158 C494 158 496 210 504 206 C512 202 516 186 524 190 C534 194 540 226 552 226 C560 226 564 158 574 158 C582 158 584 210 592 206 C600 202 604 186 612 190 C622 194 628 226 640 226 C648 226 652 158 662 158 C670 158 672 210 680 206 C688 202 692 186 700 190 C710 194 716 226 728 226 " fill="none" stroke="#2563eb" stroke-width="2.5"/>
+  <path d="M376 128v150h348" fill="none" stroke="#565f6b" stroke-width="1.5"/>
+  <text x="550" y="330" text-anchor="middle" font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#2563eb" letter-spacing="1.6">RECOVERED PULSE</text>
+  <text x="400" y="396" text-anchor="middle" font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="15" fill="#565f6b" letter-spacing="1.6">GREEN · CHROM · POS</text>
+  <g font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="14" fill="#7b838d" letter-spacing="2">
+    <text x="40" y="466">P-06</text>
+    <text x="760" y="466" text-anchor="end">VIDEO → PULSE</text>
+  </g>
+</svg>

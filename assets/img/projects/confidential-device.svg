@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="A redacted plate marked patent pending. No technical detail is shown.">
+  <rect width="800" height="500" fill="#fbfbf9"/>
+  <rect x="16.5" y="16.5" width="767" height="467" fill="none" stroke="#dde0e3" stroke-width="1"/>
+  <g stroke="#c3c8ce" stroke-width="1">
+    <path d="M16 44h20M44 16v20M784 44h-20M756 16v20M16 456h20M44 484v-20M784 456h-20M756 484v-20"/>
+  </g>
+  <defs><pattern id="hz" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="12" stroke="#c3c8ce" stroke-width="1.4"/></pattern></defs>
+  <rect x="120" y="96" width="560" height="216" fill="url(#hz)" stroke="#c3c8ce" stroke-width="1.5"/>
+  <g fill="#14181c"><rect x="168" y="146" width="290" height="26"/><rect x="474" y="146" width="128" height="26"/><rect x="168" y="192" width="164" height="26"/><rect x="348" y="192" width="254" height="26"/><rect x="168" y="238" width="216" height="26"/></g>
+  <g transform="rotate(-9 400 356)"><rect x="196" y="326" width="408" height="60" fill="none" stroke="#cc2936" stroke-width="3"/><text x="400" y="366" text-anchor="middle" font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="26" fill="#cc2936" letter-spacing="4">PATENT PENDING</text></g>
+  <g font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="14" fill="#7b838d" letter-spacing="2">
+    <text x="40" y="466">P-15</text>
+    <text x="760" y="466" text-anchor="end">DETAIL WITHHELD</text>
+  </g>
+</svg>

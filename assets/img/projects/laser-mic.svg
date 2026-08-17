@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Laser reflected off a vibrating surface into a photodetector, and the recovered audio signal.">
+  <rect width="800" height="500" fill="#fbfbf9"/>
+  <rect x="16.5" y="16.5" width="767" height="467" fill="none" stroke="#dde0e3" stroke-width="1"/>
+  <g stroke="#c3c8ce" stroke-width="1">
+    <path d="M16 44h20M44 16v20M784 44h-20M756 16v20M16 456h20M44 484v-20M784 456h-20M756 484v-20"/>
+  </g>
+  <text x="400" y="66" text-anchor="middle" font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="15" fill="#565f6b" letter-spacing="1.6">OPTICAL ACOUSTIC RECOVERY — PHASE 1</text>
+  <rect x="56" y="130" width="130" height="58" rx="2" fill="none" stroke="#14181c" stroke-width="1.5"/><text x="121.0" y="159.0" text-anchor="middle" font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="19" fill="#14181c" letter-spacing="1">LASER</text>
+  <path d="M186 159h362" stroke="#cc2936" stroke-width="2.5"/>
+  <path d="M552 159l-13-6v12z" fill="#cc2936"/>
+  <path d="M560 92v198" stroke="#14181c" stroke-width="2.5"/>
+  <g fill="none" stroke="#7b838d" stroke-width="1.2" stroke-dasharray="5 4"><path d="M580 106v170M600 120v142"/></g>
+  <text x="608" y="318" text-anchor="middle" font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#7b838d" letter-spacing="1.6">SURFACE</text>
+  <path d="M560 159L206 251" stroke="#cc2936" stroke-width="2.5" stroke-dasharray="7 5"/>
+  <rect x="56" y="222" width="150" height="58" rx="2" fill="none" stroke="#14181c" stroke-width="1.5"/><text x="131.0" y="251.0" text-anchor="middle" font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="19" fill="#14181c" letter-spacing="1">PHOTO-D</text>
+  <line x1="131" y1="280" x2="131" y2="352" stroke="#565f6b" stroke-width="1.5"/><path d="M131 352l-5 -9h10z" fill="#565f6b"/>
+  <path d="M228 396h500" stroke="#565f6b" stroke-width="1.5"/>
+  <path d="M228 396L232 381L236 378L240 382L244 382L248 378L252 379L256 382L260 378L264 366L268 360L272 368L276 380L280 386L284 387L288 392L292 398L296 396L300 390L304 393L308 408L312 421L316 423L320 420L324 421L328 422L332 415L336 408L340 410L344 420L348 424L352 415L356 403L360 398L364 394L368 385L372 378L376 382L380 390L384 388L388 376L392 367L396 367L400 369L404 368L408 370L412 382L416 393L420 392L424 384L428 383L432 391L436 399L440 403L444 409L448 421L452 427L456 420L460 410L464 409L468 417L472 421L476 419L480 418L484 420L488 415L492 400L496 387L500 387L504 393L508 393L512 386L516 383L520 382L524 376L528 364L532 360L536 369L540 381L544 383L548 380L552 382L556 386L560 385L564 382L568 388L572 404L576 417L580 417L584 413L588 414L592 416L596 414L600 411L604 417L608 428L612 429L616 419L620 407L624 403L628 401L632 395L636 390L640 393L644 398L648 392L652 377L656 367L660 368L664 371L668 370L672 371L676 380L680 387L684 382L688 373L692 373L696 384L700 394L704 399L708 404L712 413L716 418L720 411L724 404L728 408" fill="none" stroke="#2563eb" stroke-width="2"/>
+  <text x="228" y="444" text-anchor="start" font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#2563eb" letter-spacing="1.6">RECOVERED — SNR LIMITED</text>
+  <g font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="14" fill="#7b838d" letter-spacing="2">
+    <text x="40" y="466">P-12</text>
+    <text x="760" y="466" text-anchor="end">OPTICAL PATH</text>
+  </g>
+</svg>

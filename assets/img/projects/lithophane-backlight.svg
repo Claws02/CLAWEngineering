@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Block diagram: PIR sensor into an ESP32 driving a PWM sunrise ramp behind a lithophane panel.">
+  <rect width="800" height="500" fill="#fbfbf9"/>
+  <rect x="16.5" y="16.5" width="767" height="467" fill="none" stroke="#dde0e3" stroke-width="1"/>
+  <g stroke="#c3c8ce" stroke-width="1">
+    <path d="M16 44h20M44 16v20M784 44h-20M756 16v20M16 456h20M44 484v-20M784 456h-20M756 484v-20"/>
+  </g>
+  <g fill="none" stroke="#14181c" stroke-width="1.5">
+  <rect x="60" y="126" width="92" height="88" rx="2"/>
+  <circle cx="106" cy="170" r="24"/><circle cx="106" cy="170" r="13"/>
+  </g>
+  <g fill="none" stroke="#7b838d" stroke-width="1.2" stroke-dasharray="5 5"><path d="M60 148L26 108M60 192L26 232"/><path d="M44 170a34 34 0 0 0 0 0"/></g>
+  <text x="106" y="236" text-anchor="middle" font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#7b838d" letter-spacing="1.6">PIR</text>
+  <line x1="152" y1="170" x2="241" y2="170" stroke="#14181c" stroke-width="1.5"/><path d="M250 170l-9 -5v10z" fill="#14181c"/>
+  <rect x="250" y="125" width="160" height="90" rx="2" fill="none" stroke="#14181c" stroke-width="1.5"/><text x="330.0" y="164.0" text-anchor="middle" font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="19" fill="#14181c" letter-spacing="1">ESP32</text><text x="330.0" y="186.0" text-anchor="middle" font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#7b838d" letter-spacing="1">WROOM-32</text>
+  <line x1="410" y1="170" x2="509" y2="170" stroke="#14181c" stroke-width="1.5"/><path d="M518 170l-9 -5v10z" fill="#14181c"/>
+  <text x="464" y="158" text-anchor="middle" font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#7b838d" letter-spacing="1.6">PWM</text>
+  <defs><pattern id="lp" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="10" stroke="#c3c8ce" stroke-width="1.2"/></pattern></defs>
+  <rect x="520" y="96" width="150" height="148" fill="url(#lp)" stroke="#14181c" stroke-width="1.5"/>
+  <text x="595" y="266" text-anchor="middle" font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#7b838d" letter-spacing="1.6">LITHOPHANE</text>
+  <g stroke="#cc2936" stroke-width="1.5" stroke-linecap="round"><path d="M684 128h44M684 156h60M684 184h60M684 212h44"/></g>
+  <g stroke="#c3c8ce" stroke-width="1"><path d="M96 340h620M96 380h620"/></g>
+  <path d="M96 306v114M96 420h620" fill="none" stroke="#565f6b" stroke-width="1.5"/>
+  <path d="M96 420C300 418 430 390 716 314" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="96" y="294" text-anchor="start" font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#7b838d" letter-spacing="1.6">DUTY</text>
+  <text x="400" y="294" text-anchor="middle" font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#2563eb" letter-spacing="1.6">SUNRISE RAMP</text>
+  <g font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="14" fill="#7b838d" letter-spacing="2">
+    <text x="40" y="466">P-02</text>
+    <text x="760" y="466" text-anchor="end">MOTION → PWM RAMP</text>
+  </g>
+</svg>

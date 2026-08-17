@@ -261,10 +261,26 @@ async function brokenImage() {
   img.dispatchEvent(new w.Event("error", { bubbles: false }));
   ok("figure marked broken so placeholder shows",
     img.closest(".card-figure").classList.contains("is-broken"));
-  const noImage = Array.from(w.document.querySelectorAll(".card-figure"))
+  // Every catalogued project currently ships a plate, so the up-front
+  // placeholder path is exercised with a synthetic entry rather than by
+  // relying on the catalog having a gap in it.
+  const w2 = await loadReady("projects.html", {
+    inject: win => win.CLAW_PROJECTS.push({
+      id: "no-plate", no: "Z-01", year: "2026", title: "No plate",
+      blurb: "Entry with no image.", tracks: ["software"], tags: [], notes: {}
+    })
+  });
+  const noImage = Array.from(w2.document.querySelectorAll(".card-figure"))
     .filter(f => !f.querySelector("img"));
   ok("image-less projects render placeholder up front", noImage.length > 0 &&
     noImage.every(f => f.classList.contains("is-broken")), "count=" + noImage.length);
+
+  // And the real catalog should not be quietly losing plates.
+  const withImg = Array.from(w.document.querySelectorAll(".card-figure"))
+    .filter(f => f.querySelector("img"));
+  ok("every catalogued project ships a plate",
+    withImg.length === w.document.querySelectorAll("[data-project]").length,
+    withImg.length + "/" + w.document.querySelectorAll("[data-project]").length);
 }
 
 /* ---- 10. Reduced motion ---- */

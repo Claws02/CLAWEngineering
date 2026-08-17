@@ -6,6 +6,10 @@
    tracks: any of "electrical" | "embedded" | "software" | "mechanical"
    image:  card thumbnail (optional)
    plates: detail images shown in the drawing modal (optional)
+
+   Projects without a photograph use a generated schematic plate from
+   assets/img/projects/*.svg (see scripts/make-placeholders.py). Replace
+   any of them with a real photo when you have one — just change the path.
    ============================================================ */
 
 window.CLAW_PROJECTS = [
@@ -50,6 +54,8 @@ window.CLAW_PROJECTS = [
     tags: ["ESP32-WROOM-32", "PWM", "PIR", "3D print"],
     blurb:
       "An ESP32 backlight that senses a person entering the room and runs a slow PWM sunrise fade behind a printed lithophane, in a parametric enclosure.",
+    image: "assets/img/projects/lithophane-backlight.svg",
+    plates: [{ src: "assets/img/projects/lithophane-backlight.svg", cap: "Signal chain: PIR presence detect into an ESP32 PWM ramp behind the lithophane panel." }],
     notes: {
       Problem:
         "A lit display piece that snaps on at full brightness reads as an appliance, not as an object worth looking at.",
@@ -73,6 +79,8 @@ window.CLAW_PROJECTS = [
     tags: ["Verilog", "MAX 10", "DE10-Lite", "Logic analyzer"],
     blurb:
       "A Verilog subsystem on an Intel MAX 10 — seven-segment decoder, frequency divider and display counter, with GPIO brought out for logic-analyzer capture.",
+    image: "assets/img/projects/fpga-display.svg",
+    plates: [{ src: "assets/img/projects/fpga-display.svg", cap: "Seven-segment decode, clock division, and GPIO broken out for logic-analyzer capture." }],
     notes: {
       Problem:
         "Display and timing logic is where beginner FPGA designs quietly break, usually on reset behaviour and clock domain assumptions.",
@@ -96,6 +104,8 @@ window.CLAW_PROJECTS = [
     tags: ["TypeScript", "React", "Vite", "ngspice WASM"],
     blurb:
       "A browser-first schematic capture and simulation tool. The ngspice engine is compiled to WebAssembly, so real SPICE runs client-side with nothing to install.",
+    image: "assets/img/projects/claw-bench.svg",
+    plates: [{ src: "assets/img/projects/claw-bench.svg", cap: "An RC network and its step response, solved client-side by ngspice." }],
     notes: {
       Problem:
         "Circuit simulation still means a desktop install, a licence, or both — which is a hard stop for teaching, quick checks and anyone on a locked-down machine.",
@@ -119,6 +129,8 @@ window.CLAW_PROJECTS = [
     tags: ["PostgreSQL", "Docker", "LightGBM", "XGBoost"],
     blurb:
       "A containerised data pipeline that ingests season data through pybaseball into PostgreSQL, trains gradient-boosted models, and reports through a dashboard.",
+    image: "assets/img/projects/mlb-pipeline.svg",
+    plates: [{ src: "assets/img/projects/mlb-pipeline.svg", cap: "Ingestion through training to a scored back-check." }],
     notes: {
       Problem:
         "Prediction work falls apart on data plumbing long before it falls apart on modelling.",
@@ -142,6 +154,8 @@ window.CLAW_PROJECTS = [
     tags: ["MATLAB", "DSP", "GREEN / CHROM / POS"],
     blurb:
       "Remote photoplethysmography in MATLAB: pulling a pulse waveform out of ordinary video by comparing three signal-extraction methods on the same footage.",
+    image: "assets/img/projects/rppg.svg",
+    plates: [{ src: "assets/img/projects/rppg.svg", cap: "Region of interest sampled from ordinary video, and the pulse waveform recovered from it." }],
     notes: {
       Problem:
         "The colour change a heartbeat produces in video sits well below the noise floor of lighting shifts and subject motion.",
@@ -288,6 +302,8 @@ window.CLAW_PROJECTS = [
     tags: ["Optics", "Signal recovery", "Analog"],
     blurb:
       "Phase 1 of optical-acoustic signal recovery: reading sound off a surface by the way it modulates a reflected beam.",
+    image: "assets/img/projects/laser-mic.svg",
+    plates: [{ src: "assets/img/projects/laser-mic.svg", cap: "The optical path and the recovered trace — signal-to-noise is the whole problem." }],
     notes: {
       Problem:
         "Recovering intelligible audio from surface vibration means fighting an appalling signal-to-noise ratio at every stage.",
@@ -307,6 +323,8 @@ window.CLAW_PROJECTS = [
     tags: ["NEC", "MEP", "Spaced repetition"],
     blurb:
       "A gamified flashcard app for MEP and NEC code knowledge — built because that material is memorised badly and tested constantly.",
+    image: "assets/img/projects/voltiq.svg",
+    plates: [{ src: "assets/img/projects/voltiq.svg", cap: "A code drill card with recall grading and a streak meter." }],
     notes: {
       Problem:
         "Code knowledge is looked up rather than learned, which is fine until you are in a review meeting without the book.",
@@ -326,6 +344,8 @@ window.CLAW_PROJECTS = [
     tags: ["Unity", "Meta Quest", "ngspice WASM", "KiCad"],
     blurb:
       "A training environment for Meta Quest where circuits built in headset are simulated by a real SPICE engine, not a scripted approximation.",
+    image: "assets/img/projects/vr-lab.svg",
+    plates: [{ src: "assets/img/projects/vr-lab.svg", cap: "Circuits built in headset, solved by a real SPICE core." }],
     notes: {
       Problem:
         "VR training apps usually fake the physics, so what a student learns transfers poorly to a real bench.",
@@ -347,6 +367,8 @@ window.CLAW_PROJECTS = [
     tags: ["Patent pending", "Embedded", "Power management"],
     blurb:
       "An active-assisted handheld consumer device. Patent pending — architecture and design detail available under NDA.",
+    image: "assets/img/projects/confidential-device.svg",
+    plates: [{ src: "assets/img/projects/confidential-device.svg", cap: "Technical detail withheld pending the non-provisional filing." }],
     notes: {
       Scope:
         "Consumer hardware product: embedded control, rechargeable power management, and a manufacturable enclosure.",

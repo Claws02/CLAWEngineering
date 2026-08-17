@@ -299,12 +299,26 @@ button { font: inherit; color: inherit; }
   max-width: 20ch;
 }
 
+/* Short brand line, so it carries more size and tracking than the long
+   two-part phrase this slot used to hold. */
 .hero-role {
   font-family: var(--mono);
-  font-size: var(--fs-sm);
-  letter-spacing: 0.02em;
+  font-size: clamp(1rem, 1.7vw, 1.25rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   color: var(--ink);
-  margin-bottom: 1.1rem;
+  margin-bottom: 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.hero-role::after {
+  content: "";
+  flex: 1;
+  max-width: 180px;
+  height: 1px;
+  background: var(--hairline-2);
 }
 
 .hero-role .sep { color: var(--hairline-2); padding-inline: 0.5rem; }
@@ -825,6 +839,128 @@ button { font: inherit; color: inherit; }
 
 @media (max-width: 620px) {
   .note { grid-template-columns: 1fr; gap: 0.25rem; }
+}
+
+/* ---------- 9b. Publication plate ----------
+   Built as a record card rather than another project card: a stamped
+   spine on the left, the citation set as the primary object on the right. */
+.paper {
+  display: grid;
+  grid-template-columns: 128px minmax(0, 1fr);
+  border: 1px solid var(--hairline-2);
+  background: var(--paper);
+}
+
+.paper-stamp {
+  border-right: 1px solid var(--hairline-2);
+  background: var(--paper-3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 1.5rem 1rem;
+}
+
+.paper-stamp-org {
+  font-family: var(--mono);
+  font-size: 1.15rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-indent: 0.2em;
+  color: var(--redline);
+}
+
+.paper-stamp-rule {
+  width: 28px;
+  height: 1px;
+  background: var(--hairline-2);
+}
+
+.paper-stamp-year {
+  font-family: var(--mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.16em;
+  color: var(--graphite-2);
+}
+
+.paper-body { padding: clamp(1.5rem, 3.2vw, 2.4rem); }
+
+.paper-kicker {
+  font-family: var(--mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--graphite-2);
+  margin-bottom: 0.9rem;
+}
+
+.paper-title {
+  font-family: var(--serif);
+  font-size: clamp(1.3rem, 2.5vw, 1.85rem);
+  font-weight: 600;
+  line-height: 1.22;
+  letter-spacing: -0.015em;
+  max-width: 46ch;
+  margin-bottom: 0.8rem;
+}
+
+.paper-authors {
+  font-size: var(--fs-sm);
+  color: var(--graphite);
+  margin-bottom: 0.3rem;
+}
+
+.paper-authors strong { color: var(--ink); font-weight: 600; }
+
+.paper-cite {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  color: var(--graphite-2);
+  margin-bottom: 1.3rem;
+}
+
+.paper-abstract {
+  color: var(--graphite);
+  max-width: 64ch;
+  margin-bottom: 1.7rem;
+}
+
+.paper-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  border: 1px solid var(--hairline-2);
+  background: var(--hairline-2);
+  gap: 1px;
+}
+
+.pm-cell { background: var(--paper); padding: 0.65rem 0.85rem; }
+
+.pm-cell dt {
+  font-family: var(--mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--graphite-2);
+  margin-bottom: 0.2rem;
+}
+
+.pm-cell dd {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  color: var(--ink);
+}
+
+@media (max-width: 620px) {
+  .paper { grid-template-columns: 1fr; }
+  .paper-stamp {
+    flex-direction: row;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-right: 0;
+    border-bottom: 1px solid var(--hairline-2);
+  }
+  .paper-stamp-rule { width: 1px; height: 14px; }
 }
 
 /* ---------- 10. Capabilities ---------- */
