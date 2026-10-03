@@ -74,7 +74,7 @@ async function homePage() {
 async function filters() {
   console.log("\n[3] Projects page filters");
   const w = await loadReady("projects.html");
-  const total = 15;
+  const total = w.CLAW_PROJECTS.length;
   ok("full grid renders every project",
     w.document.querySelectorAll("[data-project]").length === total,
     "got " + w.document.querySelectorAll("[data-project]").length);
@@ -146,7 +146,7 @@ async function modal() {
       esc();
     } catch (e) { threw = p.id + ": " + e.message; break; }
   }
-  ok("all 15 projects open and render without error", threw === null, threw);
+  ok("all " + w.CLAW_PROJECTS.length + " projects open and render without error", threw === null, threw);
 }
 
 /* ---- 5. Escaping ---- */
@@ -163,7 +163,7 @@ async function escaping() {
       });
     }
   });
-  ok("malicious entry did render", w.document.querySelectorAll("[data-project]").length === 16,
+  ok("malicious entry did render", w.document.querySelectorAll("[data-project]").length === w.CLAW_PROJECTS.length,
     "got " + w.document.querySelectorAll("[data-project]").length);
   ok("no script executed from card render", w.PWNED === undefined, "PWNED=" + w.PWNED);
   w.document.querySelector('[data-project="xss"]')

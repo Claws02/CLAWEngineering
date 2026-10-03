@@ -22,7 +22,7 @@ window.CLAW_PROJECTS = [
     tracks: ["electrical", "software"],
     tags: ["Swarm autonomy", "Crazyflie", "Python", "TensorFlow"],
     blurb:
-      "Graduate capstone: an autonomous drone swarm that feeds firefighters live topology, wind and fire-front data so containment lines can be redrawn in real time.",
+      "Senior design capstone: a Crazyflie drone swarm that flies a leader-follower search around a simulated fire, with a thermal camera and TensorFlow model drawing the containment line.",
     image: "assets/img/projects/wildfire-swarm-test-rig.jpg",
     fit: "cover",
     plates: [
@@ -38,11 +38,11 @@ window.CLAW_PROJECTS = [
       Scope:
         "Research, design and build a drone swarm that autonomously reports topology, wind, main fire location and spot fires, and continuously updates the containment line.",
       Role:
-        "Built the search patterns and autonomous flight logic on an interdisciplinary team, and ran schedule coordination, clash checking and risk tracking across the group.",
+        "Wrote the swarm's Python flight control and ran the hardware diagnosis behind it — logging the Flow Deck showed it reading zero surface quality on a plain floor, which led to the high-contrast flight arena. Took the simulation from ROS1 to ROS2 and Gazebo, as far as stable hover.",
       Result:
-        "A working system concept that measurably improves situational awareness for first responders and supports safer, more strategic containment.",
+        "A coordinated two-drone leader-follower mission. Across six test waypoints in a 1.83 × 1.22 m arena, position error was 7.7% at worst and 3.3% or less everywhere else.",
       "Next pass":
-        "Larger airframes for longer endurance, and integration with the wildfire management software crews already use."
+        "Scale past two drones — a single radio overloaded at two, which forced one-axis-at-a-time moves — and finish the Gazebo simulation so swarm logic can be tested before it flies."
     }
   },
   {
@@ -149,7 +149,7 @@ window.CLAW_PROJECTS = [
     id: "rppg",
     no: "P-06",
     title: "Contactless Heart-Rate Estimation",
-    year: "2025",
+    year: "2026",
     featured: false,
     tracks: ["software", "electrical"],
     tags: ["MATLAB", "DSP", "GREEN / CHROM / POS"],
@@ -164,7 +164,7 @@ window.CLAW_PROJECTS = [
         "Implement and compare the GREEN, CHROM and POS extraction methods on common input and judge which survives real conditions.",
       Role: "Signal chain and comparison framework, written in MATLAB.",
       Result:
-        "A working estimator plus a direct read on where each method degrades — motion and illumination change, not sensor quality, dominate the error.",
+        "CHROM was most accurate overall: 14.45 BPM mean absolute error across 20 videos of 4 subjects, against 15.43 for POS and 19.10 for GREEN. At rest every method stayed under 10 BPM; at elevated heart rates (128–141 BPM) all three broke down, with error rising to 29–48 BPM.",
       "Next pass": "Port the winning method to run on an embedded camera module."
     }
   },
@@ -205,7 +205,7 @@ window.CLAW_PROJECTS = [
     tracks: ["electrical"],
     tags: ["MATLAB", "Simulink", "Control systems"],
     blurb:
-      "Closed-loop speed control to a hard spec: 15 rad/s, zero steady-state error, overshoot at or under 1%, and settling inside 50 ms.",
+      "Closed-loop speed control to a hard spec: 15 rad/s, zero steady-state error, overshoot under 10%, and settling inside 50 ms.",
     image: "assets/img/projects/velocity-controller-step-response.png",
     plates: [
       { src: "assets/img/projects/velocity-controller-simulink.png", cap: "Simulink model of the speed controller." },
@@ -213,13 +213,13 @@ window.CLAW_PROJECTS = [
     ],
     notes: {
       Problem:
-        "Hit 15 rad/s with zero steady-state error, no more than 1% overshoot, and a settling time under 0.05 s.",
+        "Hit 15 rad/s with zero steady-state error, under 10% overshoot, and a settling time under 0.05 s.",
       Scope:
         "Derive the motor transfer function, analyse the open-loop response, design the controller to spec, then validate in simulation and on hardware.",
       Role:
         "Modelled the transfer function, derived the feedback response, simulated in MATLAB and Simulink, and bench-tested the result.",
       Result:
-        "Controller met the primary performance targets. Measured settling time ran slightly longer than simulated — the expected gap once real friction and supply behaviour enter the loop.",
+        "Identified the motor from a measured step response — 22 rad/s per volt at steady state, with 30% and 70% rise points at 0.068 s and 0.21 s — giving G(s) = 7216 / ((s + 6.56)(s + 50)), which tracked the measured response. On the motor the controller held 15 rad/s with zero steady-state error and met the under-10% overshoot spec; measured settling ran slightly longer than simulated, the expected gap once real friction and supply behaviour enter the loop.",
       "Next pass": "Model the unmodelled: friction and drive non-linearity."
     }
   },
@@ -292,7 +292,7 @@ window.CLAW_PROJECTS = [
       Scope: "Design the control logic for floors 0–3 with gates, then run it on a DE10-Lite FPGA.",
       Role: "Designed a logic diagram against real elevator behaviour, reliability and efficiency.",
       Result:
-        "A working design on the DE10-Lite that resolves floor requests correctly and carries an explicit E-stop path.",
+        "Synthesised for the DE10-Lite's MAX 10 in 22 logic elements and 7 registers — under 1% of the device — and simulated across all 64 combinations of its six inputs in ModelSim, E-stop included.",
       "Next pass": "Add call queuing and directional priority."
     }
   },
@@ -379,6 +379,61 @@ window.CLAW_PROJECTS = [
       Role: "Product architecture, electronics and mechanical design.",
       Status:
         "Provisional filed and under active development. Technical detail is withheld pending the non-provisional; available under NDA."
+    }
+  },
+  {
+    id: "nec-building-design",
+    no: "P-16",
+    title: "Commercial Building Electrical Design",
+    year: "2026",
+    featured: false,
+    tracks: ["electrical"],
+    tags: ["NEC 2017", "EasyPower", "Load calculation", "Service sizing"],
+    blurb:
+      "The complete electrical service for a 50,000 sq ft commercial building — load calculation, transformer, service, feeders and panels — designed to NEC 2017 and modelled in EasyPower.",
+    image: "assets/img/projects/nec-building-card.png",
+    plates: [
+      { src: "assets/img/projects/nec-building-one-line.png", cap: "EasyPower one-line: 500 kVA delta-wye transformer, 1,200 A main distribution panel, and the lighting, mechanical and kitchen panels with their loads." },
+      { src: "assets/img/projects/nec-building-distribution.png", cap: "Distribution path from the 480 V utility to the three branch panels, with the governing NEC articles." }
+    ],
+    notes: {
+      Problem:
+        "Size the full electrical service for a 50,000 sq ft commercial building — 500 receptacles, 300 lighting loads, chillers, air handlers, pumps and a commercial kitchen — to NEC 2017.",
+      Scope:
+        "Load calculations with demand factors, transformer and service sizing, feeder and panel sizing, and a model of the distribution system in EasyPower, written up for client submission.",
+      Role: "Sole author: every calculation, the distribution design and the EasyPower model.",
+      Result:
+        "340.6 kVA calculated demand, served at 480 V through a 500 kVA delta-wye transformer to 208Y/120 V, a 1,200 A main distribution panel on three parallel sets of 500 kcmil copper, and three branch panels — lighting and mechanical at 600 A, kitchen at 125 A.",
+      "Next pass":
+        "Run short-circuit and arc-flash studies on the same EasyPower model."
+    }
+  },
+  {
+    id: "speech-classifier",
+    no: "P-17",
+    title: "Spoken Yes / No Classifier",
+    year: "2026",
+    featured: false,
+    tracks: ["software", "electrical"],
+    tags: ["MATLAB", "DSP", "FFT", "KNN"],
+    blurb:
+      "Telling a spoken “yes” from a “no” across 886 recordings — a single hand-tuned frequency threshold against a K-nearest-neighbours classifier on the same blind test set.",
+    image: "assets/img/projects/speech-classifier-accuracy.png",
+    plates: [
+      { src: "assets/img/projects/speech-classifier-accuracy.png", cap: "Blind-test accuracy: KNN on four frequency bands against the best single-band threshold." },
+      { src: "assets/img/projects/speech-classifier-features.png", cap: "Training-set feature histograms — only the 8–16 kHz band separates the two words on its own." }
+    ],
+    notes: {
+      Problem:
+        "Distinguish “yes” from “no” across 886 recordings of male and female speakers — a dataset varied enough that one hand-picked feature stops being enough.",
+      Scope:
+        "Extract frequency-band features from each recording's spectrum, then compare a tuned single-feature threshold against a K-nearest-neighbours model on a held-out 25% test set.",
+      Role:
+        "MATLAB signal chain: FFT power spectra, a four-band energy feature vector (0–1, 1–4, 4–8 and 8–16 kHz), the threshold sweep and the KNN model.",
+      Result:
+        "The 8–16 kHz band separated the words best on its own, reaching 76.5% at its optimal threshold. KNN on all four bands reached 89.6% on the same blind test set.",
+      "Next pass":
+        "Replace band energies with MFCCs, and test on speakers held out of training entirely."
     }
   }
 ];

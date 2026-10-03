@@ -30,7 +30,7 @@
   "name": "Contactless Heart-Rate Estimation",
   "description": "Remote photoplethysmography in MATLAB: pulling a pulse waveform out of ordinary video by comparing three signal-extraction methods on the same footage.",
   "url": "https://clawengineering.com/projects/rppg.html",
-  "dateCreated": "2025",
+  "dateCreated": "2026",
   "keywords": "MATLAB, DSP, GREEN / CHROM / POS",
   "image": "https://clawengineering.com/assets/img/og.png",
   "creator": {
@@ -75,7 +75,7 @@
 
       <dl class="titleblock">
         <div class="tb-cell"><dt class="tb-key">Sheet</dt><dd class="tb-val">P-06</dd></div>
-        <div class="tb-cell"><dt class="tb-key">Year</dt><dd class="tb-val">2025</dd></div>
+        <div class="tb-cell"><dt class="tb-key">Year</dt><dd class="tb-val">2026</dd></div>
         <div class="tb-cell"><dt class="tb-key">Discipline</dt><dd class="tb-val">software, electrical</dd></div>
       </dl>
 
@@ -96,7 +96,7 @@
         <div class="note"><dt>Problem</dt><dd>The colour change a heartbeat produces in video sits well below the noise floor of lighting shifts and subject motion.</dd></div>
         <div class="note"><dt>Scope</dt><dd>Implement and compare the GREEN, CHROM and POS extraction methods on common input and judge which survives real conditions.</dd></div>
         <div class="note"><dt>Role</dt><dd>Signal chain and comparison framework, written in MATLAB.</dd></div>
-        <div class="note"><dt>Result</dt><dd>A working estimator plus a direct read on where each method degrades — motion and illumination change, not sensor quality, dominate the error.</dd></div>
+        <div class="note"><dt>Result</dt><dd>CHROM was most accurate overall: 14.45 BPM mean absolute error across 20 videos of 4 subjects, against 15.43 for POS and 19.10 for GREEN. At rest every method stayed under 10 BPM; at elevated heart rates (128–141 BPM) all three broke down, with error rising to 29–48 BPM.</dd></div>
         <div class="note"><dt>Next pass</dt><dd>Port the winning method to run on an embedded camera module.</dd></div>
       </dl>
 
