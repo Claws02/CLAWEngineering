@@ -278,21 +278,21 @@ window.CLAW_PROJECTS = [
     year: "2023",
     featured: false,
     tracks: ["electrical", "embedded"],
-    tags: ["Logic gates", "Microcontroller", "E-stop"],
+    tags: ["Logic gates", "DE10-Lite FPGA", "E-stop", "Quartus"],
     blurb:
-      "Floor-request handling for a four-storey building, designed as gate logic and then implemented on a microcontroller — including the emergency stop path.",
+      "Floor-request handling for a four-storey building, designed as gate logic in Quartus and run on a DE10-Lite FPGA — including the emergency stop path.",
     image: "assets/img/projects/elevator-logic-board.jpg",
     fit: "cover",
     plates: [
-      { src: "assets/img/projects/elevator-logic-board.jpg", cap: "Microcontroller running floor changes." },
+      { src: "assets/img/projects/elevator-logic-board.jpg", cap: "The DE10-Lite FPGA board running floor changes." },
       { src: "assets/img/projects/elevator-logic-gates.png", cap: "Logic gate path for the control system." }
     ],
     notes: {
       Problem: "Understanding the decision logic inside something everyone uses and nobody thinks about.",
-      Scope: "Design the control logic for floors 0–3 with gates, then simulate it on a microcontroller.",
+      Scope: "Design the control logic for floors 0–3 with gates, then run it on a DE10-Lite FPGA.",
       Role: "Designed a logic diagram against real elevator behaviour, reliability and efficiency.",
       Result:
-        "A working simulation that resolves floor requests correctly and carries an explicit E-stop path.",
+        "A working design on the DE10-Lite that resolves floor requests correctly and carries an explicit E-stop path.",
       "Next pass": "Add call queuing and directional priority."
     }
   },
