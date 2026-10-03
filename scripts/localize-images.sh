@@ -36,6 +36,13 @@ done
 rm -f assets/js/projects.js.bak index.html.bak
 
 # The standalone project pages embed the image paths, so rebuild them.
-node scripts/build-project-pages.js
+# WSL and Git Bash on Windows often can't see a Windows Node install; the
+# downloads above are the part that needs this machine, so don't fail here.
+if command -v node >/dev/null 2>&1; then
+  node scripts/build-project-pages.js
+else
+  echo "node not found from bash: project pages NOT rebuilt."
+  echo "Run 'npm run build' from a normal terminal, or push and let Claude rebuild them."
+fi
 
 echo "Done. $failed failed. Review the diff, then commit assets/img/projects/, assets/js/projects.js, index.html, projects/ and sitemap.xml."
