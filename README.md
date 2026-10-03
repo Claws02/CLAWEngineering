@@ -132,14 +132,6 @@ service and serves nothing in its place.
       `services.html`, `robots.txt` and `sitemap.xml` reference a domain that does not
       resolve. If you decide on a different URL, search and replace
       `https://clawengineering.com` across those five files.
-- [ ] **Run `bash scripts/localize-images.sh`.** Six projects and the portrait still hotlink
-      from Imgur (P-01, P-07, P-08, P-09, P-10, P-11). Imgur can and does break hotlinks;
-      the script downloads them into `assets/img/projects/`, rewrites the references, and
-      rebuilds the project pages. Commit everything it changes. It needs outbound access
-      to `i.imgur.com`, so run it on your machine, not in a sandbox. `npm test` prints a
-      NOTE listing any project still hotlinked.
-- [ ] **Set `fit: "cover"` on the photographs** once they are local (likely P-09, P-10,
-      P-11 — check them first), then `npm run build`.
 - [ ] **Replace the generated plates with real photographs** as you get them. See
       "Project plates" above. `P-15` stays redacted.
 - [ ] **Decide on the public email.** `calebtlawson@gmail.com` appears on the contact page

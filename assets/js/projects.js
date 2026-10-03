@@ -23,13 +23,14 @@ window.CLAW_PROJECTS = [
     tags: ["Swarm autonomy", "Crazyflie", "Python", "TensorFlow"],
     blurb:
       "Graduate capstone: an autonomous drone swarm that feeds firefighters live topology, wind and fire-front data so containment lines can be redrawn in real time.",
-    image: "assets/img/projects/n7N7JPL.png",
+    image: "assets/img/projects/wildfire-swarm-test-rig.jpg",
+    fit: "cover",
     plates: [
-      { src: "assets/img/projects/n7N7JPL.png", cap: "Swarm simulation running a coordinated search pattern." },
-      { src: "assets/img/projects/s3x8c4t.png", cap: "Containment line inferred with TensorFlow." },
-      { src: "assets/img/projects/SUSKdiZ.png", cap: "Crazyflie airframe and ground control hardware." },
-      { src: "assets/img/projects/485HbJQ.png", cap: "Operational logic of the swarm, as a flow chart." },
-      { src: "assets/img/projects/YHGixPB.png", cap: "Floor pattern and leader-drone path." }
+      { src: "assets/img/projects/wildfire-swarm-test-rig.jpg", cap: "Test rig: a Crazyflie over simulated terrain, its 110° field of view on heat packs standing in for a fire." },
+      { src: "assets/img/projects/wildfire-swarm-containment.png", cap: "Containment line inferred with TensorFlow." },
+      { src: "assets/img/projects/wildfire-swarm-hardware.png", cap: "The Crazyflie airframe and the decks, camera and battery it carries." },
+      { src: "assets/img/projects/wildfire-swarm-flowchart.png", cap: "Operational logic of the swarm, as a flow chart." },
+      { src: "assets/img/projects/wildfire-swarm-search-path.jpg", cap: "Floor pattern and leader-drone path." }
     ],
     notes: {
       Problem:
@@ -177,11 +178,11 @@ window.CLAW_PROJECTS = [
     tags: ["SolidWorks", "Arduino", "Linear actuators", "3D print"],
     blurb:
       "A back support with six independently adjustable pads, so a wheelchair user can change their own lumbar support without waiting for help.",
-    image: "assets/img/projects/C0iv781.png",
+    image: "assets/img/projects/lumbar-pillow-shell.png",
     plates: [
-      { src: "assets/img/projects/C0iv781.png", cap: "SolidWorks model of the main pillow body." },
-      { src: "assets/img/projects/NDYZFc1.png", cap: "Corner pad assembly." },
-      { src: "assets/img/projects/l7TTYSK.png", cap: "Middle pad assembly." }
+      { src: "assets/img/projects/lumbar-pillow-shell.png", cap: "SolidWorks model of the main pillow body." },
+      { src: "assets/img/projects/lumbar-pillow-corner-pad.png", cap: "Corner pad assembly." },
+      { src: "assets/img/projects/lumbar-pillow-middle-pad.png", cap: "Middle pad assembly." }
     ],
     notes: {
       Problem:
@@ -205,10 +206,10 @@ window.CLAW_PROJECTS = [
     tags: ["MATLAB", "Simulink", "Control systems"],
     blurb:
       "Closed-loop speed control to a hard spec: 15 rad/s, zero steady-state error, overshoot at or under 1%, and settling inside 50 ms.",
-    image: "assets/img/projects/FCN3p6O.png",
+    image: "assets/img/projects/velocity-controller-step-response.png",
     plates: [
-      { src: "assets/img/projects/FCN3p6O.png", cap: "Simulink model of the speed controller." },
-      { src: "assets/img/projects/hYyNEfm.png", cap: "Measured versus simulated step response." }
+      { src: "assets/img/projects/velocity-controller-simulink.png", cap: "Simulink model of the speed controller." },
+      { src: "assets/img/projects/velocity-controller-step-response.png", cap: "Measured versus simulated step response." }
     ],
     notes: {
       Problem:
@@ -232,8 +233,9 @@ window.CLAW_PROJECTS = [
     tags: ["High voltage", "Corona discharge", "SolidWorks"],
     blurb:
       "A working thruster with no moving parts and no combustion, built to test whether corona discharge gap distance actually changes thrust.",
-    image: "assets/img/projects/WCBfY1n.jpeg",
-    plates: [{ src: "assets/img/projects/WCBfY1n.jpeg", cap: "Completed thruster assembly." }],
+    image: "assets/img/projects/ionic-thruster.jpg",
+    fit: "cover",
+    plates: [{ src: "assets/img/projects/ionic-thruster.jpg", cap: "Completed thruster assembly." }],
     notes: {
       Problem: "Does changing the distance of a corona discharge affect thrust?",
       Scope:
@@ -256,8 +258,9 @@ window.CLAW_PROJECTS = [
     tags: ["Arduino", "Thermistor", "Voltage divider"],
     blurb:
       "Built from first principles to understand the whole chain — thermistor, divider, ADC, linearisation — landing at ±0.1 °C.",
-    image: "assets/img/projects/RO9ixxL.jpeg",
-    plates: [{ src: "assets/img/projects/RO9ixxL.jpeg", cap: "Completed breadboard circuit." }],
+    image: "assets/img/projects/thermistor-thermometer.jpg",
+    fit: "cover",
+    plates: [{ src: "assets/img/projects/thermistor-thermometer.jpg", cap: "Completed breadboard circuit." }],
     notes: {
       Problem: "Understanding how an electronic thermometer actually works, end to end.",
       Scope: "Build one from a thermistor, a voltage divider and an Arduino.",
@@ -278,10 +281,11 @@ window.CLAW_PROJECTS = [
     tags: ["Logic gates", "Microcontroller", "E-stop"],
     blurb:
       "Floor-request handling for a four-storey building, designed as gate logic and then implemented on a microcontroller — including the emergency stop path.",
-    image: "assets/img/projects/EQ87jwe.jpeg",
+    image: "assets/img/projects/elevator-logic-board.jpg",
+    fit: "cover",
     plates: [
-      { src: "assets/img/projects/EQ87jwe.jpeg", cap: "Microcontroller running floor changes." },
-      { src: "assets/img/projects/STtB0dI.png", cap: "Logic gate path for the control system." }
+      { src: "assets/img/projects/elevator-logic-board.jpg", cap: "Microcontroller running floor changes." },
+      { src: "assets/img/projects/elevator-logic-gates.png", cap: "Logic gate path for the control system." }
     ],
     notes: {
       Problem: "Understanding the decision logic inside something everyone uses and nobody thinks about.",
