@@ -12,7 +12,9 @@
 <meta property="og:description" content="Embedded firmware, circuit and PCB design, electrical documentation, drone survey. Scoped and fixed-price.">
 <meta property="og:url" content="https://clawengineering.com/services.html">
 <meta property="og:image" content="https://clawengineering.com/assets/img/og.png">
+<meta property="og:image:alt" content="CLAW Engineering — consulting by Caleb Lawson. Quincy, MA.">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#fbfbf9">
 
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,7 +27,10 @@
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "name": "CLAW Engineering",
-  "founder": { "@type": "Person", "name": "Caleb Lawson" },
+  "url": "https://clawengineering.com/services.html",
+  "founder": { "@type": "Person", "name": "Caleb Lawson", "url": "https://clawengineering.com/" },
+  "address": { "@type": "PostalAddress", "addressLocality": "Quincy", "addressRegion": "MA", "addressCountry": "US" },
+  "sameAs": ["https://www.linkedin.com/in/caleblawson102/"],
   "areaServed": "Greater Boston, Massachusetts",
   "description": "Independent electrical and embedded engineering: firmware, circuit and PCB design, electrical documentation support, and FAA Part 107 drone survey."
 }
@@ -205,6 +210,8 @@
       <div class="split">
         <form class="form reveal" data-form action="https://formspree.io/f/xdkdqrwn" method="POST">
           <input type="hidden" name="_subject" value="CLAW Engineering enquiry">
+          <!-- Honeypot: hidden from people, filled in by bots; Formspree drops those. -->
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
           <div class="field">
             <label for="name">Your name</label>
             <input id="name" name="name" type="text" autocomplete="name" required>
@@ -263,7 +270,6 @@
   </div>
 </footer>
 
-<script src="assets/js/projects.js"></script>
 <script src="assets/js/site.js"></script>
 </body>
 </html>

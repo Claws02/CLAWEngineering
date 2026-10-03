@@ -2,8 +2,9 @@
   "name": "caleblawson-site",
   "version": "2.0.0",
   "private": true,
-  "description": "Personal site for Caleb Lawson. Static — no build step. jsdom is a test-only dependency.",
+  "description": "Personal site for Caleb Lawson. Static \u2014 no build step to serve it. `npm run build` regenerates projects/*.html and sitemap.xml from the catalog. jsdom is a test-only dependency.",
   "scripts": {
+    "build": "node scripts/build-project-pages.js",
     "test": "node smoke.test.js"
   },
   "devDependencies": {

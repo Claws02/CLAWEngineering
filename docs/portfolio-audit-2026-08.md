@@ -368,9 +368,14 @@ Measured, not estimated:
 at **10px and 11px**, which is unambiguously "normal" text, not large. The large-text
 exemption (18.7px bold / 24px) does not apply to any of it.
 
-**Fix:** darken `--graphite-2` to roughly `#6a727c` (≈4.5:1 on paper) or `#667079`
-(≈4.7:1, safe on `--paper-3` too). The visual hierarchy survives; it's a few percent of
-lightness. This one token change fixes every instance at once.
+**Fix:** darken `--graphite-2` to `#667079` — 4.87:1 on paper, 4.58:1 on paper-2. The
+visual hierarchy survives; it's a few percent of lightness.
+
+> **Correction (2026-10-03):** an earlier version of this audit said `#667079` was also
+> safe on `--paper-3` (≈4.7:1). Measured, it is **4.26:1** — it is not. No AA-passing grey
+> on paper-3 stays visibly lighter than `--graphite`, so the two labels that sit on
+> paper-3 (`.card-figure .fallback`, `.paper-stamp-year`) use `--graphite` instead.
+> `#6a727c` also fails on paper-2 (4.42:1). Applied, and now enforced by a test.
 
 ### D2. The modal doesn't trap focus 🟠
 

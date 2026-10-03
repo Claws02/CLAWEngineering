@@ -11,13 +11,13 @@
   --paper-3: #ecece7;
   --ink: #14181c;
   --graphite: #565f6b;
-  --graphite-2: #7b838d;
+  --graphite-2: #667079;   /* 4.87:1 on paper, 4.58:1 on paper-2 — AA for the 10–11px labels it carries */
   --hairline: #dde0e3;
   --hairline-2: #c3c8ce;
   --blue: #2563eb;
   --blue-deep: #1a2744;
   --blue-wash: #eef3fe;
-  --redline: #cc2936;
+  --redline: #c8243a;      /* 4.70:1 on paper-3, where the IEEE stamp sits */
   --redline-wash: #fdeff0;
 
   --sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -36,6 +36,9 @@
   --shell: 1180px;
   --sheet-pad: clamp(3.25rem, 7vw, 6rem);
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  /* The palette is light-only; tell the UA so form controls and scrollbars match. */
+  color-scheme: light;
 }
 
 /* ---------- 2. Reset ---------- */
@@ -321,8 +324,6 @@ button { font: inherit; color: inherit; }
   background: var(--hairline-2);
 }
 
-.hero-role .sep { color: var(--hairline-2); padding-inline: 0.5rem; }
-
 .hero-lede {
   max-width: 54ch;
   color: var(--graphite);
@@ -362,14 +363,12 @@ button { font: inherit; color: inherit; }
 .track-hire .track-tag { color: var(--blue); background: var(--blue-wash); }
 .track-claw .track-tag { color: var(--redline); background: var(--redline-wash); }
 
-/* Single lead panel — CLAW carries the fork on its own now, so it gets the
-   weight the two-up grid used to split. */
-.tracks-single { grid-template-columns: 1fr; }
-
+/* Two lead panels — the fork: full-time roles on one side, CLAW on the other.
+   Each collapses to full width before the copy gets too narrow to hold. */
 .track-lead { padding: clamp(1.9rem, 4vw, 2.9rem) clamp(1.6rem, 3.5vw, 2.6rem); }
 .track-lead .track-tag { font-size: var(--fs-xs); padding: 0.3rem 0.7rem; margin-bottom: 1.15rem; }
 .track-lead .track-title { font-size: clamp(1.6rem, 3.4vw, 2.35rem); margin-bottom: 0.8rem; }
-.track-lead .track-body { font-size: var(--fs-base); max-width: 62ch; margin-bottom: 1.35rem; }
+.track-lead .track-body { font-size: var(--fs-sm); max-width: 62ch; margin-bottom: 1.35rem; }
 
 .track-marks {
   list-style: none;
@@ -586,11 +585,33 @@ button { font: inherit; color: inherit; }
 }
 
 /* ---------- 8. Work grid ---------- */
+/* Filter + sort bar on the project index */
+.index-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
 .filters {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-bottom: 2rem;
+}
+
+.index-bar .filters { margin-bottom: 0; }
+
+.sort-label {
+  font-family: var(--mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--graphite-2);
+  align-self: center;
+  margin-right: 0.15rem;
 }
 
 .filter {
@@ -660,6 +681,10 @@ button { font: inherit; color: inherit; }
   transition: transform 0.4s var(--ease);
 }
 
+/* Photographs fill their frame; drawings keep a margin. Set per project with
+   fit: "cover" in the catalog — a diagram cropped to fit is worse than a margin. */
+.card-figure.is-photo img { object-fit: cover; padding: 0; }
+
 .card:hover .card-figure img { transform: scale(1.03); }
 
 .card-figure .fallback {
@@ -671,7 +696,7 @@ button { font: inherit; color: inherit; }
   font-size: var(--fs-label);
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--graphite-2);
+  color: var(--graphite);   /* sits on paper-3, where graphite-2 drops below AA */
   background:
     repeating-linear-gradient(45deg, var(--paper-3) 0 8px, var(--paper-2) 8px 16px);
 }
@@ -780,6 +805,21 @@ button { font: inherit; color: inherit; }
 
 .modal-close:hover { border-color: var(--ink); }
 
+.modal-actions { display: flex; align-items: center; gap: 0.5rem; }
+
+/* The standalone sheet: a real URL for sharing and for crawlers. */
+.modal-link {
+  font-family: var(--mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  text-decoration: none;
+  padding: 0.35rem 0.2rem;
+}
+
+.modal-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+
 .modal-body { padding: clamp(1.25rem, 3.5vw, 2.5rem); }
 
 .modal-title {
@@ -798,6 +838,37 @@ button { font: inherit; color: inherit; }
 }
 
 .plate { border: 1px solid var(--hairline); }
+
+/* One plate on its own gets the full width instead of a lone thumbnail. */
+.plates.is-single { grid-template-columns: 1fr; }
+.plates.is-single .plate-img { aspect-ratio: 16 / 10; }
+
+/* Every plate opens at full size — they are the evidence, and at grid size
+   a Simulink model or a step response is not readable. */
+.plate-link { display: block; position: relative; text-decoration: none; }
+
+.plate-zoom {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--hairline-2);
+  padding: 0.2rem 0.45rem;
+  opacity: 0;
+  transition: opacity 0.18s var(--ease);
+}
+
+.plate-link:hover .plate-zoom,
+.plate-link:focus-visible .plate-zoom { opacity: 1; }
+
+@media (hover: none) {
+  .plate-zoom { opacity: 1; }
+}
 
 .plate-img {
   width: 100%;
@@ -881,7 +952,7 @@ button { font: inherit; color: inherit; }
   font-family: var(--mono);
   font-size: var(--fs-label);
   letter-spacing: 0.16em;
-  color: var(--graphite-2);
+  color: var(--graphite);   /* on paper-3 — see the token note */
 }
 
 .paper-body { padding: clamp(1.5rem, 3.2vw, 2.4rem); }
@@ -1195,14 +1266,7 @@ button { font: inherit; color: inherit; }
   animation: plot-x 0.85s var(--ease) forwards;
 }
 
-.plot-v {
-  transform-origin: top center;
-  animation: plot-y 1s var(--ease) 0.15s forwards;
-  transform: scaleY(0);
-}
-
 @keyframes plot-x { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-@keyframes plot-y { from { transform: scaleY(0); } to { transform: scaleY(1); } }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -1221,3 +1285,37 @@ button { font: inherit; color: inherit; }
   .sheet { break-inside: avoid; }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* ---------- 16. No-script notice ---------- */
+.noscript {
+  border: 1px solid var(--hairline-2);
+  background: var(--paper);
+  padding: 1rem 1.15rem;
+  font-size: var(--fs-sm);
+  color: var(--graphite);
+  max-width: 62ch;
+}
+
+.noscript a { color: var(--blue); }
+
+/* ---------- 17. Standalone project sheet (projects/<id>.html) ---------- */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  text-decoration: none;
+  margin-bottom: 2rem;
+}
+
+.back-link:hover { color: var(--ink); }
+
+.project-sheet .titleblock { margin-bottom: 2rem; }
+.project-sheet .card-tags { margin-bottom: 2rem; }
+.project-sheet .sheet-lede { margin-bottom: 0.5rem; }
+.project-sheet .plates,
+.project-sheet .notes { max-width: 900px; }   /* line up with the title block */

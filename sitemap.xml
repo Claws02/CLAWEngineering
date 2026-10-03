@@ -3,4 +3,19 @@
   <url><loc>https://clawengineering.com/</loc><priority>1.0</priority></url>
   <url><loc>https://clawengineering.com/projects.html</loc><priority>0.8</priority></url>
   <url><loc>https://clawengineering.com/services.html</loc><priority>0.8</priority></url>
+  <url><loc>https://clawengineering.com/projects/wildfire-swarm.html</loc><priority>0.6</priority></url>
+  <url><loc>https://clawengineering.com/projects/lithophane-backlight.html</loc><priority>0.6</priority></url>
+  <url><loc>https://clawengineering.com/projects/fpga-display.html</loc><priority>0.6</priority></url>
+  <url><loc>https://clawengineering.com/projects/claw-bench.html</loc><priority>0.6</priority></url>
+  <url><loc>https://clawengineering.com/projects/mlb-pipeline.html</loc><priority>0.6</priority></url>
+  <url><loc>https://clawengineering.com/projects/rppg.html</loc><priority>0.6</priority></url>
+  <url><loc>https://clawengineering.com/projects/linear-pillow.html</loc><priority>0.6</priority></url>
+  <url><loc>https://clawengineering.com/projects/velocity-controller.html</loc><priority>0.6</priority></url>
+  <url><loc>https://clawengineering.com/projects/ionic-thruster.html</loc><priority>0.6</priority></url>
+  <url><loc>https://clawengineering.com/projects/thermometer.html</loc><priority>0.6</priority></url>
+  <url><loc>https://clawengineering.com/projects/elevator-logic.html</loc><priority>0.6</priority></url>
+  <url><loc>https://clawengineering.com/projects/laser-mic.html</loc><priority>0.6</priority></url>
+  <url><loc>https://clawengineering.com/projects/voltiq.html</loc><priority>0.6</priority></url>
+  <url><loc>https://clawengineering.com/projects/vr-lab.html</loc><priority>0.6</priority></url>
+  <url><loc>https://clawengineering.com/projects/confidential-device.html</loc><priority>0.6</priority></url>
 </urlset>
