@@ -37,7 +37,7 @@ Edit `assets/js/projects.js` only. Append an object to the array:
 ```js
 {
   id: "unique-slug",
-  no: "P-16",
+  no: "P-14",
   title: "Thing I Built",
   year: "2026",
   featured: false,                          // true = also shows on the home page
@@ -85,9 +85,6 @@ for real photographs** — when you have a photo of the built thing, drop it in
 `assets/img/projects/` and change the `image` path in the catalog. A photo of hardware
 that exists always beats a diagram of it.
 
-`P-15` is the exception: its plate is a redacted block stamped *patent pending* and is
-meant to stay that way until the non-provisional is filed.
-
 ---
 
 ## Deploying
@@ -133,23 +130,12 @@ service and serves nothing in its place.
       resolve. If you decide on a different URL, search and replace
       `https://clawengineering.com` across those five files.
 - [ ] **Replace the generated plates with real photographs** as you get them. See
-      "Project plates" above. `P-15` stays redacted.
+      "Project plates" above.
 - [ ] **Decide on the public email.** `calebtlawson@gmail.com` appears on the contact page
       and in the form's failure message (`assets/js/site.js`). Swap both for the branded
       address once email routing is up.
 - [ ] **Link the IEEE paper** — the DOI or the accepted manuscript PDF. The slot is
       commented out in `index.html` (search for `IEEE Xplore DOI`).
-- [ ] **Review project `P-15`** in `assets/js/projects.js` — see the note below.
-
-## Note on P-15
-
-The handheld filtration device is listed with no technical detail: no part numbers, no
-architecture, no cartridge or power-system description. That is deliberate. Publishing
-specifics before the non-provisional is filed is a public disclosure, and outside the US
-most jurisdictions apply absolute novelty — one public description can end foreign filing
-rights entirely. The entry as written establishes that the work exists without disclosing
-what it is. Do not add detail to it without talking to your patent attorney first, and if
-you would rather not signal the product at all, delete the object.
 
 ## Verification
 

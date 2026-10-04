@@ -16,7 +16,7 @@
   <text x="550" y="330" text-anchor="middle" font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#2563eb" letter-spacing="1.6">RECOVERED PULSE</text>
   <text x="400" y="396" text-anchor="middle" font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="15" fill="#565f6b" letter-spacing="1.6">GREEN · CHROM · POS</text>
   <g font-family="'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace" font-size="14" fill="#7b838d" letter-spacing="2">
-    <text x="40" y="466">P-06</text>
+    <text x="40" y="466">P-05</text>
     <text x="760" y="466" text-anchor="end">VIDEO → PULSE</text>
   </g>
 </svg>

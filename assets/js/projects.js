@@ -96,58 +96,36 @@ window.CLAW_PROJECTS = [
     }
   },
   {
-    id: "claw-bench",
+    id: "cuda-kmeans",
     no: "P-04",
-    title: "CLAW Bench — Circuit Design Studio",
+    title: "GPU-Parallel K-Means in CUDA",
     year: "2026",
     featured: true,
-    tracks: ["software", "electrical"],
-    tags: ["TypeScript", "React", "Vite", "ngspice WASM"],
-    blurb:
-      "A browser-first schematic capture and simulation tool. The ngspice engine is compiled to WebAssembly, so real SPICE runs client-side with nothing to install.",
-    image: "assets/img/projects/claw-bench.svg",
-    plates: [{ src: "assets/img/projects/claw-bench.svg", cap: "An RC network and its step response, solved client-side by ngspice." }],
-    notes: {
-      Problem:
-        "Circuit simulation still means a desktop install, a licence, or both — which is a hard stop for teaching, quick checks and anyone on a locked-down machine.",
-      Scope:
-        "Put schematic capture and a real SPICE engine in the browser, with the simulation core kept independent of the interface.",
-      Role:
-        "Architecture and build: a pure TypeScript engine layer with no UI dependencies, a React front end on Vite, and ngspice compiled to WASM and lazy-loaded.",
-      Result:
-        "Running tool with six unit and end-to-end tests passing, and an engine layer clean enough to wrap in a desktop shell later without a rewrite.",
-      "Next pass":
-        "Netlist import from KiCad, and a shareable-permalink circuit format."
-    }
-  },
-  {
-    id: "mlb-pipeline",
-    no: "P-05",
-    title: "MLB Prediction Pipeline",
-    year: "2025",
-    featured: false,
     tracks: ["software"],
-    tags: ["PostgreSQL", "Docker", "LightGBM", "XGBoost"],
+    tags: ["CUDA", "GPU computing", "nvcc", "Performance analysis"],
     blurb:
-      "A containerised data pipeline that ingests season data through pybaseball into PostgreSQL, trains gradient-boosted models, and reports through a dashboard.",
-    image: "assets/img/projects/mlb-pipeline.svg",
-    plates: [{ src: "assets/img/projects/mlb-pipeline.svg", cap: "Ingestion through training to a scored back-check." }],
+      "K-Means clustering of 3 million 20-feature game records, parallelised across an RTX 3070's 5,120 cores — 7.9 minutes on a single GPU thread down to 1.9 seconds.",
+    image: "assets/img/projects/cuda-kmeans-card.png",
+    plates: [
+      { src: "assets/img/projects/cuda-kmeans-blocks.png", cap: "Block sweep at 256 threads per block: speedup climbs from 204× at 4 blocks and plateaus near 252× by 64, once all 40 SMs are busy." },
+      { src: "assets/img/projects/cuda-kmeans-threads.png", cap: "Thread sweep with blocks sized to cover the data: 32 to 1,024 threads per block all land between 248× and 255×." }
+    ],
     notes: {
       Problem:
-        "Prediction work falls apart on data plumbing long before it falls apart on modelling.",
+        "K-Means is two O(N × K × D) passes per iteration. On 3,000,000 synthetic MLB game records with 20 features each, 50 iterations took 474 s on a single GPU thread — too slow to iterate on.",
       Scope:
-        "Build a reproducible ingestion-to-inference path where the data layer is durable and the model layer can be swapped without touching it.",
+        "Parallelise assignment and centroid accumulation in CUDA, then measure how threads per block and block count drive performance, and find the bottleneck.",
       Role:
-        "Built the PostgreSQL schema and Docker environment, the pybaseball ingestion, the LightGBM and XGBoost training stack, and a dashboard with back-check analysis.",
+        "Sole author: three kernels (nearest-centroid assignment, atomic centroid accumulation, averaging) built on a grid-stride loop, so the identical code runs as the one-thread baseline and the parallel version; CUDA-event timing; both launch-parameter sweeps and the analysis.",
       Result:
-        "A pipeline that rebuilds from scratch on any machine, and a dashboard that scores past predictions rather than only publishing new ones.",
+        "1,856 ms against 474,221 ms — 255× faster than the same kernel on one GPU thread, with identical results. Threads per block barely mattered (248–255×); block count did, plateauing near 64 blocks. At 37 ms per iteration against a roughly 25 ms floor set by 448 GB/s of memory bandwidth, the kernel is approaching the memory-bandwidth ceiling.",
       "Next pass":
-        "Automated retraining on a schedule, with calibration tracked over time."
+        "Benchmark against an optimised multi-core CPU build, and replace the atomicAdd accumulation — 3 million threads contending for 5 accumulators — with shared-memory and warp-level reductions."
     }
   },
   {
     id: "rppg",
-    no: "P-06",
+    no: "P-05",
     title: "Contactless Heart-Rate Estimation",
     year: "2026",
     featured: false,
@@ -170,7 +148,7 @@ window.CLAW_PROJECTS = [
   },
   {
     id: "linear-pillow",
-    no: "P-07",
+    no: "P-06",
     title: "Linear Actuating Lumbar Pillow",
     year: "2024",
     featured: false,
@@ -198,14 +176,14 @@ window.CLAW_PROJECTS = [
   },
   {
     id: "velocity-controller",
-    no: "P-08",
+    no: "P-07",
     title: "DC Motor Velocity Controller",
     year: "2024",
     featured: false,
     tracks: ["electrical"],
     tags: ["MATLAB", "Simulink", "Control systems"],
     blurb:
-      "Closed-loop speed control to a hard spec: 15 rad/s, zero steady-state error, overshoot under 10%, and settling inside 50 ms.",
+      "Closed-loop speed control to a hard spec: 15 rad/s, zero steady-state error, overshoot under 10%, and settling within 0.6 s.",
     image: "assets/img/projects/velocity-controller-step-response.png",
     plates: [
       { src: "assets/img/projects/velocity-controller-simulink.png", cap: "Simulink model of the speed controller." },
@@ -213,7 +191,7 @@ window.CLAW_PROJECTS = [
     ],
     notes: {
       Problem:
-        "Hit 15 rad/s with zero steady-state error, under 10% overshoot, and a settling time under 0.05 s.",
+        "Hit 15 rad/s with zero steady-state error, under 10% overshoot, and a settling time within 0.6 s.",
       Scope:
         "Derive the motor transfer function, analyse the open-loop response, design the controller to spec, then validate in simulation and on hardware.",
       Role:
@@ -225,7 +203,7 @@ window.CLAW_PROJECTS = [
   },
   {
     id: "ionic-thruster",
-    no: "P-09",
+    no: "P-08",
     title: "Ionic Thruster",
     year: "2023",
     featured: false,
@@ -250,7 +228,7 @@ window.CLAW_PROJECTS = [
   },
   {
     id: "thermometer",
-    no: "P-10",
+    no: "P-09",
     title: "Thermistor Thermometer",
     year: "2023",
     featured: false,
@@ -273,7 +251,7 @@ window.CLAW_PROJECTS = [
   },
   {
     id: "elevator-logic",
-    no: "P-11",
+    no: "P-10",
     title: "Elevator Control Logic",
     year: "2023",
     featured: false,
@@ -298,7 +276,7 @@ window.CLAW_PROJECTS = [
   },
   {
     id: "laser-mic",
-    no: "P-12",
+    no: "P-11",
     title: "Laser Microphone",
     year: "2025",
     featured: false,
@@ -318,72 +296,8 @@ window.CLAW_PROJECTS = [
     }
   },
   {
-    id: "voltiq",
-    no: "P-13",
-    title: "VoltIQ",
-    year: "2026",
-    featured: false,
-    tracks: ["software"],
-    tags: ["NEC", "MEP", "Spaced repetition"],
-    blurb:
-      "A gamified flashcard app for MEP and NEC code knowledge — built because that material is memorised badly and tested constantly.",
-    image: "assets/img/projects/voltiq.svg",
-    plates: [{ src: "assets/img/projects/voltiq.svg", cap: "A code drill card with recall grading and a streak meter." }],
-    notes: {
-      Problem:
-        "Code knowledge is looked up rather than learned, which is fine until you are in a review meeting without the book.",
-      Scope: "A drill app for NEC and MEP fundamentals with progression that rewards recall.",
-      Role: "Concept, content model and build.",
-      Result: "Working app covering core MEP and NEC material.",
-      "Next pass": "Cover the exam blueprint properly and track weak areas per user."
-    }
-  },
-  {
-    id: "vr-lab",
-    no: "P-14",
-    title: "VR Electrical Lab",
-    year: "2026",
-    featured: false,
-    tracks: ["software", "electrical"],
-    tags: ["Unity", "Meta Quest", "ngspice WASM", "KiCad"],
-    blurb:
-      "A training environment for Meta Quest where circuits built in headset are simulated by a real SPICE engine, not a scripted approximation.",
-    image: "assets/img/projects/vr-lab.svg",
-    plates: [{ src: "assets/img/projects/vr-lab.svg", cap: "Circuits built in headset, solved by a real SPICE core." }],
-    notes: {
-      Problem:
-        "VR training apps usually fake the physics, so what a student learns transfers poorly to a real bench.",
-      Scope:
-        "A Quest lab where the simulation underneath is the same engine an engineer would use at a desk.",
-      Role:
-        "Architecture: Unity application, ngspice WASM as the simulation core, and KiCad netlist parsing to bring in real circuits.",
-      Result: "Architecture defined with the simulation core proven separately in CLAW Bench.",
-      "Next pass": "First playable — one bench, one circuit, full loop."
-    }
-  },
-  {
-    id: "confidential-device",
-    no: "P-15",
-    title: "Handheld Filtration Device",
-    year: "2026",
-    featured: false,
-    tracks: ["embedded", "mechanical"],
-    tags: ["Patent pending", "Embedded", "Power management"],
-    blurb:
-      "An active-assisted handheld consumer device. Patent pending — architecture and design detail available under NDA.",
-    image: "assets/img/projects/confidential-device.svg",
-    plates: [{ src: "assets/img/projects/confidential-device.svg", cap: "Technical detail withheld pending the non-provisional filing." }],
-    notes: {
-      Scope:
-        "Consumer hardware product: embedded control, rechargeable power management, and a manufacturable enclosure.",
-      Role: "Product architecture, electronics and mechanical design.",
-      Status:
-        "Provisional filed and under active development. Technical detail is withheld pending the non-provisional; available under NDA."
-    }
-  },
-  {
     id: "nec-building-design",
-    no: "P-16",
+    no: "P-12",
     title: "Commercial Building Electrical Design",
     year: "2026",
     featured: false,
@@ -410,7 +324,7 @@ window.CLAW_PROJECTS = [
   },
   {
     id: "speech-classifier",
-    no: "P-17",
+    no: "P-13",
     title: "Spoken Yes / No Classifier",
     year: "2026",
     featured: false,

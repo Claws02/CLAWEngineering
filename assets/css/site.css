@@ -1319,3 +1319,114 @@ button { font: inherit; color: inherit; }
 .project-sheet .sheet-lede { margin-bottom: 0.5rem; }
 .project-sheet .plates,
 .project-sheet .notes { max-width: 900px; }   /* line up with the title block */
+
+/* ---------- 18. Small screens and touch ----------
+   The desktop layout is the drawing; these rules re-plot it for narrower
+   sheets rather than letting it shrink. Breakpoints match the ones above. */
+
+/* The hero frame is inset by the gutter, and so is the shell — so below the
+   point where the shell stops being centred, the copy would sit on the frame
+   with the inner rails running through it. Pull the copy inside the frame. */
+@media (max-width: 1360px) {
+  .hero-inner { padding-inline: calc(var(--gutter) + clamp(1.1rem, 2.6vw, 2rem)); }
+}
+
+@media (max-width: 620px) {
+  .hero-frame { inset: 0.75rem 0.6rem; }
+  .hero-frame::before,
+  .hero-frame::after { display: none; }   /* rails read as noise at this width */
+  .hero-inner { padding-inline: 1.6rem; }
+  .hero-name em { max-width: none; font-size: 0.46em; }
+  .hero-role { font-size: 0.95rem; letter-spacing: 0.12em; }
+  .hero-lede { margin-bottom: 2rem; }
+  .track-lead { padding: 1.6rem 1.25rem; }
+}
+
+/* Masthead: the discipline line is repeated in the hero, so it gives way
+   before the mark wraps or pushes the menu button off the sheet. */
+@media (max-width: 560px) {
+  .mark-sub { display: none; }
+}
+
+@media (max-width: 780px) {
+  .nav-toggle { min-height: 44px; min-width: 64px; }
+  .nav { box-shadow: 0 14px 30px rgba(20, 24, 28, 0.08); }
+  .nav-link {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    padding-block: 0.6rem;
+    font-size: var(--fs-xs);
+  }
+}
+
+/* Touch targets: 44px minimum on anything a thumb has to hit. Pointer
+   layouts keep their tighter desktop rhythm. */
+@media (hover: none), (max-width: 780px) {
+  .filter { min-height: 44px; padding-inline: 0.95rem; }
+  .card-more { padding-block: 0.8rem; margin-top: 0.1rem; margin-bottom: -0.8rem; }
+  .back-link { min-height: 44px; }
+  .modal-close,
+  .modal-link { min-height: 44px; display: inline-flex; align-items: center; }
+  .modal-close { padding-inline: 0.9rem; }
+  .colophon-links { gap: 0 1.25rem; }
+  .colophon-links a { display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; }
+  .mark { min-height: 44px; align-items: center; }
+  .channel { min-height: 48px; align-items: center; }
+}
+
+@media (max-width: 620px) {
+  /* 10px mono is legible on a monitor, not on a phone held at arm's length. */
+  .tag,
+  .card-no,
+  .tb-key,
+  .pm-cell dt,
+  .plate-zoom { font-size: var(--fs-label); }
+
+  /* iOS zooms the page into any field set below 16px. */
+  .field input,
+  .field textarea { font-size: 1rem; }
+  .form .btn { width: 100%; justify-content: center; min-height: 48px; }
+
+  /* Plates: one column, so each figure keeps its own proportions instead of
+     being letterboxed into a 4:3 cell — a wide chart was a sliver at 4:3. */
+  .plate-img,
+  .plates.is-single .plate-img { aspect-ratio: auto; height: auto; max-height: 75vh; }
+
+  /* The sheet goes full screen; a floating card wastes a third of the width. */
+  .modal { padding: 0; }
+  .modal-panel { min-height: 100%; border: 0; box-shadow: none; }
+  .modal-bar { flex-wrap: wrap; gap: 0.25rem 0.75rem; padding: 0.4rem 1rem; }
+  .modal-bar-no { flex: 1 1 auto; }
+  .modal-link { white-space: nowrap; }
+  .modal-actions { margin-left: auto; }
+
+  /* Touch has no hover, so the zoom cue is always shown — as its own row
+     under the figure rather than a badge sitting on top of the chart. */
+  .plate-zoom {
+    position: static;
+    display: block;
+    text-align: right;
+    border: 0;
+    border-top: 1px solid var(--hairline);
+    padding: 0.55rem 0.7rem;
+    color: var(--blue);
+    opacity: 1;
+  }
+  .modal-body { padding: 1.4rem 1.1rem 2rem; }
+
+  .sheet-head { margin-bottom: 1.75rem; }
+  .cap { padding: 1.25rem 1.1rem; }
+  .offer { grid-template-columns: 32px 1fr; gap: 0.75rem; }
+}
+
+/* Standalone sheets: Sheet and Year sit side by side, Discipline spans —
+   three stacked rows for three short values was most of a phone screen. */
+@media (max-width: 420px) {
+  .project-sheet .titleblock { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .project-sheet .tb-cell:last-child { grid-column: 1 / -1; }
+}
+
+@media (max-width: 380px) {
+  .hero-eyebrow { letter-spacing: 0.1em; }
+}
