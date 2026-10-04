@@ -154,62 +154,7 @@ def fpga():
     return "\n".join("  " + s for s in a)
 
 
-# ---------------------------------------------------------------- P-04
-def bench():
-    a = []
-    # browser frame
-    a.append(f'<rect x="52" y="60" width="696" height="330" rx="4" fill="none" stroke="{INK}" stroke-width="1.5"/>')
-    a.append(f'<path d="M52 100h696" stroke="{INK}" stroke-width="1.5"/>')
-    a.append(f'<g fill="{HAIR2}"><circle cx="76" cy="80" r="6"/><circle cx="98" cy="80" r="6"/><circle cx="120" cy="80" r="6"/></g>')
-    # RC schematic
-    a.append(f'<g fill="none" stroke="{INK}" stroke-width="1.8" stroke-linejoin="round">')
-    a.append('<path d="M112 176h56"/>')                                   # source to R
-    a.append('<path d="M168 176l10-14 16 28 16-28 16 28 16-28 10 14"/>')  # resistor
-    a.append('<path d="M252 176h72"/>')
-    a.append('<path d="M324 152v48M348 152v48"/>')                        # capacitor
-    a.append('<path d="M348 176h48v96"/>')
-    a.append('<path d="M112 176v96h284"/>')                               # return
-    a.append('</g>')
-    # source symbol
-    a.append(f'<circle cx="112" cy="176" r="0" fill="none"/>')
-    a.append(f'<g fill="none" stroke="{INK}" stroke-width="1.8"><path d="M96 152v48M104 160v32M120 168v16M128 164v24"/></g>')
-    a.append(cap(200, 138, "R", color=GRAPHITE, size=15))
-    a.append(cap(336, 138, "C", color=GRAPHITE, size=15))
-    # ground
-    a.append(f'<g stroke="{INK}" stroke-width="1.8"><path d="M376 272h40M383 281h26M390 290h12"/></g>')
-    # response plot
-    a.append(f'<g stroke="{HAIR}" stroke-width="1"><path d="M470 150h214M470 200h214M470 250h214"/></g>')
-    a.append(f'<path d="M470 128v172h214" fill="none" stroke="{GRAPHITE}" stroke-width="1.5"/>')
-    a.append(f'<path d="M470 300C520 300 540 176 684 158" fill="none" stroke="{BLUE}" stroke-width="2.5"/>')
-    a.append(cap(577, 332, "STEP RESPONSE", color=BLUE))
-    a.append(cap(400, 366, "ngspice → WebAssembly", size=15, color=GRAPHITE))
-    return "\n".join("  " + s for s in a)
-
-
 # ---------------------------------------------------------------- P-05
-def mlb():
-    a = []
-    # database cylinder
-    a.append(f'<g fill="none" stroke="{INK}" stroke-width="1.5">'
-             f'<ellipse cx="128" cy="150" rx="66" ry="22"/>'
-             f'<path d="M62 150v104a66 22 0 0 0 132 0V150"/>'
-             f'<path d="M62 186a66 22 0 0 0 132 0M62 220a66 22 0 0 0 132 0"/></g>')
-    a.append(cap(128, 306, "POSTGRESQL"))
-    a.append(arrow(206, 202, 288, 202))
-    a.append(box(288, 160, 172, 84, "GBM", "LightGBM / XGB"))
-    a.append(arrow(460, 202, 542, 202))
-    # bar chart of predictions
-    bars = [(0, 58), (1, 96), (2, 74), (3, 128), (4, 106)]
-    for i, h in bars:
-        x = 552 + i * 38
-        a.append(f'<rect x="{x}" y="{268 - h}" width="26" height="{h}" fill="{BLUE if i != 3 else RED}" opacity="0.9"/>')
-    a.append(f'<path d="M542 268h188" stroke="{GRAPHITE}" stroke-width="1.5"/>')
-    a.append(cap(636, 306, "BACK-CHECK"))
-    a.append(cap(400, 396, "ingest → train → score → grade", size=15, color=GRAPHITE))
-    return "\n".join("  " + s for s in a)
-
-
-# ---------------------------------------------------------------- P-06
 def rppg():
     a = []
     # head outline with tracker landmarks and the sampled region of interest —
@@ -238,7 +183,7 @@ def rppg():
     return "\n".join("  " + s for s in a)
 
 
-# ---------------------------------------------------------------- P-12
+# ---------------------------------------------------------------- P-11
 def lasermic():
     a = []
     import math
@@ -268,96 +213,16 @@ def lasermic():
     return "\n".join("  " + s for s in a)
 
 
-# ---------------------------------------------------------------- P-13
-def voltiq():
-    a = []
-    # stacked cards
-    for i, (dx, dy, op) in enumerate([(48, 40, HAIR2), (24, 20, HAIR2)]):
-        a.append(f'<rect x="{132+dx}" y="{96+dy}" width="424" height="220" rx="4" fill="{PAPER}" stroke="{op}" stroke-width="1.5"/>')
-    a.append(f'<rect x="132" y="96" width="424" height="220" rx="4" fill="{PAPER}" stroke="{INK}" stroke-width="1.8"/>')
-    a.append(cap(160, 136, "NEC 210.19(A)", anchor="start", color=RED, size=15))
-    a.append(f'<path d="M160 154h368" stroke="{HAIR}" stroke-width="1"/>')
-    a.append(f'<g font-family="{MONO}" font-size="17" fill="{INK}" letter-spacing="0.6">'
-             f'<text x="160" y="196">Minimum branch-circuit</text>'
-             f'<text x="160" y="224">conductor ampacity?</text></g>')
-    a.append(f'<g fill="none" stroke="{HAIR2}" stroke-width="1.5">'
-             f'<rect x="160" y="248" width="164" height="40" rx="2"/>'
-             f'<rect x="340" y="248" width="164" height="40" rx="2"/></g>')
-    a.append(cap(242, 274, "AGAIN", color=GRAPHITE2))
-    a.append(cap(422, 274, "GOT IT", color=BLUE))
-    # streak meter
-    a.append(cap(132, 396, "STREAK", anchor="start", color=GRAPHITE))
-    for i in range(12):
-        f = BLUE if i < 8 else HAIR
-        a.append(f'<rect x="{236 + i*36}" y="382" width="26" height="18" fill="{f}"/>')
-    return "\n".join("  " + s for s in a)
-
-
-# ---------------------------------------------------------------- P-14
-def vrlab():
-    a = []
-    # headset
-    a.append(f'<g fill="none" stroke="{INK}" stroke-width="1.8">'
-             f'<rect x="80" y="150" width="268" height="132" rx="30"/>'
-             f'<circle cx="150" cy="216" r="36"/><circle cx="278" cy="216" r="36"/>'
-             f'<path d="M80 186H56a14 14 0 0 0-14 14v32a14 14 0 0 0 14 14h24"/>'
-             f'<path d="M348 186h24a14 14 0 0 1 14 14v32a14 14 0 0 1-14 14h-24"/></g>')
-    a.append(cap(214, 330, "META QUEST"))
-    a.append(arrow(410, 216, 484, 216))
-    # floating schematic panel
-    a.append(f'<rect x="500" y="120" width="234" height="192" rx="4" fill="none" stroke="{BLUE}" stroke-width="1.5" stroke-dasharray="7 5"/>')
-    a.append(f'<g fill="none" stroke="{INK}" stroke-width="1.8" stroke-linejoin="round">'
-             f'<path d="M530 200h30l8-12 14 24 14-24 14 24 8-12h30"/>'
-             f'<path d="M648 200v44M530 200v44M530 244h118"/>'
-             f'<path d="M600 244v22M588 266h24M592 274h16M596 282h8"/></g>')
-    a.append(cap(617, 336, "REAL SPICE CORE", color=BLUE))
-    a.append(cap(400, 400, "circuits built in headset, solved by ngspice", size=15, color=GRAPHITE))
-    return "\n".join("  " + s for s in a)
-
-
-# ---------------------------------------------------------------- P-15
-def confidential():
-    """Deliberately discloses nothing: no geometry, no architecture, no ports.
-       Publishing device detail before the non-provisional is filed is a public
-       disclosure. This plate says the work exists and stops there."""
-    a = []
-    a.append(f'<defs><pattern id="hz" width="12" height="12" patternUnits="userSpaceOnUse" '
-             f'patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="12" stroke="{HAIR2}" stroke-width="1.4"/></pattern></defs>')
-    a.append(f'<rect x="120" y="96" width="560" height="216" fill="url(#hz)" stroke="{HAIR2}" stroke-width="1.5"/>')
-    # redaction bars
-    a.append(f'<g fill="{INK}">'
-             f'<rect x="168" y="146" width="290" height="26"/>'
-             f'<rect x="474" y="146" width="128" height="26"/>'
-             f'<rect x="168" y="192" width="164" height="26"/>'
-             f'<rect x="348" y="192" width="254" height="26"/>'
-             f'<rect x="168" y="238" width="216" height="26"/></g>')
-    # stamp
-    a.append(f'<g transform="rotate(-9 400 356)">'
-             f'<rect x="196" y="326" width="408" height="60" fill="none" stroke="{RED}" stroke-width="3"/>'
-             f'<text x="400" y="366" text-anchor="middle" font-family="{MONO}" font-size="26" '
-             f'fill="{RED}" letter-spacing="4">PATENT PENDING</text></g>')
-    return "\n".join("  " + s for s in a)
-
 
 PLATES = [
     ("lithophane-backlight", "P-02", "MOTION → PWM RAMP", lithophane,
      "Block diagram: PIR sensor into an ESP32 driving a PWM sunrise ramp behind a lithophane panel."),
     ("fpga-display", "P-03", "MAX 10 · DE10-LITE", fpga,
      "Seven-segment decoder with a clock divider and GPIO broken out for logic-analyzer capture."),
-    ("claw-bench", "P-04", "SPICE IN THE BROWSER", bench,
-     "An RC circuit and its step response, drawn inside a browser frame."),
-    ("mlb-pipeline", "P-05", "INGEST → TRAIN → SCORE", mlb,
-     "Data pipeline: PostgreSQL into gradient-boosted models into a scored back-check."),
-    ("rppg", "P-06", "VIDEO → PULSE", rppg,
+    ("rppg", "P-05", "VIDEO → PULSE", rppg,
      "A face with a region of interest, and the pulse waveform recovered from it."),
-    ("laser-mic", "P-12", "OPTICAL PATH", lasermic,
+    ("laser-mic", "P-11", "OPTICAL PATH", lasermic,
      "Laser reflected off a vibrating surface into a photodetector, and the recovered audio signal."),
-    ("voltiq", "P-13", "NEC DRILL", voltiq,
-     "A code flashcard with recall buttons and a streak meter."),
-    ("vr-lab", "P-14", "QUEST + ngspice", vrlab,
-     "A VR headset beside a schematic panel solved by a real SPICE core."),
-    ("confidential-device", "P-15", "DETAIL WITHHELD", confidential,
-     "A redacted plate marked patent pending. No technical detail is shown."),
 ]
 
 

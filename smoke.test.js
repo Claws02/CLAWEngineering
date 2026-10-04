@@ -54,8 +54,6 @@ console.log("\n[1] Catalog integrity");
   const badTrack = cat.flatMap(p => (p.tracks || []).filter(t => !valid.has(t)));
   ok("all tracks are known filter values", badTrack.length === 0, badTrack.join(","));
   ok("featured count is 4", cat.filter(p => p.featured).length === 4);
-  ok("confidential project leaks no part numbers",
-    !/ESP32-C3|BQ21040|MAX17048/i.test(JSON.stringify(cat.find(p => p.id === "confidential-device"))));
 }
 
 /* ---- 2. Home page render ---- */
@@ -345,7 +343,7 @@ async function deepLinks() {
   ok("closing a landed sheet strips the hash without leaving the page",
     !dm.classList.contains("is-open") && d.location.hash === "" && /projects\.html$/.test(d.location.pathname));
 
-  const h = await loadReady("index.html", { hash: "#p/claw-bench" });
+  const h = await loadReady("index.html", { hash: "#p/cuda-kmeans" });
   ok("deep links also work on the home page", h.document.querySelector("[data-modal]").classList.contains("is-open"));
 
   const bad = await loadReady("projects.html", { hash: "#p/not-a-project" });
@@ -392,7 +390,7 @@ async function platesAndFit() {
   ok("fit: cover marks the card as a photo",
     w.document.querySelector('[data-project="photo"] .card-figure').classList.contains("is-photo"));
   ok("drawings keep the contained treatment",
-    !w.document.querySelector('[data-project="claw-bench"] .card-figure').classList.contains("is-photo"));
+    !w.document.querySelector('[data-project="rppg"] .card-figure').classList.contains("is-photo"));
 }
 
 /* ---- 16. Sort ---- */
