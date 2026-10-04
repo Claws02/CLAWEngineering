@@ -832,12 +832,22 @@ button { font: inherit; color: inherit; }
 
 .plates {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));   /* two up: plates are evidence, not thumbnails */
   gap: 1rem;
   margin-bottom: 2rem;
 }
 
 .plate { border: 1px solid var(--hairline); }
+
+/* Set by fitPlates() from each image's real proportions. Wide charts take the
+   full row at their own shape; tall schematics get a portrait cell. Dense
+   flow back-fills the gap a full-row plate would otherwise leave. */
+@media (min-width: 621px) {
+  .plates { grid-auto-flow: dense; }
+  .plate.is-wide { grid-column: 1 / -1; }
+  .plate.is-wide .plate-img { aspect-ratio: auto; height: auto; max-height: 460px; }
+  .plate.is-tall .plate-img { aspect-ratio: 3 / 4; }
+}
 
 /* One plate on its own gets the full width instead of a lone thumbnail. */
 .plates.is-single { grid-template-columns: 1fr; }

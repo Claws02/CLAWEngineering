@@ -150,7 +150,7 @@ window.CLAW_PROJECTS = [
     id: "linear-pillow",
     no: "P-06",
     title: "Linear Actuating Lumbar Pillow",
-    year: "2024",
+    year: "2022",
     featured: false,
     tracks: ["mechanical", "embedded"],
     tags: ["SolidWorks", "Arduino", "Linear actuators", "3D print"],
