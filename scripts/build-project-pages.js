@@ -110,7 +110,7 @@ function page(p, prev, next) {
     '<meta property="og:description" content="' + esc(p.blurb) + '">\n' +
     '<meta property="og:url" content="' + esc(url) + '">\n' +
     '<meta property="og:image" content="' + esc(ogImage(p)) + '">\n' +
-    '<meta property="og:image:alt" content="' + esc(p.no + " — " + p.title) + '">\n' +
+    '<meta property="og:image:alt" content="Caleb Lawson — ElectroMechanical &amp; Embedded Systems Engineering. Quincy, MA · IMEG Corp · M.S. ECE 2026 · FAA Part 107 · open to roles.">\n' +
     '<meta name="twitter:card" content="summary_large_image">\n' +
     '<meta name="theme-color" content="#fbfbf9">\n' +
     "\n" +
