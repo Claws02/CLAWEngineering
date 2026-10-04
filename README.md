@@ -22,7 +22,8 @@ assets/js/site.js       All behaviour (nav, reveals, filters, modal, form)
 assets/img/             favicon, social card
 assets/img/projects/    Project plates — generated schematics + downloaded photos
 assets/docs/            résumé PDF
-scripts/                Maintenance and asset-generation scripts
+scripts/                Maintenance and asset-generation scripts (og-card.html → og.png)
+code/<project>/         Published project source, linked from the project's sheet
 docs/                   Audit reports
 smoke.test.js           Test suite
 .github/workflows/      CI — runs the suite on every push and PR
@@ -134,8 +135,14 @@ service and serves nothing in its place.
 - [ ] **Decide on the public email.** `calebtlawson@gmail.com` appears on the contact page
       and in the form's failure message (`assets/js/site.js`). Swap both for the branded
       address once email routing is up.
-- [ ] **Link the IEEE paper** — the DOI or the accepted manuscript PDF. The slot is
-      commented out in `index.html` (search for `IEEE Xplore DOI`).
+- [ ] **Link the IEEE paper** — the DOI, and optionally the *accepted manuscript*
+      (post-review, pre-IEEE-formatting) with IEEE's copyright notice and the DOI on it.
+      Never the IEEE-formatted PDF from Xplore. The slot is commented out in
+      `index.html` (search for `IEEE posting policy`).
+- [ ] **Source code** — each `code/<project>/` folder is linked from its sheet via the
+      catalog's `code` field. Links point at `main`, so they resolve once this merges.
+      No licence is set, so the code is viewable but not reusable; add a `LICENSE` if
+      you want otherwise.
 
 ## Verification
 

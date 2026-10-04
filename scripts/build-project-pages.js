@@ -168,7 +168,11 @@ function page(p, prev, next) {
       : "") +
     '      <dl class="notes">\n' + notes + "      </dl>\n" +
     "\n" +
-    '      <p style="margin-top:2rem"><a class="btn btn-ghost" href="../index.html#contact">Ask about this project <span aria-hidden="true">&rarr;</span></a></p>\n' +
+    '      <p class="sheet-actions">' +
+    (/^https:\/\//.test(p.code || "")
+      ? '<a class="btn btn-ghost" href="' + esc(p.code) + '" target="_blank" rel="noopener">Source code <span aria-hidden="true">&rarr;</span></a>'
+      : "") +
+    '<a class="btn btn-ghost" href="../index.html#contact">Ask about this project <span aria-hidden="true">&rarr;</span></a></p>\n' +
     "\n" +
     pager +
     "    </div>\n" +

@@ -362,7 +362,13 @@
           : "") +
         '<dl class="notes">' +
         notes +
-        "</dl></div>";
+        "</dl>" +
+        (/^https:\/\//.test(p.code || "")
+          ? '<p class="sheet-actions"><a class="btn btn-ghost" href="' +
+            escapeHtml(p.code) +
+            '" target="_blank" rel="noopener">Source code <span aria-hidden="true">&rarr;</span></a></p>'
+          : "") +
+        "</div>";
 
       Array.prototype.forEach.call(panel.querySelectorAll("img"), function (img) {
         img.addEventListener("error", function () {

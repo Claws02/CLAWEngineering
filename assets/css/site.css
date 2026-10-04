@@ -1325,6 +1325,7 @@ button { font: inherit; color: inherit; }
 .back-link:hover { color: var(--ink); }
 
 .project-sheet .titleblock { margin-bottom: 2rem; }
+.sheet-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; }
 .project-sheet .card-tags { margin-bottom: 2rem; }
 .project-sheet .sheet-lede { margin-bottom: 0.5rem; }
 .project-sheet .plates,
