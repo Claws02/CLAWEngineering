@@ -12,7 +12,9 @@
 <meta property="og:description" content="Drone swarm autonomy, FPGA design, browser SPICE simulation, control systems.">
 <meta property="og:url" content="https://clawengineering.com/projects.html">
 <meta property="og:image" content="https://clawengineering.com/assets/img/og.png">
+<meta property="og:image:alt" content="Project index — Caleb Lawson. Drone swarm autonomy, FPGA design, browser SPICE simulation, control systems.">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#fbfbf9">
 
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,7 +48,7 @@
     <div class="shell">
       <div class="sheet-head">
         <p class="sheet-no">P-000 &nbsp;·&nbsp; Project index</p>
-        <h1 class="sheet-title">Everything I have built</h1>
+        <h1 class="sheet-title">Selected work, 2023–2026</h1>
         <p class="sheet-lede">
           Coursework, capstone, client work and things built because they were bothering me.
           Filter by discipline; open any sheet for the problem, the scope, what I owned, and
@@ -54,6 +56,7 @@
         </p>
       </div>
 
+      <div class="index-bar">
       <div class="filters" role="group" aria-label="Filter projects by discipline">
         <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
         <button class="filter" type="button" data-filter="electrical" aria-pressed="false">Electrical</button>
@@ -61,9 +64,23 @@
         <button class="filter" type="button" data-filter="software" aria-pressed="false">Software</button>
         <button class="filter" type="button" data-filter="mechanical" aria-pressed="false">Mechanical</button>
       </div>
+      <div class="filters" role="group" aria-label="Sort projects by year">
+        <span class="sort-label" aria-hidden="true">Sort</span>
+        <button class="filter" type="button" data-sort="newest" aria-pressed="true">Newest</button>
+        <button class="filter" type="button" data-sort="oldest" aria-pressed="false">Oldest</button>
+      </div>
+      </div>
 
-      <p class="sheet-no" style="margin-bottom:1.5rem"><span data-filter-count>&nbsp;</span></p>
+      <p class="sheet-no" style="margin-bottom:1.5rem"><span data-filter-count aria-live="polite">&nbsp;</span></p>
 
+      <h2 class="visually-hidden">Project sheets</h2>
+      <noscript>
+        <p class="noscript">
+          The project index is drawn by JavaScript, which is off or failed to load. Every project
+          also has its own page — start from <a href="projects/wildfire-swarm.html">P-01, the wildfire
+          drone swarm</a> — or read the <a href="assets/docs/caleb-lawson-resume.pdf">résumé (PDF)</a>.
+        </p>
+      </noscript>
       <div class="grid" data-grid="all"></div>
     </div>
   </section>

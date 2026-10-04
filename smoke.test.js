@@ -14,7 +14,7 @@ function load(file, opts = {}) {
   const dom = new JSDOM(html, {
     runScripts: "outside-only",
     pretendToBeVisual: true,
-    url: "https://example.test/" + file
+    url: "https://example.test/" + file + (opts.hash || "")
   });
   const w = dom.window;
   // Environment stubs: jsdom lacks IntersectionObserver and fetch.
@@ -74,7 +74,7 @@ async function homePage() {
 async function filters() {
   console.log("\n[3] Projects page filters");
   const w = await loadReady("projects.html");
-  const total = 15;
+  const total = w.CLAW_PROJECTS.length;
   ok("full grid renders every project",
     w.document.querySelectorAll("[data-project]").length === total,
     "got " + w.document.querySelectorAll("[data-project]").length);
@@ -146,7 +146,7 @@ async function modal() {
       esc();
     } catch (e) { threw = p.id + ": " + e.message; break; }
   }
-  ok("all 15 projects open and render without error", threw === null, threw);
+  ok("all " + w.CLAW_PROJECTS.length + " projects open and render without error", threw === null, threw);
 }
 
 /* ---- 5. Escaping ---- */
@@ -163,7 +163,7 @@ async function escaping() {
       });
     }
   });
-  ok("malicious entry did render", w.document.querySelectorAll("[data-project]").length === 16,
+  ok("malicious entry did render", w.document.querySelectorAll("[data-project]").length === w.CLAW_PROJECTS.length,
     "got " + w.document.querySelectorAll("[data-project]").length);
   ok("no script executed from card render", w.PWNED === undefined, "PWNED=" + w.PWNED);
   w.document.querySelector('[data-project="xss"]')
@@ -316,6 +316,193 @@ async function navToggle() {
   ok("label restored", btn.textContent === "Menu");
 }
 
+/* ---- 13. Deep links: the hash is the source of truth ---- */
+async function deepLinks() {
+  console.log("\n[13] Deep links");
+  const w = await loadReady("projects.html");
+  const m = w.document.querySelector("[data-modal]");
+  const card = w.document.querySelector('[data-project="fpga-display"]');
+
+  card.dispatchEvent(new w.Event("click", { bubbles: true }));
+  ok("opening a sheet writes #p/<id>", w.location.hash === "#p/fpga-display", w.location.hash);
+  ok("sheet links to its standalone page",
+    m.querySelector(".modal-link") && m.querySelector(".modal-link").getAttribute("href") === "projects/fpga-display.html");
+
+  m.querySelector("[data-modal-close]").dispatchEvent(new w.Event("click", { bubbles: true }));
+  ok("close hides immediately", !m.classList.contains("is-open"));
+  await settle();
+  ok("close steps history back, clearing the hash", w.location.hash === "", w.location.hash);
+
+  card.dispatchEvent(new w.Event("click", { bubbles: true }));
+  w.history.back();
+  await settle();
+  ok("browser Back closes the sheet", !m.classList.contains("is-open") && w.location.hash === "");
+
+  const d = await loadReady("projects.html", { hash: "#p/wildfire-swarm" });
+  const dm = d.document.querySelector("[data-modal]");
+  ok("landing on #p/<id> opens that sheet", dm.classList.contains("is-open") && /Wildfire/.test(dm.textContent));
+  d.document.dispatchEvent(new d.KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+  ok("closing a landed sheet strips the hash without leaving the page",
+    !dm.classList.contains("is-open") && d.location.hash === "" && /projects\.html$/.test(d.location.pathname));
+
+  const h = await loadReady("index.html", { hash: "#p/claw-bench" });
+  ok("deep links also work on the home page", h.document.querySelector("[data-modal]").classList.contains("is-open"));
+
+  const bad = await loadReady("projects.html", { hash: "#p/not-a-project" });
+  ok("unknown id is ignored", !bad.document.querySelector("[data-modal]").classList.contains("is-open"));
+  const anchor = await loadReady("index.html", { hash: "#contact" });
+  ok("ordinary anchors are not mistaken for sheets", !anchor.document.querySelector("[data-modal]").classList.contains("is-open"));
+}
+
+/* ---- 14. Focus containment ---- */
+async function focusContainment() {
+  console.log("\n[14] Focus containment");
+  const w = await loadReady("projects.html");
+  const main = w.document.querySelector("main");
+  const head = w.document.querySelector(".masthead");
+  const btn = w.document.querySelector('[data-project="rppg"] .card-more');
+  btn.focus();
+  btn.dispatchEvent(new w.Event("click", { bubbles: true }));
+  ok("page behind the sheet goes inert", main.hasAttribute("inert") && head.hasAttribute("inert"));
+  ok("dialog itself stays interactive", !w.document.querySelector("[data-modal]").closest("[inert]"));
+  ok("focus moves to Close", w.document.activeElement === w.document.querySelector("[data-modal-close]"));
+  w.document.dispatchEvent(new w.KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+  ok("inert lifted on close", !main.hasAttribute("inert") && !head.hasAttribute("inert"));
+  ok("focus returns to the card that opened it", w.document.activeElement === btn);
+}
+
+/* ---- 15. Plates and photo fit ---- */
+async function platesAndFit() {
+  console.log("\n[15] Plates and photo fit");
+  const w = await loadReady("projects.html", {
+    inject: win => win.CLAW_PROJECTS.push({
+      id: "photo", no: "Z-02", year: "2026", title: "Photo", blurb: "b", tracks: ["software"],
+      tags: [], notes: {}, image: "assets/img/og.png", fit: "cover"
+    })
+  });
+  const m = w.document.querySelector("[data-modal]");
+  w.document.querySelector('[data-project="wildfire-swarm"]').dispatchEvent(new w.Event("click", { bubbles: true }));
+  const links = m.querySelectorAll(".plate-link");
+  ok("every plate opens full size", links.length === 5 &&
+    Array.from(links).every(a => a.getAttribute("href") === a.querySelector("img").getAttribute("src") && a.target === "_blank"));
+  ok("multi-plate sets use the grid", !m.querySelector(".plates").classList.contains("is-single"));
+  m.querySelector("[data-modal-close]").dispatchEvent(new w.Event("click", { bubbles: true }));
+  w.document.querySelector('[data-project="laser-mic"]').dispatchEvent(new w.Event("click", { bubbles: true }));
+  ok("a lone plate spans the full width", m.querySelector(".plates").classList.contains("is-single"));
+  ok("fit: cover marks the card as a photo",
+    w.document.querySelector('[data-project="photo"] .card-figure').classList.contains("is-photo"));
+  ok("drawings keep the contained treatment",
+    !w.document.querySelector('[data-project="claw-bench"] .card-figure').classList.contains("is-photo"));
+}
+
+/* ---- 16. Sort ---- */
+async function sorting() {
+  console.log("\n[16] Sort");
+  const w = await loadReady("projects.html");
+  const years = () => Array.from(w.document.querySelectorAll('[data-grid="all"] [data-project]'))
+    .filter(c => !c.hidden).map(c => +c.getAttribute("data-sort-year"));
+  const sorted = (a, dir) => a.every((y, i) => i === 0 || (dir < 0 ? a[i - 1] >= y : a[i - 1] <= y));
+  ok("newest first by default", sorted(years(), -1), years().join(" "));
+  w.document.querySelector('[data-sort="oldest"]').dispatchEvent(new w.Event("click", { bubbles: true }));
+  ok("oldest first on request", sorted(years(), 1), years().join(" "));
+  ok("sort buttons report state", w.document.querySelector('[data-sort="oldest"]').getAttribute("aria-pressed") === "true" &&
+    w.document.querySelector('[data-sort="newest"]').getAttribute("aria-pressed") === "false");
+  w.document.querySelector('[data-filter="embedded"]').dispatchEvent(new w.Event("click", { bubbles: true }));
+  ok("filter still applies after sorting", years().length > 0 && sorted(years(), 1) &&
+    Array.from(w.document.querySelectorAll('[data-project]')).filter(c => !c.hidden)
+      .every(c => c.getAttribute("data-tracks").split(" ").includes("embedded")));
+  ok("card text survives the footer-year hook", /Wildfire/.test(w.document.querySelector('[data-project="wildfire-swarm"]').textContent));
+  ok("filter count is announced", w.document.querySelector("[data-filter-count]").getAttribute("aria-live") === "polite");
+}
+
+/* ---- 17. Hero, services and generated pages ---- */
+async function heroAndPages() {
+  console.log("\n[17] Hero, services and generated pages");
+  const w = await loadReady("index.html");
+  const tracks = w.document.querySelectorAll(".tracks .track");
+  ok("hero offers both tracks", tracks.length === 2 &&
+    w.document.querySelector(".track-hire") && w.document.querySelector(".track-claw"));
+  ok("résumé is reachable from the hero",
+    w.document.querySelector('.hero a[href="assets/docs/caleb-lawson-resume.pdf"]') !== null);
+  ok("both forms carry the honeypot", ["index.html", "services.html"].every(f =>
+    /name="_gotcha"/.test(fs.readFileSync(path.join(ROOT, f), "utf8"))));
+
+  const s = await loadReady("services.html");
+  ok("services page boots without the catalog", s.document.querySelector("[data-form]") && !/projects\.js/.test(
+    fs.readFileSync(path.join(ROOT, "services.html"), "utf8")));
+
+  const { build } = require("./scripts/build-project-pages.js");
+  const files = build();
+  const stale = Object.keys(files).filter(rel => {
+    const abs = path.join(ROOT, rel);
+    return !fs.existsSync(abs) || fs.readFileSync(abs, "utf8") !== files[rel];
+  });
+  ok("generated pages match the catalog (run npm run build)", stale.length === 0, stale.join(", "));
+
+  const p = await loadReady("projects/velocity-controller.html");
+  ok("standalone page has the content without the catalog script",
+    /DC Motor Velocity Controller/.test(p.document.querySelector("h1").textContent) &&
+    p.document.querySelectorAll(".note").length === 5 && p.document.querySelectorAll(".plate").length === 2);
+  ok("standalone page has its own canonical URL",
+    p.document.querySelector('link[rel="canonical"]').href === "https://clawengineering.com/projects/velocity-controller.html");
+}
+
+/* ---- 18. Static checks: tokens, contrast, links ---- */
+function staticChecks() {
+  console.log("\n[18] Static checks");
+  const css = fs.readFileSync(path.join(ROOT, "assets/css/site.css"), "utf8");
+  const defined = new Set((css.match(/--[a-z0-9-]+(?=\s*:)/g) || []));
+  const used = new Set((css.match(/var\((--[a-z0-9-]+)/g) || []).map(v => v.slice(4)));
+  const undef = [...used].filter(v => !defined.has(v));
+  ok("every CSS custom property used is defined", undef.length === 0, undef.join(", "));
+
+  const tok = n => (css.match(new RegExp("--" + n + ":\\s*(#[0-9a-f]{6})", "i")) || [])[1];
+  const lum = hex => {
+    const c = [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16) / 255)
+      .map(v => v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4));
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+  };
+  const ratio = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
+  // Text token on the grounds it actually sits on. graphite-2 never sits on
+  // paper-3; the two labels that do use graphite instead.
+  const pairs = [["ink", "paper"], ["graphite", "paper"], ["graphite", "paper-3"],
+    ["graphite-2", "paper"], ["graphite-2", "paper-2"], ["blue", "paper"], ["blue", "blue-wash"],
+    ["redline", "paper"], ["redline", "paper-3"], ["redline", "redline-wash"]];
+  const low = pairs.map(([f, b]) => [f, b, ratio(tok(f), tok(b))]).filter(r => r[2] < 4.5);
+  ok("text tokens meet WCAG AA (4.5:1) on their grounds", low.length === 0,
+    low.map(r => r[0] + "/" + r[1] + "=" + r[2].toFixed(2)).join(", "));
+
+  const pages = ["index.html", "projects.html", "services.html", "404.html"]
+    .concat(fs.readdirSync(path.join(ROOT, "projects")).map(f => "projects/" + f));
+  const broken = [];
+  pages.forEach(rel => {
+    const html = fs.readFileSync(path.join(ROOT, rel), "utf8");
+    const ids = new Set((html.match(/\sid="([^"]+)"/g) || []).map(m => m.slice(5, -1)));
+    (html.match(/\s(?:href|src)="([^"]+)"/g) || []).forEach(m => {
+      const ref = m.replace(/^\s(?:href|src)="/, "").slice(0, -1);
+      if (/^(https?:|mailto:|data:)/.test(ref)) return;
+      if (ref.startsWith("#")) {
+        if (ref.length > 1 && !ids.has(ref.slice(1))) broken.push(rel + " -> " + ref);
+        return;
+      }
+      const file = ref.split(/[?#]/)[0];
+      if (file.startsWith("/")) { broken.push(rel + " -> " + ref + " (root-absolute)"); return; }
+      if (!fs.existsSync(path.join(ROOT, path.dirname(rel), file))) broken.push(rel + " -> " + ref);
+    });
+  });
+  ok("every local link and asset resolves (" + pages.length + " pages)", broken.length === 0, broken.join("; "));
+
+  global.window = {};
+  require("./assets/js/projects.js");
+  const missing = [];
+  window.CLAW_PROJECTS.forEach(p => [p.image].concat((p.plates || []).map(pl => pl.src)).forEach(src => {
+    if (src && !/^https?:/.test(src) && !fs.existsSync(path.join(ROOT, src))) missing.push(p.no + ": " + src);
+  }));
+  ok("every local catalog image exists", missing.length === 0, missing.join(", "));
+  const remote = window.CLAW_PROJECTS.filter(p => /^https?:/.test(p.image || "")).map(p => p.no);
+  if (remote.length) console.log("  NOTE  still hotlinked, run scripts/localize-images.sh: " + remote.join(" "));
+}
+
 (async () => {
   await homePage();
   await filters();
@@ -328,6 +515,12 @@ async function navToggle() {
   await reducedMotion();
   await navToggle();
   await cardValidity();
+  await deepLinks();
+  await focusContainment();
+  await platesAndFit();
+  await sorting();
+  await heroAndPages();
+  staticChecks();
   console.log("\n========================================");
   console.log("  " + pass + " passed, " + fail + " failed");
   console.log("========================================");

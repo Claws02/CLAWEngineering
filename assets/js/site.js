@@ -91,7 +91,7 @@
       .join("");
 
     var figure = p.image
-      ? '<div class="card-figure">' +
+      ? '<div class="card-figure' + (p.fit === "cover" ? " is-photo" : "") + '">' +
         '<img src="' +
         escapeHtml(p.image) +
         '" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">' +
@@ -111,6 +111,8 @@
       escapeHtml(p.id) +
       '" data-tracks="' +
       escapeHtml((p.tracks || []).join(" ")) +
+      '" data-sort-year="' +
+      escapeHtml(p.year || "") +
       '">' +
       figure +
       '<div class="card-body">' +
@@ -192,42 +194,106 @@
     apply("all");
   }
 
-  /* ---------- Detail modal ---------- */
+  /* ---------- Sort (project index) ----------
+     Newest first by default; ties keep catalog order so the result is stable. */
+  function initSort() {
+    var buttons = document.querySelectorAll("[data-sort]");
+    var grid = document.querySelector('[data-grid="all"]');
+    if (!buttons.length || !grid) return;
+
+    function apply(order) {
+      var cards = Array.prototype.slice.call(grid.querySelectorAll("[data-project]"));
+      cards.forEach(function (c, i) {
+        if (!c.hasAttribute("data-index")) c.setAttribute("data-index", i);
+      });
+      cards.sort(function (a, b) {
+        var ya = +a.getAttribute("data-sort-year") || 0;
+        var yb = +b.getAttribute("data-sort-year") || 0;
+        var ia = +a.getAttribute("data-index");
+        var ib = +b.getAttribute("data-index");
+        if (ya !== yb) return order === "oldest" ? ya - yb : yb - ya;
+        return ia - ib;
+      });
+      cards.forEach(function (c) {
+        grid.appendChild(c);
+      });
+      Array.prototype.forEach.call(buttons, function (b) {
+        b.setAttribute("aria-pressed", b.getAttribute("data-sort") === order ? "true" : "false");
+      });
+    }
+
+    Array.prototype.forEach.call(buttons, function (b) {
+      b.addEventListener("click", function () {
+        apply(b.getAttribute("data-sort"));
+      });
+    });
+
+    apply("newest");
+  }
+
+  /* ---------- Detail modal ----------
+     The URL hash is the source of truth: a sheet is open exactly when the
+     hash reads #p/<id>. That makes every sheet linkable, and Back closes it.
+
+       state     input                     result
+       closed    card click                push #p/id, show
+       closed    load / popstate #p/id     show (no push)
+       closed    Esc, close, backdrop      ignored
+       open A    Esc, close, backdrop      hide; back() if we pushed, else strip hash
+       open A    popstate without #p/      hide
+       open A    popstate #p/B             show B
+       any       #p/<unknown id>           treated as no sheet                   */
+  var SHEET_HASH = /^#p\/([a-z0-9-]+)$/;
+
   function initModal(catalog) {
     var modal = document.querySelector("[data-modal]");
     if (!modal) return;
 
     var panel = modal.querySelector("[data-modal-content]");
     var lastFocus = null;
+    var openId = null;
 
-    function close() {
-      modal.classList.remove("is-open");
-      modal.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
-      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    function find(id) {
+      for (var i = 0; i < catalog.length; i++) {
+        if (catalog[i].id === id) return catalog[i];
+      }
+      return null;
     }
 
-    function open(id) {
-      var p = null;
-      for (var i = 0; i < catalog.length; i++) {
-        if (catalog[i].id === id) {
-          p = catalog[i];
-          break;
+    function hashId() {
+      var m = SHEET_HASH.exec(window.location.hash || "");
+      return m && find(m[1]) ? m[1] : null;
+    }
+
+    /* Everything outside the dialog goes inert while it is open, so Tab
+       cannot walk into the page hidden behind it. */
+    function setInert(on) {
+      Array.prototype.forEach.call(
+        document.querySelectorAll("body > header, body > main, body > footer, body > .skip-link"),
+        function (el) {
+          if (on) el.setAttribute("inert", "");
+          else el.removeAttribute("inert");
         }
-      }
-      if (!p) return;
+      );
+    }
 
-      lastFocus = document.activeElement;
-
-      var plates = (p.plates || [])
+    function render(p) {
+      var plateList = p.plates || [];
+      var plates = plateList
         .map(function (pl) {
           return (
             '<figure class="plate">' +
+            '<a class="plate-link" href="' +
+            escapeHtml(pl.src) +
+            '" target="_blank" rel="noopener">' +
             '<img class="plate-img" src="' +
             escapeHtml(pl.src) +
             '" alt="' +
             escapeHtml(pl.cap || "") +
             '" loading="lazy" decoding="async" referrerpolicy="no-referrer">' +
+            '<span class="plate-zoom" aria-hidden="true">Full size &#8599;</span>' +
+            '<span class="visually-hidden"> (opens full size in a new tab)</span>' +
+            "</a>" +
             '<figcaption class="plate-cap">' +
             escapeHtml(pl.cap || "") +
             "</figcaption></figure>"
@@ -262,14 +328,21 @@
         " &nbsp;/&nbsp; " +
         escapeHtml((p.tracks || []).join(", ")) +
         "</span>" +
+        '<div class="modal-actions">' +
+        '<a class="modal-link" href="projects/' +
+        escapeHtml(p.id) +
+        '.html">Open as page</a>' +
         '<button class="modal-close" type="button" data-modal-close>Close</button>' +
+        "</div>" +
         "</div>" +
         '<div class="modal-body">' +
         '<h2 class="modal-title" id="modal-title">' +
         escapeHtml(p.title) +
         "</h2>" +
         (tags ? '<div class="card-tags" style="margin-bottom:1.75rem">' + tags + "</div>" : "") +
-        (plates ? '<div class="plates">' + plates + "</div>" : "") +
+        (plates
+          ? '<div class="plates' + (plateList.length === 1 ? " is-single" : "") + '">' + plates + "</div>"
+          : "") +
         '<dl class="notes">' +
         notes +
         "</dl></div>";
@@ -280,32 +353,85 @@
           if (fig) fig.remove();
         });
       });
+    }
 
+    function show(id) {
+      var p = find(id);
+      if (!p || openId === id) return;
+      if (!openId) lastFocus = document.activeElement;
+
+      render(p);
+      openId = id;
       modal.classList.add("is-open");
       modal.setAttribute("aria-hidden", "false");
       modal.scrollTop = 0;
       document.body.style.overflow = "hidden";
+      setInert(true);
 
       var closeBtn = panel.querySelector("[data-modal-close]");
       if (closeBtn) closeBtn.focus();
     }
 
+    function hide() {
+      if (!openId) return;
+      openId = null;
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      setInert(false);
+      if (lastFocus && lastFocus.focus && document.contains(lastFocus)) lastFocus.focus();
+      lastFocus = null;
+    }
+
+    function requestOpen(id) {
+      if (!find(id)) return;
+      if (window.history && window.history.pushState) {
+        window.history.pushState({ clawSheet: id }, "", "#p/" + id);
+      }
+      show(id);
+    }
+
+    function requestClose() {
+      if (!openId) return;
+      var st = window.history && window.history.state;
+      if (st && st.clawSheet) {
+        // We pushed this entry, so Back is the honest close: the hash and the
+        // history agree afterwards. Hide now rather than waiting on the
+        // traversal; the popstate that follows finds nothing open.
+        hide();
+        window.history.back();
+        return;
+      }
+      // Landed directly on #p/<id>: strip the hash without leaving the page.
+      if (hashId() && window.history && window.history.replaceState) {
+        window.history.replaceState(null, "", window.location.pathname + window.location.search);
+      }
+      hide();
+    }
+
+    function syncToHash() {
+      var id = hashId();
+      if (id) show(id);
+      else hide();
+    }
+
     document.addEventListener("click", function (e) {
+      if (openId) {
+        if (e.target.closest("[data-modal-close]") || e.target === modal) requestClose();
+        return;
+      }
       var trigger = e.target.closest("[data-project]");
-      if (trigger) {
-        open(trigger.getAttribute("data-project"));
-        return;
-      }
-      if (e.target.closest("[data-modal-close]")) {
-        close();
-        return;
-      }
-      if (e.target === modal) close();
+      if (trigger) requestOpen(trigger.getAttribute("data-project"));
     });
 
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && modal.classList.contains("is-open")) close();
+      if (e.key === "Escape" && openId) requestClose();
     });
+
+    window.addEventListener("popstate", syncToHash);
+    window.addEventListener("hashchange", syncToHash);
+
+    syncToHash();
   }
 
   /* ---------- Contact form ---------- */
@@ -372,6 +498,7 @@
     initNav();
     initGrids(catalog);
     initFilters();
+    initSort();
     initModal(catalog);
     initForm();
     initYear();

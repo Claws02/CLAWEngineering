@@ -5,11 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sheet not found — Caleb Lawson</title>
 <meta name="robots" content="noindex">
-<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#fbfbf9">
+<!-- A 404 can be served at any depth (/a/b/c), so relative paths alone would
+     break below the root. Pin the base to the site root before anything else
+     resolves: "/CLAWEngineering/" on the GitHub Pages project URL, "/" on a
+     custom domain. Without JS the relative paths still work one level down. -->
+<script>
+  (function () {
+    var root = location.pathname.indexOf("/CLAWEngineering/") === 0 ? "/CLAWEngineering/" : "/";
+    var base = document.createElement("base");
+    base.href = root;
+    document.head.appendChild(base);
+  })();
+</script>
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/site.css">
+<link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
 <main id="main">
@@ -21,8 +34,8 @@
         <p class="sheet-lede">The link is wrong or the page has moved. The index below will get you where you were going.</p>
       </div>
       <p>
-        <a class="btn" href="/">Home</a>
-        <a class="btn btn-ghost" href="/projects.html" style="margin-left:.5rem">Projects</a>
+        <a class="btn" href="index.html">Home</a>
+        <a class="btn btn-ghost" href="projects.html" style="margin-left:.5rem">Projects</a>
       </p>
     </div>
   </section>

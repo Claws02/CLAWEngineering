@@ -1,6 +1,6 @@
 # clawengineering.com
 
-Personal site for Caleb Lawson — electrical and embedded systems engineer, Boston MA.
+Personal site for Caleb Lawson — electrical and embedded systems engineer, Quincy, MA.
 Dual-track: an employment track (home, projects) and a CLAW Engineering consulting track.
 
 Static HTML/CSS/JS. No build step, no framework, no runtime dependencies. Open
@@ -12,7 +12,8 @@ Static HTML/CSS/JS. No build step, no framework, no runtime dependencies. Open
 
 ```
 index.html              Home — title sheet, background, experience, featured work, contact
-projects.html           Full project index with discipline filters
+projects.html           Full project index with discipline filters and sort
+projects/<id>.html      One standalone page per project — GENERATED, do not edit
 services.html           CLAW Engineering consulting
 404.html                Not-found page
 assets/css/site.css     The entire design system
@@ -22,9 +23,11 @@ assets/img/             favicon, social card
 assets/img/projects/    Project plates — generated schematics + downloaded photos
 assets/docs/            résumé PDF
 scripts/                Maintenance and asset-generation scripts
-smoke.test.js           64-assertion test suite
+docs/                   Audit reports
+smoke.test.js           Test suite
 .github/workflows/      CI — runs the suite on every push and PR
-robots.txt, sitemap.xml
+robots.txt
+sitemap.xml             GENERATED with the project pages
 ```
 
 ## Adding a project
@@ -42,13 +45,30 @@ Edit `assets/js/projects.js` only. Append an object to the array:
   tags: ["ESP32", "C++"],                   // first three show on the card
   blurb: "One or two sentences.",
   image: "assets/img/projects/thing.png",   // optional
+  fit: "cover",                             // optional — photographs only, see below
   plates: [{ src: "...", cap: "..." }],     // optional detail images
   notes: { Problem: "...", Scope: "...", Role: "...", Result: "..." }
 }
 ```
 
-Both pages render from that array. Nothing else needs touching. `tracks` values must
-match the filter buttons in `projects.html` or the project becomes unreachable by filter.
+Then regenerate the standalone pages and sitemap:
+
+```
+npm run build
+```
+
+The home page and project index render from the array directly; `projects/<id>.html` and
+`sitemap.xml` are generated from it so every project has a real, crawlable URL. `npm test`
+fails if you edit the catalog and forget the build. `tracks` values must match the filter
+buttons in `projects.html` or the project becomes unreachable by filter.
+
+**`fit: "cover"`** makes a card image fill its frame instead of sitting inside a margin.
+Use it for photographs. Leave it off for diagrams, renders and screenshots — cropping a
+Simulink model to fill a box is worse than a margin around it.
+
+**Linking to a project.** Every sheet has two addresses: `projects.html#p/<id>` opens the
+sheet over the index (Back closes it), and `projects/<id>.html` is the standalone page —
+use that one when you paste a link to someone, since it carries its own preview card.
 
 ### Project plates
 
@@ -112,19 +132,13 @@ service and serves nothing in its place.
       `services.html`, `robots.txt` and `sitemap.xml` reference a domain that does not
       resolve. If you decide on a different URL, search and replace
       `https://clawengineering.com` across those five files.
-- [ ] **Run `bash scripts/localize-images.sh`.** Six projects still hotlink photographs
-      from Imgur (P-01, P-07, P-08, P-09, P-10, P-11). Imgur can and does break hotlinks;
-      the script downloads them into `assets/img/projects/` and rewrites the references.
-      Commit the result. This has to run somewhere with outbound access to `i.imgur.com`.
 - [ ] **Replace the generated plates with real photographs** as you get them. See
       "Project plates" above. `P-15` stays redacted.
-- [ ] **Move the résumé into the repo.** It is served from a Dropbox share link today.
-      Drop the PDF at `assets/docs/caleb-lawson-resume.pdf` and update the link in
-      `index.html` (search for `dropbox.com`).
 - [ ] **Decide on the public email.** `calebtlawson@gmail.com` appears on the contact page
       and in the form's failure message (`assets/js/site.js`). Swap both for the branded
       address once email routing is up.
-- [ ] **Add your B.S. line** to the education row in `index.html` (search for `Education`).
+- [ ] **Link the IEEE paper** — the DOI or the accepted manuscript PDF. The slot is
+      commented out in `index.html` (search for `IEEE Xplore DOI`).
 - [ ] **Review project `P-15`** in `assets/js/projects.js` — see the note below.
 
 ## Note on P-15
@@ -148,4 +162,8 @@ npm install
 npm test
 ```
 
-64 assertions. CI runs them on every push and pull request.
+Beyond the behaviour above it also checks deep links, focus containment while a sheet is
+open, sorting, plates, that the generated pages match the catalog, that every CSS custom
+property used is defined, that text tokens meet WCAG AA contrast on their backgrounds,
+and that every local link and asset on every page resolves. CI runs it on every push and
+pull request.
