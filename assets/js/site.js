@@ -245,6 +245,23 @@
        any       #p/<unknown id>           treated as no sheet                   */
   var SHEET_HASH = /^#p\/([a-z0-9-]+)$/;
 
+  /* Plates are a mix of wide charts, tall schematics and ordinary figures.
+     A single cell shape letterboxes the first two into slivers, so classify
+     each one by its real proportions once it has loaded. */
+  function fitPlates(root) {
+    Array.prototype.forEach.call(root.querySelectorAll(".plate-img"), function (img) {
+      function classify() {
+        var fig = img.closest(".plate");
+        if (!fig || !img.naturalWidth || !img.naturalHeight) return;
+        var r = img.naturalWidth / img.naturalHeight;
+        fig.classList.toggle("is-wide", r >= 1.9);
+        fig.classList.toggle("is-tall", r <= 0.7);
+      }
+      if (img.complete) classify();
+      else img.addEventListener("load", classify);
+    });
+  }
+
   function initModal(catalog) {
     var modal = document.querySelector("[data-modal]");
     if (!modal) return;
@@ -345,7 +362,13 @@
           : "") +
         '<dl class="notes">' +
         notes +
-        "</dl></div>";
+        "</dl>" +
+        (/^https:\/\//.test(p.code || "")
+          ? '<p class="sheet-actions"><a class="btn btn-ghost" href="' +
+            escapeHtml(p.code) +
+            '" target="_blank" rel="noopener">Source code <span aria-hidden="true">&rarr;</span></a></p>'
+          : "") +
+        "</div>";
 
       Array.prototype.forEach.call(panel.querySelectorAll("img"), function (img) {
         img.addEventListener("error", function () {
@@ -353,6 +376,7 @@
           if (fig) fig.remove();
         });
       });
+      fitPlates(panel);
     }
 
     function show(id) {
@@ -502,6 +526,7 @@
     initModal(catalog);
     initForm();
     initYear();
+    fitPlates(document);   /* standalone project pages render plates in the HTML */
     Array.prototype.forEach.call(document.querySelectorAll("img[data-guard]"), guardImage);
     initReveal();
   }

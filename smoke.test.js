@@ -391,6 +391,15 @@ async function platesAndFit() {
     w.document.querySelector('[data-project="photo"] .card-figure').classList.contains("is-photo"));
   ok("drawings keep the contained treatment",
     !w.document.querySelector('[data-project="rppg"] .card-figure').classList.contains("is-photo"));
+
+  m.querySelector("[data-modal-close]").dispatchEvent(new w.Event("click", { bubbles: true }));
+  w.document.querySelector('[data-project="cuda-kmeans"]').dispatchEvent(new w.Event("click", { bubbles: true }));
+  const src = m.querySelector(".sheet-actions a");
+  ok("a project with code links to its source in a new tab",
+    src && /^https:\/\/github\.com\//.test(src.getAttribute("href")) && src.target === "_blank" && /noopener/.test(src.rel));
+  m.querySelector("[data-modal-close]").dispatchEvent(new w.Event("click", { bubbles: true }));
+  w.document.querySelector('[data-project="rppg"]').dispatchEvent(new w.Event("click", { bubbles: true }));
+  ok("a project without code shows no source link", !m.querySelector(".sheet-actions"));
 }
 
 /* ---- 16. Sort ---- */
@@ -448,6 +457,12 @@ async function heroAndPages() {
 /* ---- 18. Static checks: tokens, contrast, links ---- */
 function staticChecks() {
   console.log("\n[18] Static checks");
+  const repoTree = "https://github.com/Claws02/CLAWEngineering/tree/main/";
+  const sb = {}; new Function("window", catalogSrc)(sb); const cat = sb.CLAW_PROJECTS;
+  const missingCode = cat.filter(p => (p.code || "").startsWith(repoTree))
+    .map(p => p.code.slice(repoTree.length))
+    .filter(dir => !fs.existsSync(path.join(ROOT, dir, "README.md")));
+  ok("every in-repo source link has a folder with a README", missingCode.length === 0, missingCode.join(", "));
   const css = fs.readFileSync(path.join(ROOT, "assets/css/site.css"), "utf8");
   const defined = new Set((css.match(/--[a-z0-9-]+(?=\s*:)/g) || []));
   const used = new Set((css.match(/var\((--[a-z0-9-]+)/g) || []).map(v => v.slice(4)));

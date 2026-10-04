@@ -110,7 +110,7 @@ function page(p, prev, next) {
     '<meta property="og:description" content="' + esc(p.blurb) + '">\n' +
     '<meta property="og:url" content="' + esc(url) + '">\n' +
     '<meta property="og:image" content="' + esc(ogImage(p)) + '">\n' +
-    '<meta property="og:image:alt" content="' + esc(p.no + " — " + p.title) + '">\n' +
+    '<meta property="og:image:alt" content="Caleb Lawson — ElectroMechanical &amp; Embedded Systems Engineering. Quincy, MA · IMEG Corp · M.S. ECE 2026 · FAA Part 107 · open to roles.">\n' +
     '<meta name="twitter:card" content="summary_large_image">\n' +
     '<meta name="theme-color" content="#fbfbf9">\n' +
     "\n" +
@@ -168,7 +168,11 @@ function page(p, prev, next) {
       : "") +
     '      <dl class="notes">\n' + notes + "      </dl>\n" +
     "\n" +
-    '      <p style="margin-top:2rem"><a class="btn btn-ghost" href="../index.html#contact">Ask about this project <span aria-hidden="true">&rarr;</span></a></p>\n' +
+    '      <p class="sheet-actions">' +
+    (/^https:\/\//.test(p.code || "")
+      ? '<a class="btn btn-ghost" href="' + esc(p.code) + '" target="_blank" rel="noopener">Source code <span aria-hidden="true">&rarr;</span></a>'
+      : "") +
+    '<a class="btn btn-ghost" href="../index.html#contact">Ask about this project <span aria-hidden="true">&rarr;</span></a></p>\n' +
     "\n" +
     pager +
     "    </div>\n" +

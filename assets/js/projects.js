@@ -6,6 +6,7 @@
    tracks: any of "electrical" | "embedded" | "software" | "mechanical"
    image:  card thumbnail (optional)
    plates: detail images shown in the drawing modal (optional)
+   code:   https link to the project's source, shown as a button (optional)
 
    Projects without a photograph use a generated schematic plate from
    assets/img/projects/*.svg (see scripts/make-placeholders.py). Replace
@@ -106,6 +107,7 @@ window.CLAW_PROJECTS = [
     blurb:
       "K-Means clustering of 3 million 20-feature game records, parallelised across an RTX 3070's 5,120 cores — 7.9 minutes on a single GPU thread down to 1.9 seconds.",
     image: "assets/img/projects/cuda-kmeans-card.png",
+    code: "https://github.com/Claws02/CLAWEngineering/tree/main/code/cuda-kmeans",
     plates: [
       { src: "assets/img/projects/cuda-kmeans-blocks.png", cap: "Block sweep at 256 threads per block: speedup climbs from 204× at 4 blocks and plateaus near 252× by 64, once all 40 SMs are busy." },
       { src: "assets/img/projects/cuda-kmeans-threads.png", cap: "Thread sweep with blocks sized to cover the data: 32 to 1,024 threads per block all land between 248× and 255×." }
@@ -150,7 +152,7 @@ window.CLAW_PROJECTS = [
     id: "linear-pillow",
     no: "P-06",
     title: "Linear Actuating Lumbar Pillow",
-    year: "2024",
+    year: "2022",
     featured: false,
     tracks: ["mechanical", "embedded"],
     tags: ["SolidWorks", "Arduino", "Linear actuators", "3D print"],

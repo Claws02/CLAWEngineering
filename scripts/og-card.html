@@ -1,0 +1,46 @@
+<!doctype html>
+<!-- Source for assets/img/og.png (1200×630 link-preview card).
+     Re-render after editing:  open at 1200×630 and screenshot, e.g.
+     npx playwright screenshot --viewport-size=1200,630 scripts/og-card.html assets/img/og.png -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Serif:wght@600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  body { width: 1200px; height: 630px; background: #fbfbf9; color: #14181c; font-family: "IBM Plex Mono", monospace; }
+  .frame { position: absolute; inset: 36px; border: 1px solid #c3c8ce; }
+  .frame::before, .frame::after { content: ""; position: absolute; top: 12px; bottom: 12px; width: 1px; background: #dde0e3; }
+  .frame::before { left: 12px; } .frame::after { right: 12px; }
+  .in { position: absolute; inset: 92px 104px 60px; }
+  .eyebrow { font-size: 16px; letter-spacing: .32em; color: #5c6670; text-transform: uppercase; }
+  h1 { font-family: "IBM Plex Serif", serif; font-weight: 600; font-size: 92px; line-height: 1; letter-spacing: -.03em; margin-top: 34px; }
+  h2 { font-family: "IBM Plex Serif", serif; font-weight: 600; font-size: 36px; color: #5c6670; margin-top: 14px; letter-spacing: -.01em; }
+  .rule { height: 1px; background: #c3c8ce; margin: 34px 0 26px; }
+  .line { font-size: 21px; }
+  .tb { position: absolute; left: 0; right: 0; bottom: 34px; display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid #c3c8ce; }
+  .tb div { padding: 16px 20px; border-left: 1px solid #c3c8ce; }
+  .tb div:first-child { border-left: 0; }
+  .k { display: block; font-size: 13px; letter-spacing: .14em; color: #5c6670; text-transform: uppercase; margin-bottom: 8px; }
+  .v { font-size: 18px; }
+  .url { position: absolute; left: 0; bottom: 0; font-size: 19px; color: #2563eb; }
+</style>
+</head>
+<body>
+  <div class="frame"></div>
+  <div class="in">
+    <p class="eyebrow">E-000 &nbsp;·&nbsp; Quincy, MA</p>
+    <h1>Caleb Lawson</h1>
+    <h2>ElectroMechanical &amp; Embedded Systems Engineering</h2>
+    <div class="rule"></div>
+    <p class="line">From imagination to reality — robotics, embedded &amp; autonomous systems</p>
+    <div class="tb">
+      <div><span class="k">Current</span><span class="v">IMEG Corp</span></div>
+      <div><span class="k">Degree</span><span class="v">M.S. ECE, 2026</span></div>
+      <div><span class="k">Licence</span><span class="v">FAA Part 107</span></div>
+      <div><span class="k">Status</span><span class="v">Open to roles</span></div>
+    </div>
+    <p class="url">clawengineering.com</p>
+  </div>
+</body>
+</html>
